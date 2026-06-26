@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get involved, HarmonYouth Foundation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav>
+  <div class="logo">HarmonYouth</div>
+  <button class="nav-toggle" aria-label="Open menu">&#9776;</button>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="mission.html">Mission</a>
+    <a href="founder.html">Founder</a>
+    <a href="performances.html">Performances</a>
+    <a href="get-involved.html" class="active">Get involved</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="tag">Get involved</div>
+  <h1>Join as a performer, or request a show</h1>
+  <p>Both forms below send directly to harmonyouthfoundation@gmail.com.</p>
+</div>
+
+<section class="form-section">
+  <div class="section-inner">
+    <div class="split-grid">
+      <div class="panel reveal">
+        <div class="tag" style="color:var(--gold);">For musicians</div>
+        <h3>Join the performer roster</h3>
+        <p class="desc">Open to student musicians of any instrument or voice. We will add you to the roster and reach out before each show to see who is available.</p>
+        <div data-fs-success class="fs-success"></div>
+        <form id="volunteerForm">
+          <input type="hidden" name="_subject" value="New performer roster signup">
+          <div>
+            <label for="vname">Name</label>
+            <input id="vname" name="name" type="text" placeholder="Your name" data-fs-field required>
+          </div>
+          <div>
+            <label for="vinstrument">Instrument or voice</label>
+            <input id="vinstrument" name="instrument" type="text" placeholder="Piano, violin, voice" data-fs-field>
+          </div>
+          <div>
+            <label for="vemail">Email</label>
+            <input id="vemail" name="email" type="email" placeholder="name@email.com" data-fs-field required>
+            <span data-fs-error="email" class="fs-error"></span>
+          </div>
+          <div>
+            <label for="vschool">School</label>
+            <input id="vschool" name="school" type="text" placeholder="Your school" data-fs-field>
+          </div>
+          <button type="submit" class="btn btn-primary" data-fs-submit-btn>Request to join</button>
+        </form>
+      </div>
+      <div class="panel reveal" id="homes">
+        <div class="tag" style="color:var(--rose);">For senior homes</div>
+        <h3>Request a performance</h3>
+        <p class="desc">Tell us about your community and we will find a date that works for both sides.</p>
+        <div data-fs-success class="fs-success"></div>
+        <form id="homeForm">
+          <input type="hidden" name="_subject" value="New performance request">
+          <div>
+            <label for="hname">Your name</label>
+            <input id="hname" name="name" type="text" placeholder="Your name" data-fs-field required>
+          </div>
+          <div>
+            <label for="hhome">Care home name</label>
+            <input id="hhome" name="home" type="text" placeholder="Name of the home" data-fs-field required>
+          </div>
+          <div>
+            <label for="hemail">Email</label>
+            <input id="hemail" name="email" type="email" placeholder="name@email.com" data-fs-field required>
+            <span data-fs-error="email" class="fs-error"></span>
+          </div>
+          <div>
+            <label for="hmsg">Anything we should know</label>
+            <textarea id="hmsg" name="message" placeholder="Preferred dates, room setup, audience size" data-fs-field></textarea>
+          </div>
+          <button type="submit" class="btn btn-ghost" data-fs-submit-btn>Send request</button>
+        </form>
+      </div>
+    </div>
+    <p class="form-note" style="margin-top:30px;">Both forms submit directly to harmonyouthfoundation@gmail.com through Formspree. No further setup needed.</p>
+  </div>
+</section>
+
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+<script>
+  window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+  formspree('initForm', {
+    formElement: '#volunteerForm',
+    formId: 'xnjkdgge',
+    successMessage: 'Thanks, you are on the roster list. We will email you before the next show.'
+  });
+  formspree('initForm', {
+    formElement: '#homeForm',
+    formId: 'xnjkdgge',
+    successMessage: 'Thanks, your request has been sent. We will follow up by email.'
+  });
+</script>
+
+<footer>
+  <div class="footer-grid">
+    <div class="logo">HarmonYouth Foundation</div>
+    <div class="footer-links">
+      <a href="mission.html">Mission</a>
+      <a href="founder.html">Founder</a>
+      <a href="performances.html">Performances</a>
+    </div>
+  </div>
+  <div class="footer-fine">HarmonYouth Foundation, Calgary, AB. Organized and run by student volunteers.</div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
