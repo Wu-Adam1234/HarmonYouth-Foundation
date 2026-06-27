@@ -13,6 +13,19 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.15 });
   revealEls.forEach(el => obs.observe(el));
 
+  // staggered reveal for grouped items (steps, stats, form panels)
+  const groupSelectors = ['.steps .step', '.mission-stats .stat', '.split-grid .panel'];
+  groupSelectors.forEach(sel => {
+    document.querySelectorAll(sel).forEach((el, i) => {
+      el.classList.add('reveal');
+      el.style.transitionDelay = (i * 0.08) + 's';
+    });
+  });
+  const groupObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll(groupSelectors.join(',')).forEach(el => groupObs.observe(el));
+
   // piano keyboard, only present on the homepage
   const piano = document.getElementById('piano');
   if (piano) {

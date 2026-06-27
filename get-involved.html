@@ -24,7 +24,7 @@
 <div class="page-header">
   <div class="tag">Get involved</div>
   <h1>Join as a performer, or request a show</h1>
-  <p>Both forms below send directly to harmonyouthfoundation@gmail.com.</p>
+  <p>Fill out either form below and it lands straight in our inbox. Email and phone number are both required. We'll use your phone number to reach you about scheduling and your involvement with HarmonYouth Foundation.</p>
 </div>
 
 <section class="form-section">
@@ -33,7 +33,7 @@
       <div class="panel reveal">
         <div class="tag" style="color:var(--gold);">For musicians</div>
         <h3>Join the performer roster</h3>
-        <p class="desc">Open to student musicians of any instrument or voice. We will add you to the roster and reach out before each show to see who is available.</p>
+        <p class="desc">Any instrument, any voice, any skill level you're comfortable performing at. We'll add you to the list and check in before each show to see who can make it.</p>
         <div data-fs-success class="fs-success"></div>
         <form id="volunteerForm">
           <input type="hidden" name="_subject" value="New performer roster signup">
@@ -51,6 +51,11 @@
             <span data-fs-error="email" class="fs-error"></span>
           </div>
           <div>
+            <label for="vphone">Phone number</label>
+            <input id="vphone" name="phone" type="tel" placeholder="(403) 555-0123" data-fs-field required>
+            <span data-fs-error="phone" class="fs-error"></span>
+          </div>
+          <div>
             <label for="vschool">School</label>
             <input id="vschool" name="school" type="text" placeholder="Your school" data-fs-field>
           </div>
@@ -60,7 +65,7 @@
       <div class="panel reveal" id="homes">
         <div class="tag" style="color:var(--rose);">For senior homes</div>
         <h3>Request a performance</h3>
-        <p class="desc">Tell us about your community and we will find a date that works for both sides.</p>
+        <p class="desc">Tell us a bit about your home and we'll figure out a date that works.</p>
         <div data-fs-success class="fs-success"></div>
         <form id="homeForm">
           <input type="hidden" name="_subject" value="New performance request">
@@ -78,6 +83,11 @@
             <span data-fs-error="email" class="fs-error"></span>
           </div>
           <div>
+            <label for="hphone">Phone number</label>
+            <input id="hphone" name="phone" type="tel" placeholder="(403) 555-0123" data-fs-field required>
+            <span data-fs-error="phone" class="fs-error"></span>
+          </div>
+          <div>
             <label for="hmsg">Anything we should know</label>
             <textarea id="hmsg" name="message" placeholder="Preferred dates, room setup, audience size" data-fs-field></textarea>
           </div>
@@ -85,7 +95,6 @@
         </form>
       </div>
     </div>
-    <p class="form-note" style="margin-top:30px;">Both forms submit directly to harmonyouthfoundation@gmail.com through Formspree. No further setup needed.</p>
   </div>
 </section>
 
@@ -95,12 +104,12 @@
   formspree('initForm', {
     formElement: '#volunteerForm',
     formId: 'xnjkdgge',
-    successMessage: 'Thanks, you are on the roster list. We will email you before the next show.'
+    successMessage: "Got it, you're on the list. We'll email you before the next show."
   });
   formspree('initForm', {
     formElement: '#homeForm',
     formId: 'xnjkdgge',
-    successMessage: 'Thanks, your request has been sent. We will follow up by email.'
+    successMessage: "Thanks, that's been sent. We'll follow up by email soon."
   });
 </script>
 
@@ -112,7 +121,7 @@
       <a href="performances.html">Performances</a>
     </div>
   </div>
-  <div class="footer-fine">HarmonYouth Foundation, Calgary, AB. Organized and run by student volunteers.</div>
+  <div class="footer-fine">HarmonYouth Foundation. Calgary, AB. Started and run by students.</div>
 </footer>
 
 <script src="script.js"></script>
