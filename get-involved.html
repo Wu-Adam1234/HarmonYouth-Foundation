@@ -66,6 +66,9 @@
         <div class="tag" style="color:var(--rose);">For senior homes</div>
         <h3>Request a performance</h3>
         <p class="desc">Tell us a bit about your home and we'll figure out a date that works.</p>
+        <div class="panel-photo">
+          <img src="scenic-grande-recital.jpg" alt="A HarmonYouth performance at The Scenic Grande">
+        </div>
         <div data-fs-success class="fs-success"></div>
         <form id="homeForm">
           <input type="hidden" name="_subject" value="New performance request">
@@ -76,6 +79,10 @@
           <div>
             <label for="hhome">Care home name</label>
             <input id="hhome" name="home" type="text" placeholder="Name of the home" data-fs-field required>
+          </div>
+          <div>
+            <label for="hlocation">Requested location(s)</label>
+            <input id="hlocation" name="requested_location" type="text" placeholder="Common room, dining hall, multiple locations..." data-fs-field>
           </div>
           <div>
             <label for="hemail">Email</label>
