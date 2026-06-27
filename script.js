@@ -6,6 +6,25 @@ document.addEventListener('DOMContentLoaded', () => {
     toggle.addEventListener('click', () => links.classList.toggle('open'));
   }
 
+  // language toggle: EN / ZH
+  const langBtn = document.getElementById('langToggle');
+  if (langBtn) {
+    let zh = false;
+    langBtn.addEventListener('click', () => {
+      zh = !zh;
+      document.querySelectorAll('[data-zh]').forEach(el => {
+        if (el.dataset.en === undefined) el.dataset.en = el.textContent;
+        el.textContent = zh ? el.dataset.zh : el.dataset.en;
+      });
+      document.querySelectorAll('[data-zh-placeholder]').forEach(el => {
+        if (el.dataset.enPlaceholder === undefined) el.dataset.enPlaceholder = el.placeholder;
+        el.placeholder = zh ? el.dataset.zhPlaceholder : el.dataset.enPlaceholder;
+      });
+      langBtn.textContent = zh ? 'EN' : '中文';
+      document.documentElement.lang = zh ? 'zh' : 'en';
+    });
+  }
+
   // scroll reveal
   const revealEls = document.querySelectorAll('.reveal');
   const obs = new IntersectionObserver((entries) => {
@@ -13,7 +32,46 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.15 });
   revealEls.forEach(el => obs.observe(el));
 
-  // staggered reveal for grouped items (steps, stats, form panels)
+  // turn inline success messages into a full confirmation screen, hiding the form
+  document.querySelectorAll('[data-fs-success]').forEach(successEl => {
+    const panel = successEl.closest('.panel') || successEl.parentElement;
+    const form = panel ? panel.querySelector('form') : null;
+    const observer = new MutationObserver(() => {
+      const msg = successEl.textContent.trim();
+      if (msg && !successEl.classList.contains('fs-success-screen')) {
+        if (form) form.style.display = 'none';
+        successEl.classList.add('fs-success-screen');
+        successEl.innerHTML =
+          '<div class="fs-success-title">Sent!</div>' +
+          '<div class="fs-success-msg">' + msg + '</div>';
+      }
+    });
+    observer.observe(successEl, { childList: true, characterData: true, subtree: true });
+  });
+
+  // small decorative piano key strips used as dividers on non-home pages
+  document.querySelectorAll('.mini-keys').forEach(container => {
+    const count = parseInt(container.dataset.count || '24', 10);
+    for (let i = 0; i < count; i++) {
+      const k = document.createElement('div');
+      k.className = 'mini-key';
+      container.appendChild(k);
+    }
+    const keys = container.querySelectorAll('.mini-key');
+    let played = false;
+    const mObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting && !played) {
+          played = true;
+          keys.forEach((k, i) => {
+            setTimeout(() => k.classList.add('lit'), i * 26);
+            setTimeout(() => k.classList.remove('lit'), 480 + i * 26);
+          });
+        }
+      });
+    }, { threshold: 0.4 });
+    mObs.observe(container);
+  });
   const groupSelectors = ['.steps .step', '.mission-stats .stat', '.split-grid .panel'];
   groupSelectors.forEach(sel => {
     document.querySelectorAll(sel).forEach((el, i) => {
