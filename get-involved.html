@@ -67,6 +67,15 @@
             <span data-fs-error="email" class="fs-error"></span>
           </div>
           <div>
+            <label>Which dates are you interested in</label>
+            <div class="checkbox-group">
+              <label class="checkbox-option"><input type="checkbox" name="dates_interested" value="Jul 10, 2:00-2:30 PM, The Scenic Grande"> Jul 10, 2:00 to 2:30 PM</label>
+              <label class="checkbox-option"><input type="checkbox" name="dates_interested" value="Jul 24, 2:00-2:30 PM, The Scenic Grande"> Jul 24, 2:00 to 2:30 PM</label>
+              <label class="checkbox-option"><input type="checkbox" name="dates_interested" value="Aug 7, 2:00-2:30 PM, The Scenic Grande"> Aug 7, 2:00 to 2:30 PM</label>
+              <label class="checkbox-option"><input type="checkbox" name="dates_interested" value="Aug 21, 2:00-2:30 PM, The Scenic Grande"> Aug 21, 2:00 to 2:30 PM</label>
+            </div>
+          </div>
+          <div>
             <label for="vphone">Phone number</label>
             <input id="vphone" name="phone" type="tel" placeholder="(403) 555-0123" data-fs-field required>
             <span data-fs-error="phone" class="fs-error"></span>
@@ -130,12 +139,12 @@
   formspree('initForm', {
     formElement: '#volunteerForm',
     formId: 'xnjkdgge',
-    successMessage: "Got it, you're on the list. We'll email you before the next show."
+    successMessage: "Got it, you're on the list. We'll email you before the next show. You can also reach out to us on Instagram @harmonyouthfoundation."
   });
   formspree('initForm', {
     formElement: '#homeForm',
     formId: 'xnjkdgge',
-    successMessage: "Thanks, that's been sent. We'll follow up by email soon."
+    successMessage: "Thanks, that's been sent. We'll follow up by email soon. You can also reach out to us on Instagram @harmonyouthfoundation."
   });
 </script>
 
@@ -147,6 +156,12 @@
       <a href="team.html">Meet the team</a>
       <a href="performances.html">Performances</a>
     </div>
+  </div>
+  <div class="footer-social">
+    <a href="https://instagram.com/harmonyouthfoundation" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor"/></svg>
+      Follow us on Instagram @harmonyouthfoundation
+    </a>
   </div>
   <div class="footer-fine">HarmonYouth Foundation. Calgary, AB. Started and run by students.</div>
 </footer>
