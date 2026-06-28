@@ -67,13 +67,9 @@
             <span data-fs-error="email" class="fs-error"></span>
           </div>
           <div>
-            <label>Which dates are you interested in</label>
-            <div class="checkbox-group">
-              <label class="checkbox-option"><input type="checkbox" name="dates_interested" value="Jul 10, 2:00-2:30 PM, The Scenic Grande"> Jul 10, 2:00 to 2:30 PM</label>
-              <label class="checkbox-option"><input type="checkbox" name="dates_interested" value="Jul 24, 2:00-2:30 PM, The Scenic Grande"> Jul 24, 2:00 to 2:30 PM</label>
-              <label class="checkbox-option"><input type="checkbox" name="dates_interested" value="Aug 7, 2:00-2:30 PM, The Scenic Grande"> Aug 7, 2:00 to 2:30 PM</label>
-              <label class="checkbox-option"><input type="checkbox" name="dates_interested" value="Aug 21, 2:00-2:30 PM, The Scenic Grande"> Aug 21, 2:00 to 2:30 PM</label>
-            </div>
+            <label for="vdates">Which dates are you interested in</label>
+            <input id="vdates" name="dates_interested" type="text" placeholder="e.g. Jul 10, Aug 7" data-fs-field>
+            <p class="form-note">Check out our <a href="performances.html" style="color:var(--gold);text-decoration:underline;">Performances</a> tab to see upcoming dates.</p>
           </div>
           <div>
             <label for="vphone">Phone number</label>
