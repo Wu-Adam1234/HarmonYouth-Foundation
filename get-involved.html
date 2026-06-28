@@ -11,24 +11,23 @@
 <body>
 
 <nav>
-  <img src="harmonyouth-logo.png" alt="HarmonYouth Foundation" class="logo-img">
+  <div class="nav-brand"><img src="harmonyouth-logo.png" alt="HarmonYouth Foundation" class="logo-img"><span class="nav-brand-name">HarmonYouth Foundation</span></div>
   <div class="nav-right">
     <div class="nav-links">
-      <a href="index.html" data-zh="首页">Home</a>
-      <a href="mission.html" data-zh="使命">Mission</a>
-      <a href="team.html" data-zh="团队介绍">Meet the team</a>
-      <a href="performances.html" data-zh="演出">Performances</a>
-      <a href="get-involved.html" class="active" data-zh="参与">Get involved</a>
+      <a href="index.html">Home</a>
+      <a href="mission.html">Mission</a>
+      <a href="team.html">Meet the team</a>
+      <a href="performances.html">Performances</a>
+      <a href="get-involved.html" class="active">Get involved</a>
     </div>
-    <button class="lang-toggle" id="langToggle">中文</button>
     <button class="nav-toggle" aria-label="Open menu">&#9776;</button>
   </div>
 </nav>
 
 <div class="page-header">
-  <div class="tag" data-zh="参与">Get involved</div>
-  <h1 data-zh="成为表演者，或申请一场演出">Join as a performer, or request a show</h1>
-  <p data-zh="填写下面任意一个表格，会直接发到我们的邮箱。邮箱和电话号码都是必填的，我们会用电话号码联系你安排演出和相关事项。">Fill out either form below and it lands straight in our inbox. Email and phone number are both required. We'll use your phone number to reach you about scheduling and your involvement with HarmonYouth Foundation.</p>
+  <div class="tag">Get involved</div>
+  <h1>Join as a performer, or request a show</h1>
+  <p>Fill out either form below and it lands straight in our inbox. Email and phone number are both required. We'll use your phone number to reach you about scheduling and your involvement with HarmonYouth Foundation.</p>
   <svg class="floating-note" style="top:24px;right:8%;width:34px;height:34px;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M9 18V5l12-2v13" stroke="#5B7B9A" stroke-width="1.6"/>
     <circle cx="6" cy="18" r="3" stroke="#5B7B9A" stroke-width="1.6"/>
@@ -41,25 +40,25 @@
   <div class="section-inner">
     <div class="split-grid">
       <div class="panel reveal">
-        <div class="tag" style="color:var(--gold);" data-zh="致学生音乐家">For musicians</div>
-        <h3 data-zh="加入演出名单">Join the performer roster</h3>
-        <p class="desc" data-zh="任何乐器、任何声音，只要是你愿意表演的程度都可以。我们会把你加入名单，并在每次演出前确认你是否有空。">Any instrument, any voice, any skill level you're comfortable performing at. We'll add you to the list and check in before each show to see who can make it.</p>
+        <div class="tag" style="color:var(--gold);">For musicians</div>
+        <h3>Join the performer roster</h3>
+        <p class="desc">Any instrument, any voice, any skill level you're comfortable performing at. We'll add you to the list and check in before each show to see who can make it.</p>
         <div data-fs-success class="fs-success"></div>
         <form id="volunteerForm">
           <input type="hidden" name="_subject" value="New performer roster signup">
           <div>
-            <label for="vname" data-zh="姓名">Name</label>
-            <input id="vname" name="name" type="text" placeholder="Your name" data-fs-field data-zh-placeholder="你的姓名" required>
+            <label for="vname">Name</label>
+            <input id="vname" name="name" type="text" placeholder="Your name" data-fs-field required>
           </div>
           <div>
-            <label for="vinstrument" data-zh="乐器或声音类型">Instrument or voice</label>
-            <input id="vinstrument" name="instrument" type="text" placeholder="Piano, violin, voice" data-fs-field data-zh-placeholder="钢琴、小提琴、人声等">
+            <label for="vinstrument">Instrument or voice</label>
+            <input id="vinstrument" name="instrument" type="text" placeholder="Piano, violin, voice" data-fs-field>
           </div>
           <div>
-            <label for="varea" data-zh="所在区域">General area or community</label>
+            <label for="varea">General area or community</label>
             <select id="varea" name="area" data-fs-field>
-              <option value="SW" data-zh="西南区 (SW)">SW</option>
-              <option value="NW" data-zh="西北区 (NW)">NW</option>
+              <option value="NW">NW</option>
+              <option value="SW">SW</option>
             </select>
           </div>
           <div>
@@ -68,38 +67,31 @@
             <span data-fs-error="email" class="fs-error"></span>
           </div>
           <div>
-            <label for="vphone" data-zh="电话号码">Phone number</label>
+            <label for="vphone">Phone number</label>
             <input id="vphone" name="phone" type="tel" placeholder="(403) 555-0123" data-fs-field required>
             <span data-fs-error="phone" class="fs-error"></span>
           </div>
           <div>
-            <label for="vschool" data-zh="学校">School</label>
-            <input id="vschool" name="school" type="text" placeholder="Your school" data-fs-field data-zh-placeholder="你的学校">
+            <label for="vschool">School</label>
+            <input id="vschool" name="school" type="text" placeholder="Your school" data-fs-field>
           </div>
-          <button type="submit" class="btn btn-primary" data-fs-submit-btn data-zh="申请加入">Request to join</button>
+          <button type="submit" class="btn btn-primary" data-fs-submit-btn>Request to join</button>
         </form>
       </div>
       <div class="panel reveal" id="homes">
-        <div class="tag" style="color:var(--rose);" data-zh="致养老院">For senior homes</div>
-        <h3 data-zh="申请演出">Request a performance</h3>
-        <p class="desc" data-zh="告诉我们一些关于你们养老院的信息，我们会安排一个合适的日期。">Tell us a bit about your home and we'll figure out a date that works.</p>
+        <div class="tag" style="color:var(--rose);">For senior homes</div>
+        <h3>Request a performance</h3>
+        <p class="desc">Tell us a bit about your home and we'll figure out a date that works.</p>
         <div data-fs-success class="fs-success"></div>
         <form id="homeForm">
           <input type="hidden" name="_subject" value="New performance request">
           <div>
-            <label for="hname" data-zh="您的姓名">Your name</label>
-            <input id="hname" name="name" type="text" placeholder="Your name" data-fs-field data-zh-placeholder="您的姓名" required>
+            <label for="hname">Your name</label>
+            <input id="hname" name="name" type="text" placeholder="Your name" data-fs-field required>
           </div>
           <div>
-            <label for="hhome" data-zh="养老院名称">Care home name</label>
-            <input id="hhome" name="home" type="text" placeholder="Name of the home" data-fs-field data-zh-placeholder="养老院名称" required>
-          </div>
-          <div>
-            <label for="hlocation" data-zh="希望演出的地点">Requested location(s)</label>
-            <select id="hlocation" name="requested_location" data-fs-field>
-              <option value="SW" data-zh="西南区 (SW)">SW</option>
-              <option value="NW" data-zh="西北区 (NW)">NW</option>
-            </select>
+            <label for="hhome">Care home name</label>
+            <input id="hhome" name="home" type="text" placeholder="Name of the home" data-fs-field required>
           </div>
           <div>
             <label for="hemail">Email</label>
@@ -107,15 +99,15 @@
             <span data-fs-error="email" class="fs-error"></span>
           </div>
           <div>
-            <label for="hphone" data-zh="电话号码">Phone number</label>
+            <label for="hphone">Phone number</label>
             <input id="hphone" name="phone" type="tel" placeholder="(403) 555-0123" data-fs-field required>
             <span data-fs-error="phone" class="fs-error"></span>
           </div>
           <div>
-            <label for="hmsg" data-zh="其他需要我们知道的信息">Anything we should know</label>
-            <textarea id="hmsg" name="message" placeholder="Preferred dates, room setup, audience size" data-fs-field data-zh-placeholder="希望的日期、场地安排、观众人数等"></textarea>
+            <label for="hmsg">Anything we should know</label>
+            <textarea id="hmsg" name="message" placeholder="Preferred dates, room setup, audience size" data-fs-field></textarea>
           </div>
-          <button type="submit" class="btn btn-ghost" data-fs-submit-btn data-zh="发送申请">Send request</button>
+          <button type="submit" class="btn btn-ghost" data-fs-submit-btn>Send request</button>
         </form>
       </div>
     </div>
@@ -125,8 +117,8 @@
         <img src="wechat-qr.jpg" alt="HarmonYouth Foundation WeChat QR code">
       </div>
       <div class="wechat-text">
-        <h4 data-zh="加我的微信">Friend me on WeChat</h4>
-        <p data-zh="扫描左侧二维码，添加 HarmonYouth 的微信。">Scan the QR code to add HarmonYouth on WeChat.</p>
+        <h4>Friend me on WeChat</h4>
+        <p>Scan the QR code to add HarmonYouth on WeChat.</p>
       </div>
     </div>
   </div>
@@ -149,14 +141,14 @@
 
 <footer>
   <div class="footer-grid">
-    <img src="harmonyouth-logo.png" alt="HarmonYouth Foundation" class="footer-logo-img">
+    <div class="footer-brand"><img src="harmonyouth-logo.png" alt="HarmonYouth Foundation" class="footer-logo-img"><span class="footer-brand-name">HarmonYouth Foundation</span></div>
     <div class="footer-links">
-      <a href="mission.html" data-zh="使命">Mission</a>
-      <a href="team.html" data-zh="团队介绍">Meet the team</a>
-      <a href="performances.html" data-zh="演出">Performances</a>
+      <a href="mission.html">Mission</a>
+      <a href="team.html">Meet the team</a>
+      <a href="performances.html">Performances</a>
     </div>
   </div>
-  <div class="footer-fine" data-zh="HarmonYouth 基金会。艾伯塔省卡尔加里。由学生发起并运营。">HarmonYouth Foundation. Calgary, AB. Started and run by students.</div>
+  <div class="footer-fine">HarmonYouth Foundation. Calgary, AB. Started and run by students.</div>
 </footer>
 
 <script src="script.js"></script>

@@ -6,25 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
     toggle.addEventListener('click', () => links.classList.toggle('open'));
   }
 
-  // language toggle: EN / ZH
-  const langBtn = document.getElementById('langToggle');
-  if (langBtn) {
-    let zh = false;
-    langBtn.addEventListener('click', () => {
-      zh = !zh;
-      document.querySelectorAll('[data-zh]').forEach(el => {
-        if (el.dataset.en === undefined) el.dataset.en = el.textContent;
-        el.textContent = zh ? el.dataset.zh : el.dataset.en;
-      });
-      document.querySelectorAll('[data-zh-placeholder]').forEach(el => {
-        if (el.dataset.enPlaceholder === undefined) el.dataset.enPlaceholder = el.placeholder;
-        el.placeholder = zh ? el.dataset.zhPlaceholder : el.dataset.enPlaceholder;
-      });
-      langBtn.textContent = zh ? 'EN' : '中文';
-      document.documentElement.lang = zh ? 'zh' : 'en';
-    });
-  }
-
   // scroll reveal
   const revealEls = document.querySelectorAll('.reveal');
   const obs = new IntersectionObserver((entries) => {
