@@ -266,6 +266,22 @@ h2{
 @media(max-width:700px){.past-show{grid-template-columns:1fr;}}
 .past-show-photo{width:100%;aspect-ratio:16/10;overflow:hidden;border:1px solid #D7DEE6;}
 .past-show-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+
+.past-show-photo.carousel{position:relative;}
+.carousel-slide{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  object-fit:cover;opacity:0;transition:opacity 1s ease;
+}
+.carousel-slide.active{opacity:1;}
+.carousel-dots{
+  position:absolute;bottom:12px;left:0;right:0;
+  display:flex;justify-content:center;gap:7px;z-index:2;
+}
+.carousel-dot{
+  width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.5);
+  transition:background .3s ease;
+}
+.carousel-dot.active{background:var(--gold);}
 .past-show-info .show-venue{font-size:18px;}
 .past-show-info .show-venue span{margin-top:4px;}
 

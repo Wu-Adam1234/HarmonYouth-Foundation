@@ -34,6 +34,23 @@ document.addEventListener('DOMContentLoaded', () => {
     updateScrollPiano();
   }
 
+  // simple auto-rotating photo carousel
+  const carousel = document.getElementById('recitalCarousel');
+  if (carousel) {
+    const slides = carousel.querySelectorAll('.carousel-slide');
+    const dots = carousel.querySelectorAll('.carousel-dot');
+    let current = 0;
+    if (slides.length > 1) {
+      setInterval(() => {
+        slides[current].classList.remove('active');
+        if (dots[current]) dots[current].classList.remove('active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('active');
+        if (dots[current]) dots[current].classList.add('active');
+      }, 4000);
+    }
+  }
+
   // turn inline success messages into a full confirmation screen, hiding the form
   document.querySelectorAll('[data-fs-success]').forEach(successEl => {
     const panel = successEl.closest('.panel') || successEl.parentElement;
