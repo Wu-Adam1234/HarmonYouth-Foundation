@@ -13,6 +13,27 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.15 });
   revealEls.forEach(el => obs.observe(el));
 
+  // persistent scroll-reactive piano bar fixed at the bottom of the page
+  const scrollPiano = document.getElementById('scrollPiano');
+  if (scrollPiano) {
+    const count = 50;
+    for (let i = 0; i < count; i++) {
+      const k = document.createElement('div');
+      k.className = 'key';
+      scrollPiano.appendChild(k);
+    }
+    const spKeys = scrollPiano.querySelectorAll('.key');
+    function updateScrollPiano() {
+      const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = scrollableHeight > 0 ? window.scrollY / scrollableHeight : 0;
+      const activeCount = Math.round(progress * count);
+      spKeys.forEach((k, i) => k.classList.toggle('active', i < activeCount));
+    }
+    window.addEventListener('scroll', updateScrollPiano);
+    window.addEventListener('resize', updateScrollPiano);
+    updateScrollPiano();
+  }
+
   // turn inline success messages into a full confirmation screen, hiding the form
   document.querySelectorAll('[data-fs-success]').forEach(successEl => {
     const panel = successEl.closest('.panel') || successEl.parentElement;
