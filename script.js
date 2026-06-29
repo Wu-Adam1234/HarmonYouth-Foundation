@@ -34,22 +34,36 @@ document.addEventListener('DOMContentLoaded', () => {
     updateScrollPiano();
   }
 
-  // simple auto-rotating photo carousel
-  const carousel = document.getElementById('recitalCarousel');
-  if (carousel) {
+  // auto-rotating photo carousels with clickable dots (reusable for any .carousel on the site)
+  document.querySelectorAll('.carousel').forEach(carousel => {
     const slides = carousel.querySelectorAll('.carousel-slide');
     const dots = carousel.querySelectorAll('.carousel-dot');
     let current = 0;
-    if (slides.length > 1) {
-      setInterval(() => {
-        slides[current].classList.remove('active');
-        if (dots[current]) dots[current].classList.remove('active');
-        current = (current + 1) % slides.length;
-        slides[current].classList.add('active');
-        if (dots[current]) dots[current].classList.add('active');
-      }, 4000);
+    let timer = null;
+
+    function goTo(index) {
+      if (slides[current]) slides[current].classList.remove('active');
+      if (dots[current]) dots[current].classList.remove('active');
+      current = index;
+      if (slides[current]) slides[current].classList.add('active');
+      if (dots[current]) dots[current].classList.add('active');
     }
-  }
+
+    function startAutoplay() {
+      if (timer) clearInterval(timer);
+      timer = setInterval(() => goTo((current + 1) % slides.length), 3000);
+    }
+
+    if (slides.length > 1) {
+      dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => {
+          goTo(i);
+          startAutoplay();
+        });
+      });
+      startAutoplay();
+    }
+  });
 
   // turn inline success messages into a full confirmation screen, hiding the form
   document.querySelectorAll('[data-fs-success]').forEach(successEl => {

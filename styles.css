@@ -279,7 +279,11 @@ h2{
 }
 .carousel-dot{
   width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.5);
-  transition:background .3s ease;
+  transition:background .3s ease;cursor:pointer;
+  position:relative;
+}
+.carousel-dot::before{
+  content:'';position:absolute;top:-8px;left:-8px;right:-8px;bottom:-8px;
 }
 .carousel-dot.active{background:var(--gold);}
 .past-show-info .show-venue{font-size:18px;}
