@@ -264,13 +264,13 @@ h2{
   border-top:1px solid #D7DEE6;padding-top:30px;align-items:center;
 }
 @media(max-width:700px){.past-show{grid-template-columns:1fr;}}
-.past-show-photo{width:100%;aspect-ratio:16/10;overflow:hidden;border:1px solid #D7DEE6;}
-.past-show-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+.past-show-photo{width:100%;aspect-ratio:16/10;overflow:hidden;border:1px solid #D7DEE6;background:var(--charcoal);}
+.past-show-photo img{width:100%;height:100%;object-fit:contain;display:block;}
 
 .past-show-photo.carousel{position:relative;}
 .carousel-slide{
   position:absolute;top:0;left:0;width:100%;height:100%;
-  object-fit:cover;opacity:0;transition:opacity 1s ease;
+  object-fit:contain;opacity:0;transition:opacity 1s ease;
 }
 .carousel-slide.active{opacity:1;}
 .carousel-dots{
