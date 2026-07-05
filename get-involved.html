@@ -38,7 +38,7 @@
 
 <section class="form-section" style="position:relative;overflow:hidden;">
 <div class="section-inner">
-    <div class="single-panel">
+    <div class="split-grid">
       <div class="panel reveal">
         <div class="tag" style="color:var(--gold);">For musicians</div>
         <h3>Join the performer roster</h3>
@@ -83,7 +83,34 @@
           <button type="submit" class="btn btn-primary" data-fs-submit-btn>Request to join</button>
         </form>
       </div>
+      <div class="panel reveal" id="help">
+        <div class="tag" style="color:var(--rose);">Other ways to help</div>
+        <h3>Not a musician? Apply here</h3>
+        <p class="desc">Marketing, outreach, design, event help, or something we haven't thought of yet. Tell us what you'd like to do and we'll get back to you.</p>
+        <div data-fs-success class="fs-success"></div>
+        <form id="helpForm">
+          <input type="hidden" name="_subject" value="New volunteer application (non-musician)">
+          <div>
+            <label for="aname">Name</label>
+            <input id="aname" name="name" type="text" placeholder="Your name" data-fs-field required>
           </div>
+          <div>
+            <label for="aemail">Email</label>
+            <input id="aemail" name="email" type="email" placeholder="name@email.com" data-fs-field required>
+            <span data-fs-error="email" class="fs-error"></span>
+          </div>
+          <div>
+            <label for="arole">What would you like to do</label>
+            <input id="arole" name="role" type="text" placeholder="Marketing, design, outreach, event help..." data-fs-field required>
+          </div>
+          <div>
+            <label for="amsg">Your message</label>
+            <textarea id="amsg" name="message" placeholder="Tell us a bit about yourself and how you'd like to get involved." data-fs-field required></textarea>
+          </div>
+          <button type="submit" class="btn btn-ghost" data-fs-submit-btn>Send application</button>
+        </form>
+      </div>
+    </div>
 
     <div class="wechat-block">
       <div class="wechat-qr">
@@ -104,6 +131,11 @@
     formElement: '#volunteerForm',
     formId: 'xnjkdgge',
     successMessage: "Got it, you're on the list. We'll email you before the next show. You can also reach out to us on Instagram @harmonyouthfoundation."
+  });
+  formspree('initForm', {
+    formElement: '#helpForm',
+    formId: 'xnjkdgge',
+    successMessage: "Thanks for applying. We'll be in touch by email soon. You can also reach out to us on Instagram @harmonyouthfoundation."
   });
 </script>
 
