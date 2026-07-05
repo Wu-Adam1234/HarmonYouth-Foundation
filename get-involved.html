@@ -26,8 +26,8 @@
 
 <div class="page-header">
 <div class="tag">Get involved</div>
-  <h1>Join as a performer, or request a show</h1>
-  <p>Fill out either form below and it lands straight in our inbox. Email and phone number are both required. We'll use your phone number to reach you about scheduling and your involvement with HarmonYouth Foundation.</p>
+  <h1>Join as a performer</h1>
+  <p>Fill out the form below and it lands straight in our inbox. Email and phone number are both required. We'll use your phone number to reach you about scheduling and your involvement with HarmonYouth Foundation. Not a musician? We're working on volunteer projects beyond performances too, so reach out anyway.</p>
   <svg class="floating-note" style="top:24px;right:8%;width:34px;height:34px;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M9 18V5l12-2v13" stroke="#5B7B9A" stroke-width="1.6"/>
     <circle cx="6" cy="18" r="3" stroke="#5B7B9A" stroke-width="1.6"/>
@@ -38,7 +38,7 @@
 
 <section class="form-section" style="position:relative;overflow:hidden;">
 <div class="section-inner">
-    <div class="split-grid">
+    <div class="single-panel">
       <div class="panel reveal">
         <div class="tag" style="color:var(--gold);">For musicians</div>
         <h3>Join the performer roster</h3>
@@ -83,39 +83,7 @@
           <button type="submit" class="btn btn-primary" data-fs-submit-btn>Request to join</button>
         </form>
       </div>
-      <div class="panel reveal" id="homes">
-        <div class="tag" style="color:var(--rose);">For senior homes</div>
-        <h3>Request a performance</h3>
-        <p class="desc">Tell us a bit about your home and we'll figure out a date that works.</p>
-        <div data-fs-success class="fs-success"></div>
-        <form id="homeForm">
-          <input type="hidden" name="_subject" value="New performance request">
-          <div>
-            <label for="hname">Your name</label>
-            <input id="hname" name="name" type="text" placeholder="Your name" data-fs-field required>
           </div>
-          <div>
-            <label for="hhome">Care home name</label>
-            <input id="hhome" name="home" type="text" placeholder="Name of the home" data-fs-field required>
-          </div>
-          <div>
-            <label for="hemail">Email</label>
-            <input id="hemail" name="email" type="email" placeholder="name@email.com" data-fs-field required>
-            <span data-fs-error="email" class="fs-error"></span>
-          </div>
-          <div>
-            <label for="hphone">Phone number</label>
-            <input id="hphone" name="phone" type="tel" placeholder="(403) 555-0123" data-fs-field required>
-            <span data-fs-error="phone" class="fs-error"></span>
-          </div>
-          <div>
-            <label for="hmsg">Anything we should know</label>
-            <textarea id="hmsg" name="message" placeholder="Preferred dates, room setup, audience size" data-fs-field></textarea>
-          </div>
-          <button type="submit" class="btn btn-ghost" data-fs-submit-btn>Send request</button>
-        </form>
-      </div>
-    </div>
 
     <div class="wechat-block">
       <div class="wechat-qr">
@@ -137,11 +105,6 @@
     formId: 'xnjkdgge',
     successMessage: "Got it, you're on the list. We'll email you before the next show. You can also reach out to us on Instagram @harmonyouthfoundation."
   });
-  formspree('initForm', {
-    formElement: '#homeForm',
-    formId: 'xnjkdgge',
-    successMessage: "Thanks, that's been sent. We'll follow up by email soon. You can also reach out to us on Instagram @harmonyouthfoundation."
-  });
 </script>
 
 <footer>
@@ -152,6 +115,10 @@
       <a href="team.html">Meet the team</a>
       <a href="performances.html">Performances</a>
     </div>
+  </div>
+  <div class="footer-contact">
+    <button class="contact-toggle" type="button">Contact us</button>
+    <a class="contact-email" href="mailto:harmonyouthfoundation@gmail.com" hidden>harmonyouthfoundation@gmail.com</a>
   </div>
   <div class="footer-social">
     <a href="https://instagram.com/harmonyouthfoundation" target="_blank" rel="noopener">

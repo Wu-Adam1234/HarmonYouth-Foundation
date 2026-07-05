@@ -6,10 +6,10 @@ document.addEventListener('DOMContentLoaded', () => {
     toggle.addEventListener('click', () => links.classList.toggle('open'));
   }
 
-  // scroll reveal
+  // scroll reveal (replays every time elements enter the viewport)
   const revealEls = document.querySelectorAll('.reveal');
   const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    entries.forEach(e => e.target.classList.toggle('in', e.isIntersecting));
   }, { threshold: 0.15 });
   revealEls.forEach(el => obs.observe(el));
 
@@ -96,6 +96,21 @@ document.addEventListener('DOMContentLoaded', () => {
     updateParallax();
   }
 
+  // footer contact us toggle
+  document.querySelectorAll('.footer-contact').forEach(block => {
+    const btn = block.querySelector('.contact-toggle');
+    const email = block.querySelector('.contact-email');
+    if (btn && email) {
+      btn.addEventListener('click', () => {
+        email.hidden = false;
+        requestAnimationFrame(() => email.classList.add('shown'));
+        btn.textContent = 'Email us at:';
+        btn.disabled = true;
+        btn.style.cursor = 'default';
+      });
+    }
+  });
+
   // turn inline success messages into a full confirmation screen, hiding the form
   document.querySelectorAll('[data-fs-success]').forEach(successEl => {
     const panel = successEl.closest('.panel') || successEl.parentElement;
@@ -113,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
     observer.observe(successEl, { childList: true, characterData: true, subtree: true });
   });
 
-  // small decorative piano key strips used as dividers on non-home pages
+  // small decorative piano key strips used as dividers on non-home pages (replays on re-entry)
   document.querySelectorAll('.mini-keys').forEach(container => {
     const count = parseInt(container.dataset.count || '24', 10);
     for (let i = 0; i < count; i++) {
@@ -122,15 +137,16 @@ document.addEventListener('DOMContentLoaded', () => {
       container.appendChild(k);
     }
     const keys = container.querySelectorAll('.mini-key');
-    let played = false;
+    let playing = false;
     const mObs = new IntersectionObserver((entries) => {
       entries.forEach(e => {
-        if (e.isIntersecting && !played) {
-          played = true;
+        if (e.isIntersecting && !playing) {
+          playing = true;
           keys.forEach((k, i) => {
             setTimeout(() => k.classList.add('lit'), i * 26);
             setTimeout(() => k.classList.remove('lit'), 480 + i * 26);
           });
+          setTimeout(() => { playing = false; }, 480 + count * 26 + 200);
         }
       });
     }, { threshold: 0.4 });
@@ -144,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
   const groupObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    entries.forEach(e => e.target.classList.toggle('in', e.isIntersecting));
   }, { threshold: 0.1 });
   document.querySelectorAll(groupSelectors.join(',')).forEach(el => groupObs.observe(el));
 
