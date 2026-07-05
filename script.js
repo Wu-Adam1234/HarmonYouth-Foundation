@@ -65,6 +65,37 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // scatter music notes across dark sections; they drift as you scroll (parallax)
+  const noteSvgs = [
+    '<svg width="__S__" height="__S__" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 18V5l12-2v13" stroke="currentColor" stroke-width="1.5"/><circle cx="6" cy="18" r="3" stroke="currentColor" stroke-width="1.5"/><circle cx="18" cy="16" r="3" stroke="currentColor" stroke-width="1.5"/></svg>',
+    '<svg width="__S__" height="__S__" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 18V4l6 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="7" cy="18" r="3" stroke="currentColor" stroke-width="1.5"/></svg>'
+  ];
+  const parallaxEls = [];
+  document.querySelectorAll('.hero, .page-header, .founder, .form-section, .recruiting-banner').forEach(section => {
+    section.classList.add('has-notes');
+    const noteCount = 4;
+    for (let i = 0; i < noteCount; i++) {
+      const span = document.createElement('span');
+      span.className = 'parallax-note';
+      const size = 18 + Math.round(Math.random() * 22);
+      span.innerHTML = noteSvgs[i % noteSvgs.length].replaceAll('__S__', size);
+      span.style.left = (6 + Math.random() * 88) + '%';
+      span.style.top = (8 + Math.random() * 80) + '%';
+      section.appendChild(span);
+      parallaxEls.push({ el: span, speed: 0.06 + Math.random() * 0.14, rot: (Math.random() - 0.5) * 40 });
+    }
+  });
+  if (parallaxEls.length) {
+    function updateParallax() {
+      const y = window.scrollY;
+      parallaxEls.forEach(p => {
+        p.el.style.transform = 'translateY(' + (-y * p.speed) + 'px) rotate(' + (y * 0.02 * p.rot / 10) + 'deg)';
+      });
+    }
+    window.addEventListener('scroll', updateParallax, { passive: true });
+    updateParallax();
+  }
+
   // turn inline success messages into a full confirmation screen, hiding the form
   document.querySelectorAll('[data-fs-success]').forEach(successEl => {
     const panel = successEl.closest('.panel') || successEl.parentElement;
