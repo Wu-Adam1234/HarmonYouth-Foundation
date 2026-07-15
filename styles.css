@@ -98,6 +98,14 @@ section.has-notes, .page-header{position:relative;overflow:hidden;}
 .gofundme-title{font-family:var(--serif);font-size:18px;font-weight:500;}
 .gofundme-sub{font-size:13px;color:var(--ivory-dim);margin-top:4px;line-height:1.5;}
 .gfm-embed:not(:empty) + .gofundme-fallback{display:none;}
+.gofundme-qr{
+  margin-top:18px;display:flex;align-items:center;gap:16px;
+}
+.gofundme-qr img{
+  width:130px;height:130px;border-radius:10px;display:block;
+  border:1px solid var(--gold-dim);
+}
+.gofundme-qr span{font-size:13px;color:var(--ivory-dim);max-width:160px;line-height:1.5;}
 
 /* ---------- FLOWING BACKGROUND PATHS ---------- */
 .bg-paths{
