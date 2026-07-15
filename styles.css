@@ -82,6 +82,46 @@ section.has-notes, .page-header{position:relative;overflow:hidden;}
   font-size:14px;color:var(--ivory);
 }
 .volunteer-perk svg{color:var(--gold);flex-shrink:0;}
+
+/* ---------- GOFUNDME / SUPPORT ---------- */
+.support-section{background:var(--charcoal-2);border-top:1px solid #3a332f;position:relative;overflow:hidden;}
+.gofundme-card{margin-top:30px;max-width:620px;}
+.gofundme-fallback{
+  display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+  background:rgba(91,123,154,0.12);border:1px solid var(--gold-dim);
+  padding:20px 22px;border-radius:4px;color:var(--ivory);
+  transition:border-color .25s ease, transform .25s ease;
+}
+.gofundme-fallback:hover{border-color:var(--gold);transform:translateY(-2px);}
+.gofundme-fallback svg{color:var(--rose);flex-shrink:0;}
+.gofundme-fallback > div{flex:1;min-width:200px;}
+.gofundme-title{font-family:var(--serif);font-size:18px;font-weight:500;}
+.gofundme-sub{font-size:13px;color:var(--ivory-dim);margin-top:4px;line-height:1.5;}
+.gfm-embed:not(:empty) + .gofundme-fallback{display:none;}
+
+/* ---------- FLOWING BACKGROUND PATHS ---------- */
+.bg-paths{
+  position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0;
+  color:var(--gold);
+}
+.bg-paths svg{position:absolute;inset:0;width:100%;height:100%;}
+.bg-paths path{
+  fill:none;
+  stroke-dasharray:.35 .65;
+  animation:flowPath linear infinite;
+}
+@keyframes flowPath{
+  0%{stroke-dashoffset:1;}
+  100%{stroke-dashoffset:-1;}
+}
+.hero .hero-inner, .page-header > *:not(.bg-paths), .support-section .section-inner, .recruiting-banner .section-inner{position:relative;z-index:1;}
+
+/* ---------- 3D TILT ON SCROLL ---------- */
+.scroll-tilt{
+  will-change:transform;
+  transform-origin:center top;
+  transition:transform .1s linear;
+}
 .nav-links{display:flex;gap:30px;}
 .nav-links a{
   font-size:14px;color:var(--ivory-dim);font-weight:500;

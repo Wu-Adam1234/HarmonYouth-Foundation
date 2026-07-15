@@ -96,6 +96,55 @@ document.addEventListener('DOMContentLoaded', () => {
     updateParallax();
   }
 
+  // flowing background paths (vanilla port of the BackgroundPaths component)
+  function buildFloatingPaths(position) {
+    const ns = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(ns, 'svg');
+    svg.setAttribute('viewBox', '0 0 696 316');
+    svg.setAttribute('fill', 'none');
+    svg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
+    for (let i = 0; i < 36; i++) {
+      const d = `M-${380 - i * 5 * position} -${189 + i * 6}C-${380 - i * 5 * position} -${189 + i * 6} -${312 - i * 5 * position} ${216 - i * 6} ${152 - i * 5 * position} ${343 - i * 6}C${616 - i * 5 * position} ${470 - i * 6} ${684 - i * 5 * position} ${875 - i * 6} ${684 - i * 5 * position} ${875 - i * 6}`;
+      const path = document.createElementNS(ns, 'path');
+      path.setAttribute('d', d);
+      path.setAttribute('pathLength', '1');
+      path.setAttribute('stroke', 'currentColor');
+      path.setAttribute('stroke-width', (0.5 + i * 0.03).toFixed(2));
+      path.style.strokeOpacity = (0.08 + i * 0.02).toFixed(3);
+      path.style.animationDuration = (20 + Math.random() * 10) + 's';
+      path.style.animationDelay = (-Math.random() * 20) + 's';
+      svg.appendChild(path);
+    }
+    return svg;
+  }
+  document.querySelectorAll('.hero, .page-header, .support-section, .recruiting-banner').forEach(section => {
+    const wrap = document.createElement('div');
+    wrap.className = 'bg-paths';
+    wrap.appendChild(buildFloatingPaths(1));
+    wrap.appendChild(buildFloatingPaths(-1));
+    section.prepend(wrap);
+  });
+
+  // 3D tilt-on-scroll cards (vanilla port of the ContainerScroll component)
+  const tiltEls = Array.from(document.querySelectorAll('.past-show-photo, .gofundme-card, .founder-photo, .mission-stats'));
+  if (tiltEls.length) {
+    tiltEls.forEach(el => el.classList.add('scroll-tilt'));
+    function updateTilt() {
+      const vh = window.innerHeight;
+      tiltEls.forEach(el => {
+        const r = el.getBoundingClientRect();
+        // progress: 0 when the card's top enters the viewport bottom, 1 when its center passes viewport center
+        const progress = Math.min(Math.max((vh - r.top) / (vh * 0.9), 0), 1);
+        const rotate = 18 * (1 - progress);
+        const scale = 1.04 - 0.04 * progress;
+        el.style.transform = 'perspective(1000px) rotateX(' + rotate.toFixed(2) + 'deg) scale(' + scale.toFixed(3) + ')';
+      });
+    }
+    window.addEventListener('scroll', updateTilt, { passive: true });
+    window.addEventListener('resize', updateTilt);
+    updateTilt();
+  }
+
   // footer contact us toggle
   document.querySelectorAll('.footer-contact').forEach(block => {
     const btn = block.querySelector('.contact-toggle');
