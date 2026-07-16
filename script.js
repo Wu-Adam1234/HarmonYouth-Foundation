@@ -145,6 +145,74 @@ document.addEventListener('DOMContentLoaded', () => {
     updateTilt();
   }
 
+  // pointer-tracking glow borders (vanilla port of the GlowingEffect component)
+  const glowTargets = document.querySelectorAll('.step, .panel, .gofundme-fallback, .wechat-block, .volunteer-perk, .past-show, .recruiting-banner .section-inner');
+  glowTargets.forEach(el => el.classList.add('glow-card'));
+  // mouse sheen on dark feature cards (from the CinematicHero card)
+  const sheenTargets = document.querySelectorAll('.gofundme-fallback, .wechat-block, .founder-photo');
+  sheenTargets.forEach(el => el.classList.add('sheen-card'));
+
+  if (glowTargets.length || sheenTargets.length) {
+    let glowRaf = null;
+    document.addEventListener('pointermove', (e) => {
+      if (glowRaf) return;
+      glowRaf = requestAnimationFrame(() => {
+        glowRaf = null;
+        const proximity = 80;
+        glowTargets.forEach(el => {
+          const r = el.getBoundingClientRect();
+          if (r.bottom < -proximity || r.top > window.innerHeight + proximity) return;
+          const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+          const active = e.clientX > r.left - proximity && e.clientX < r.right + proximity &&
+                         e.clientY > r.top - proximity && e.clientY < r.bottom + proximity;
+          el.style.setProperty('--active', active ? '1' : '0');
+          if (active) {
+            const angle = (180 * Math.atan2(e.clientY - cy, e.clientX - cx)) / Math.PI + 90;
+            el.style.setProperty('--start', String(angle));
+          }
+        });
+        sheenTargets.forEach(el => {
+          const r = el.getBoundingClientRect();
+          if (r.bottom < 0 || r.top > window.innerHeight) return;
+          el.style.setProperty('--mouse-x', (e.clientX - r.left) + 'px');
+          el.style.setProperty('--mouse-y', (e.clientY - r.top) + 'px');
+        });
+      });
+    }, { passive: true });
+  }
+
+  // performer email confirmation: live feedback + hard block on submit (runs before Formspree)
+  const vEmail = document.getElementById('vemail');
+  const vEmail2 = document.getElementById('vemail2');
+  const vMatchError = document.getElementById('vemailMatchError');
+  if (vEmail && vEmail2 && vMatchError) {
+    function emailsMatch() {
+      return vEmail.value.trim().toLowerCase() === vEmail2.value.trim().toLowerCase();
+    }
+    function updateMatchUI() {
+      if (vEmail2.value && !emailsMatch()) {
+        vMatchError.textContent = "These don't match yet.";
+        vEmail2.style.borderColor = 'var(--rose)';
+      } else {
+        vMatchError.textContent = '';
+        vEmail2.style.borderColor = vEmail2.value ? 'var(--sage)' : '';
+      }
+    }
+    vEmail2.addEventListener('input', updateMatchUI);
+    vEmail.addEventListener('input', updateMatchUI);
+    const vForm = document.getElementById('volunteerForm');
+    if (vForm) {
+      vForm.addEventListener('submit', (e) => {
+        if (!emailsMatch()) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          vMatchError.textContent = 'Please make sure both email fields match before sending.';
+          vEmail2.focus();
+        }
+      }, true);
+    }
+  }
+
   // footer contact us toggle
   document.querySelectorAll('.footer-contact').forEach(block => {
     const btn = block.querySelector('.contact-toggle');

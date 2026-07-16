@@ -67,9 +67,19 @@
             </select>
           </div>
           <div>
-            <label for="vemail">Email</label>
-            <input id="vemail" name="email" type="email" placeholder="name@email.com" data-fs-field required>
-            <span data-fs-error="email" class="fs-error"></span>
+            <label for="vemail">Performer email</label>
+            <input id="vemail" name="performer_email" type="email" placeholder="name@email.com" data-fs-field required>
+            <span data-fs-error="performer_email" class="fs-error"></span>
+          </div>
+          <div>
+            <label for="vemail2">Confirm performer email</label>
+            <input id="vemail2" type="email" placeholder="Type it once more" autocomplete="off" required>
+            <span class="fs-error" id="vemailMatchError"></span>
+          </div>
+          <div>
+            <label for="vparentemail">Parent or guardian email</label>
+            <input id="vparentemail" name="parent_email" type="email" placeholder="parent@email.com" data-fs-field required>
+            <span data-fs-error="parent_email" class="fs-error"></span>
           </div>
           <div>
             <label for="vdates">Which dates are you interested in</label>

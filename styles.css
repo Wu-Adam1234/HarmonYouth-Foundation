@@ -130,6 +130,78 @@ section.has-notes, .page-header{position:relative;overflow:hidden;}
   transform-origin:center top;
   transition:transform .1s linear;
 }
+
+/* ---------- FILM GRAIN (from CinematicHero) ---------- */
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:500;
+  opacity:.045;mix-blend-mode:overlay;
+  background:url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%25" height="100%25" filter="url(%23n)"/></svg>');
+}
+
+/* ---------- MASKED GRID BACKGROUND (from CinematicHero) ---------- */
+.hero::before, .page-header::before, .support-section::before, .recruiting-banner::before, .form-section::before, .founder::before{
+  content:'';position:absolute;inset:0;pointer-events:none;z-index:0;
+  background-size:60px 60px;
+  background-image:
+    linear-gradient(to right, rgba(244,246,249,0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(244,246,249,0.045) 1px, transparent 1px);
+  -webkit-mask-image:radial-gradient(ellipse at center, black 0%, transparent 72%);
+  mask-image:radial-gradient(ellipse at center, black 0%, transparent 72%);
+}
+
+/* ---------- 3D MATTE TEXT (from CinematicHero) ---------- */
+.hero h1, .page-header h1{
+  text-shadow:
+    0 10px 30px rgba(244,246,249,0.16),
+    0 2px 4px rgba(244,246,249,0.08);
+}
+
+/* ---------- TACTILE BUTTONS (from CinematicHero) ---------- */
+.btn{
+  transition:all .4s cubic-bezier(.25,1,.5,1) !important;
+}
+.btn-primary{
+  box-shadow:0 0 0 1px rgba(255,255,255,0.06), 0 2px 4px rgba(0,0,0,0.35),
+    0 12px 24px -4px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.22),
+    inset 0 -3px 6px rgba(0,0,0,0.28);
+}
+.btn-primary:hover{transform:translateY(-3px);
+  box-shadow:0 0 0 1px rgba(255,255,255,0.1), 0 6px 12px -2px rgba(0,0,0,0.45),
+    0 20px 32px -6px rgba(0,0,0,0.6), inset 0 1px 1px rgba(255,255,255,0.25),
+    inset 0 -3px 6px rgba(0,0,0,0.28);}
+.btn-primary:active{transform:translateY(1px);
+  box-shadow:0 0 0 1px rgba(0,0,0,0.2), inset 0 3px 8px rgba(0,0,0,0.5);}
+.btn-ghost:hover, .btn-ghost-dark:hover{transform:translateY(-3px);}
+.btn-ghost:active, .btn-ghost-dark:active{transform:translateY(1px);}
+
+/* ---------- POINTER-TRACKING GLOW BORDER (from GlowingEffect) ---------- */
+.glow-card{position:relative;}
+.glow-card::after{
+  content:'';position:absolute;inset:-1px;border-radius:inherit;pointer-events:none;
+  padding:2px;
+  background:conic-gradient(from calc(var(--start,0)*1deg),
+    transparent 0deg,
+    rgba(143,176,204,0.0) 40deg,
+    var(--gold) 90deg,
+    #8FB0CC 120deg,
+    rgba(143,176,204,0.0) 200deg,
+    transparent 360deg);
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+  mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite:exclude;
+  opacity:var(--active,0);
+  transition:opacity .3s ease;
+}
+
+/* ---------- MOUSE SHEEN (from CinematicHero premium card) ---------- */
+.sheen-card{position:relative;}
+.sheen-card::before{
+  content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:2;
+  background:radial-gradient(600px circle at var(--mouse-x,50%) var(--mouse-y,50%),
+    rgba(255,255,255,0.055) 0%, transparent 40%);
+  mix-blend-mode:screen;
+}
 .nav-links{display:flex;gap:30px;}
 .nav-links a{
   font-size:14px;color:var(--ivory-dim);font-weight:500;
