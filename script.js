@@ -181,33 +181,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
   }
 
-  // performer email confirmation: live feedback + hard block on submit (runs before Formspree)
-  const vEmail = document.getElementById('vemail');
-  const vEmail2 = document.getElementById('vemail2');
+  // parent/guardian email confirmation: live feedback + hard block on submit (runs before Formspree)
+  const pEmail = document.getElementById('vparentemail');
+  const pEmail2 = document.getElementById('vparentemail2');
   const vMatchError = document.getElementById('vemailMatchError');
-  if (vEmail && vEmail2 && vMatchError) {
+  if (pEmail && pEmail2 && vMatchError) {
     function emailsMatch() {
-      return vEmail.value.trim().toLowerCase() === vEmail2.value.trim().toLowerCase();
+      return pEmail.value.trim().toLowerCase() === pEmail2.value.trim().toLowerCase();
     }
     function updateMatchUI() {
-      if (vEmail2.value && !emailsMatch()) {
+      if (pEmail2.value && !emailsMatch()) {
         vMatchError.textContent = "These don't match yet.";
-        vEmail2.style.borderColor = 'var(--rose)';
+        pEmail2.style.borderColor = 'var(--rose)';
       } else {
         vMatchError.textContent = '';
-        vEmail2.style.borderColor = vEmail2.value ? 'var(--sage)' : '';
+        pEmail2.style.borderColor = pEmail2.value ? 'var(--sage)' : '';
       }
     }
-    vEmail2.addEventListener('input', updateMatchUI);
-    vEmail.addEventListener('input', updateMatchUI);
+    pEmail2.addEventListener('input', updateMatchUI);
+    pEmail.addEventListener('input', updateMatchUI);
     const vForm = document.getElementById('volunteerForm');
     if (vForm) {
       vForm.addEventListener('submit', (e) => {
         if (!emailsMatch()) {
           e.preventDefault();
           e.stopImmediatePropagation();
-          vMatchError.textContent = 'Please make sure both email fields match before sending.';
-          vEmail2.focus();
+          vMatchError.textContent = 'Please make sure both parent or guardian email fields match before sending.';
+          pEmail2.focus();
         }
       }, true);
     }
