@@ -28,6 +28,10 @@
 <div class="tag">Calendar</div>
   <h1>Upcoming performances</h1>
   <p>Shows running at four senior homes across NW Calgary this summer. Our first two July shows are done, scroll down for photos.</p>
+  <div style="margin-top:24px;display:flex;gap:14px;flex-wrap:wrap;">
+    <a href="#upcoming" class="btn btn-primary">Upcoming shows</a>
+    <a href="#past" class="btn btn-ghost">Past performances &amp; photos</a>
+  </div>
   <svg class="floating-note" style="top:24px;right:8%;width:34px;height:34px;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M9 18V5l12-2v13" stroke="#5B7B9A" stroke-width="1.6"/>
     <circle cx="6" cy="18" r="3" stroke="#5B7B9A" stroke-width="1.6"/>
@@ -36,14 +40,18 @@
 </div>
 <div class="mini-keys" data-count="32"></div>
 
-<section>
+<section id="upcoming">
   <div class="section-inner reveal">
     <div class="tag">Upcoming</div>
-    <div class="show-list">
+    <div class="view-toggle">
+      <button type="button" class="view-btn active" data-view="list">List</button>
+      <button type="button" class="view-btn" data-view="calendar">Calendar</button>
+    </div>
+    <div class="show-list" id="listView">
       <div class="show-row">
         <div class="show-date">Jul 24</div>
         <div class="show-venue"><span><a href="https://www.google.com/maps/search/?api=1&query=The+Scenic+Grande+Calgary" target="_blank" rel="noopener" class="venue-link">The Scenic Grande</a></span><span class="sub">2:00 to 2:30 PM</span></div>
-        <div class="show-status" style="color:#8B97A3;">Full</div>
+        <div class="show-status">Recruiting</div>
       </div>
       <div class="show-row">
         <div class="show-date">Jul 24</div>
@@ -91,6 +99,11 @@
         <div class="show-status">Recruiting</div>
       </div>
     </div>
+<div class="calendar-view" id="calendarView" hidden>
+<div class="cal-month"><div class="cal-title">July 2026</div><div class="cal-grid"><div class="cal-head">Su</div><div class="cal-head">Mo</div><div class="cal-head">Tu</div><div class="cal-head">We</div><div class="cal-head">Th</div><div class="cal-head">Fr</div><div class="cal-head">Sa</div><div class="cal-cell empty"></div><div class="cal-cell empty"></div><div class="cal-cell empty"></div><div class="cal-cell"><span class="cal-day">1</span></div><div class="cal-cell"><span class="cal-day">2</span></div><div class="cal-cell"><span class="cal-day">3</span></div><div class="cal-cell"><span class="cal-day">4</span></div><div class="cal-cell"><span class="cal-day">5</span></div><div class="cal-cell"><span class="cal-day">6</span></div><div class="cal-cell"><span class="cal-day">7</span></div><div class="cal-cell"><span class="cal-day">8</span></div><div class="cal-cell"><span class="cal-day">9</span></div><div class="cal-cell"><span class="cal-day">10</span></div><div class="cal-cell"><span class="cal-day">11</span></div><div class="cal-cell"><span class="cal-day">12</span></div><div class="cal-cell"><span class="cal-day">13</span></div><div class="cal-cell"><span class="cal-day">14</span></div><div class="cal-cell"><span class="cal-day">15</span></div><div class="cal-cell"><span class="cal-day">16</span></div><div class="cal-cell"><span class="cal-day">17</span></div><div class="cal-cell"><span class="cal-day">18</span></div><div class="cal-cell"><span class="cal-day">19</span></div><div class="cal-cell"><span class="cal-day">20</span></div><div class="cal-cell"><span class="cal-day">21</span></div><div class="cal-cell"><span class="cal-day">22</span></div><div class="cal-cell"><span class="cal-day">23</span></div><div class="cal-cell has-event"><span class="cal-day">24</span><span class="cal-chip" title="The Scenic Grande, Recruiting">SG</span><span class="cal-chip full" title="The Manor Village at Rocky Ridge, Full">MV</span></div><div class="cal-cell"><span class="cal-day">25</span></div><div class="cal-cell"><span class="cal-day">26</span></div><div class="cal-cell"><span class="cal-day">27</span></div><div class="cal-cell"><span class="cal-day">28</span></div><div class="cal-cell"><span class="cal-day">29</span></div><div class="cal-cell"><span class="cal-day">30</span></div><div class="cal-cell"><span class="cal-day">31</span></div><div class="cal-cell empty"></div></div></div>
+<div class="cal-month"><div class="cal-title">August 2026</div><div class="cal-grid"><div class="cal-head">Su</div><div class="cal-head">Mo</div><div class="cal-head">Tu</div><div class="cal-head">We</div><div class="cal-head">Th</div><div class="cal-head">Fr</div><div class="cal-head">Sa</div><div class="cal-cell empty"></div><div class="cal-cell empty"></div><div class="cal-cell empty"></div><div class="cal-cell empty"></div><div class="cal-cell empty"></div><div class="cal-cell empty"></div><div class="cal-cell has-event"><span class="cal-day">1</span><span class="cal-chip" title="Rocky Ridge Retirement Community, Recruiting">RR</span></div><div class="cal-cell"><span class="cal-day">2</span></div><div class="cal-cell"><span class="cal-day">3</span></div><div class="cal-cell"><span class="cal-day">4</span></div><div class="cal-cell"><span class="cal-day">5</span></div><div class="cal-cell"><span class="cal-day">6</span></div><div class="cal-cell has-event"><span class="cal-day">7</span><span class="cal-chip" title="The Scenic Grande, Recruiting">SG</span><span class="cal-chip" title="The Manor Village at Rocky Ridge, Recruiting">MV</span></div><div class="cal-cell"><span class="cal-day">8</span></div><div class="cal-cell"><span class="cal-day">9</span></div><div class="cal-cell"><span class="cal-day">10</span></div><div class="cal-cell"><span class="cal-day">11</span></div><div class="cal-cell"><span class="cal-day">12</span></div><div class="cal-cell"><span class="cal-day">13</span></div><div class="cal-cell"><span class="cal-day">14</span></div><div class="cal-cell"><span class="cal-day">15</span></div><div class="cal-cell"><span class="cal-day">16</span></div><div class="cal-cell"><span class="cal-day">17</span></div><div class="cal-cell"><span class="cal-day">18</span></div><div class="cal-cell"><span class="cal-day">19</span></div><div class="cal-cell"><span class="cal-day">20</span></div><div class="cal-cell has-event"><span class="cal-day">21</span><span class="cal-chip" title="The Scenic Grande, Recruiting">SG</span><span class="cal-chip" title="The Manor Village at Rocky Ridge, Recruiting">MV</span></div><div class="cal-cell has-event"><span class="cal-day">22</span><span class="cal-chip talks" title="Venvi The Edgemont, In talks">VE</span></div><div class="cal-cell"><span class="cal-day">23</span></div><div class="cal-cell"><span class="cal-day">24</span></div><div class="cal-cell"><span class="cal-day">25</span></div><div class="cal-cell"><span class="cal-day">26</span></div><div class="cal-cell"><span class="cal-day">27</span></div><div class="cal-cell"><span class="cal-day">28</span></div><div class="cal-cell has-event"><span class="cal-day">29</span><span class="cal-chip talks" title="Venvi The Edgemont, In talks">VE</span></div><div class="cal-cell has-event"><span class="cal-day">30</span><span class="cal-chip" title="Boardwalk Retirement Community, Recruiting">BW</span></div><div class="cal-cell"><span class="cal-day">31</span></div><div class="cal-cell empty"></div><div class="cal-cell empty"></div><div class="cal-cell empty"></div><div class="cal-cell empty"></div><div class="cal-cell empty"></div></div></div>
+<div class="cal-legend"><span><b>SG</b> The Scenic Grande</span> <span><b>MV</b> The Manor Village at Rocky Ridge</span> <span><b>RR</b> Rocky Ridge Retirement Community</span> <span><b>VE</b> Venvi The Edgemont</span> <span><b>BW</b> Boardwalk Retirement Community</span><span class="cal-legend-note">Blue = recruiting, gray = full, rose = in talks. Hover a chip for details.</span></div>
+</div>
     <p style="margin-top:30px;color:#5C6B7A;font-size:15px;">Want to perform at one of these? Join the roster. Performers earn a volunteer hour certificate at every 5 hours performed, about 10 performances.</p>
     <div style="margin-top:24px;">
       <a href="mailto:harmonyouthfoundation@gmail.com" class="btn btn-ghost-dark">Contact us</a>
@@ -98,7 +111,7 @@
   </div>
 </section>
 
-<section style="padding-top:0;">
+<section style="padding-top:0;" id="past">
   <div class="section-inner reveal">
     <div class="tag">Past</div>
 
@@ -171,7 +184,7 @@
   </div>
   <div class="footer-contact">
     <button class="contact-toggle" type="button">Contact us</button>
-    <a class="contact-email" href="mailto:harmonyouthfoundation@gmail.com" hidden>harmonyouthfoundation@gmail.com</a>
+    <span class="contact-email" hidden><a href="mailto:harmonyouthfoundation@gmail.com">harmonyouthfoundation@gmail.com</a> &nbsp;|&nbsp; <a href="tel:+14039266122">(403) 926-6122</a></span>
   </div>
   <div class="footer-social">
     <a href="https://instagram.com/harmonyouthfoundation" target="_blank" rel="noopener">

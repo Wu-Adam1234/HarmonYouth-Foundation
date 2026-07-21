@@ -306,6 +306,10 @@ h2{
 .piano-wrap{
   position:relative;width:100%;margin-top:70px;
   height:160px;
+  transform-style:preserve-3d;
+  transform:perspective(900px) rotateX(38deg);
+  will-change:transform;
+  transition:transform .05s linear;
 }
 .piano{
   position:relative;display:flex;width:100%;height:130px;
@@ -324,6 +328,11 @@ h2{
   border-bottom-color:#7c5a28;
   transform:translateY(5px) scaleY(0.97);
   box-shadow:inset 0 -4px 6px -2px rgba(0,0,0,0.25);
+}
+.wkey{cursor:pointer;}
+.wkey.pressed{
+  transform:translateY(7px) rotateX(-7deg) scaleY(0.96);
+  background:linear-gradient(to bottom,#f0c98a 0%,var(--gold) 70%,#a87a36 100%);
 }
 .bkeys{position:absolute;top:0;left:0;width:100%;height:62%;display:flex;pointer-events:none;}
 .bkey{
@@ -445,6 +454,39 @@ h2{
 }
 .venue-link:hover{color:var(--gold);}
 
+/* ---------- VIEW TOGGLE + CALENDAR ---------- */
+.view-toggle{display:flex;gap:0;margin-top:20px;border:1px solid #c9d2dc;border-radius:3px;width:fit-content;overflow:hidden;}
+.view-btn{
+  background:transparent;border:none;padding:9px 22px;font-family:var(--sans);
+  font-size:13px;font-weight:600;color:#5C6B7A;cursor:pointer;transition:all .2s ease;
+}
+.view-btn.active{background:var(--charcoal);color:var(--ivory);}
+.calendar-view{margin-top:36px;display:grid;grid-template-columns:1fr 1fr;gap:34px;}
+@media(max-width:760px){.calendar-view{grid-template-columns:1fr;}}
+.cal-month{border:1px solid #D7DEE6;border-radius:4px;padding:18px;background:#fff;}
+.cal-title{font-family:var(--serif);font-size:19px;font-weight:500;margin-bottom:14px;}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
+.cal-head{font-size:11px;font-weight:600;color:#8B97A3;text-align:center;padding:4px 0;text-transform:uppercase;letter-spacing:.05em;}
+.cal-cell{
+  min-height:52px;border:1px solid #EDF1F5;border-radius:3px;padding:4px;
+  display:flex;flex-direction:column;gap:2px;align-items:flex-start;
+}
+.cal-cell.empty{border:none;}
+.cal-cell.has-event{background:rgba(91,123,154,0.07);border-color:#c9d6e2;}
+.cal-day{font-size:11px;color:#5C6B7A;font-weight:500;}
+.cal-chip{
+  font-size:10px;font-weight:700;color:#fff;background:var(--gold);
+  border-radius:2px;padding:1px 5px;line-height:1.5;cursor:help;
+}
+.cal-chip.full{background:#8B97A3;}
+.cal-chip.talks{background:var(--rose);}
+.cal-legend{
+  grid-column:1 / -1;display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:#5C6B7A;
+  padding-top:4px;
+}
+.cal-legend b{color:var(--charcoal);}
+.cal-legend-note{width:100%;color:#8B97A3;}
+
 /* ---------- FORMS ---------- */
 .form-section{background:var(--charcoal);color:var(--ivory);}
 .split-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:44px;}
@@ -528,6 +570,7 @@ footer{
   padding:9px 20px;border-radius:2px;cursor:pointer;transition:all .25s ease;
 }
 .contact-toggle:hover{background:var(--gold);color:#fff;}
+.contact-email a{color:var(--ivory);text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:3px;}
 .contact-email{
   color:var(--ivory);font-size:15px;font-weight:500;
   text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:3px;

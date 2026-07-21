@@ -213,6 +213,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // list/calendar view toggle on the performances page
+  const viewBtns = document.querySelectorAll('.view-btn');
+  const listView = document.getElementById('listView');
+  const calView = document.getElementById('calendarView');
+  if (viewBtns.length && listView && calView) {
+    viewBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        viewBtns.forEach(b => b.classList.toggle('active', b === btn));
+        const cal = btn.dataset.view === 'calendar';
+        listView.hidden = cal;
+        calView.hidden = !cal;
+      });
+    });
+  }
+
   // footer contact us toggle
   document.querySelectorAll('.footer-contact').forEach(block => {
     const btn = block.querySelector('.contact-toggle');
@@ -330,6 +345,46 @@ document.addEventListener('DOMContentLoaded', () => {
     wrap.addEventListener('mouseleave', () => {
       if (whiteKeys[mouseActiveIndex]) whiteKeys[mouseActiveIndex].classList.remove('active');
       mouseActiveIndex = -1;
+    });
+
+    // 3D: the whole keyboard sits in perspective and un-tilts as you scroll
+    function updateTilt3D() {
+      const heroEl = document.querySelector('.hero');
+      if (!heroEl) return;
+      const progress = Math.min(Math.max(window.scrollY / (heroEl.offsetHeight * 0.7), 0), 1);
+      const rx = 38 - 30 * progress; // 38deg tilted like a player's view, flattens toward 8deg
+      wrap.style.transform = 'perspective(900px) rotateX(' + rx.toFixed(2) + 'deg)';
+    }
+    window.addEventListener('scroll', updateTilt3D, { passive: true });
+    updateTilt3D();
+
+    // click to actually play notes (WebAudio) — white keys start at C3
+    let audioCtx = null;
+    function playNote(whiteIndex) {
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const whiteOffsets = [0, 2, 4, 5, 7, 9, 11];
+        const midi = 48 + 12 * Math.floor(whiteIndex / 7) + whiteOffsets[whiteIndex % 7];
+        const freq = 440 * Math.pow(2, (midi - 69) / 12);
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.25, audioCtx.currentTime + 0.015);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.1);
+        osc.connect(gain).connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 1.15);
+      } catch (err) { /* audio unsupported; stay silent */ }
+    }
+    whiteKeys.forEach((k, i) => {
+      k.addEventListener('click', () => {
+        playNote(i);
+        k.classList.add('pressed');
+        setTimeout(() => k.classList.remove('pressed'), 180);
+      });
     });
 
     // scroll animation: as the hero scrolls past, keys press down left to right in sequence
