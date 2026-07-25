@@ -213,10 +213,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // list/calendar view toggle on the performances page
+  // list/calendar view toggle + month-browser calendar on the performances page
   const viewBtns = document.querySelectorAll('.view-btn');
   const listView = document.getElementById('listView');
   const calView = document.getElementById('calendarView');
+  const calMonthEl = document.getElementById('calMonth');
   if (viewBtns.length && listView && calView) {
     viewBtns.forEach(btn => {
       btn.addEventListener('click', () => {
@@ -226,6 +227,67 @@ document.addEventListener('DOMContentLoaded', () => {
         calView.hidden = !cal;
       });
     });
+  }
+  if (calMonthEl) {
+    const VENUES = {
+      SG: 'The Scenic Grande', MV: 'The Manor Village at Rocky Ridge',
+      RR: 'Rocky Ridge Retirement Community', VE: 'Venvi The Edgemont',
+      BW: 'Boardwalk Retirement Community'
+    };
+    // status: recruiting | full | talks | past | cancelled
+    const EVENTS = {
+      '2025-12-27': [['SG', 'past']],
+      '2026-07-10': [['SG', 'past'], ['MV', 'past']],
+      '2026-07-24': [['SG', 'past'], ['MV', 'cancelled']],
+      '2026-08-01': [['RR', 'recruiting']],
+      '2026-08-07': [['SG', 'recruiting'], ['MV', 'recruiting']],
+      '2026-08-21': [['SG', 'recruiting'], ['MV', 'recruiting']],
+      '2026-08-22': [['VE', 'talks']],
+      '2026-08-29': [['VE', 'talks']],
+      '2026-08-30': [['BW', 'recruiting']]
+    };
+    const STATUS_LABEL = { recruiting: 'Recruiting', full: 'Full', talks: 'In talks', past: 'Past performance', cancelled: 'Cancelled' };
+    const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const MIN = { y: 2025, m: 11 }; // Dec 2025
+    const MAX = { y: 2026, m: 7 };  // Aug 2026
+    let cur = { y: 2026, m: 6 };    // July 2026 (current month)
+
+    const titleEl = document.getElementById('calTitle');
+    const prevBtn = document.getElementById('calPrev');
+    const nextBtn = document.getElementById('calNext');
+    const legendEl = document.getElementById('calLegend');
+    legendEl.innerHTML = Object.entries(VENUES).map(([k, v]) => '<span><b>' + k + '</b> ' + v + '</span>').join(' ')
+      + '<span class="cal-legend-note">Blue = recruiting, rose = in talks, gray = past, strikethrough = cancelled. Hover a chip for details.</span>';
+
+    function cmp(a, b) { return (a.y * 12 + a.m) - (b.y * 12 + b.m); }
+
+    function renderMonth() {
+      titleEl.textContent = MONTHS[cur.m] + ' ' + cur.y;
+      prevBtn.disabled = cmp(cur, MIN) <= 0;
+      nextBtn.disabled = cmp(cur, MAX) >= 0;
+      const first = new Date(cur.y, cur.m, 1);
+      const daysInMonth = new Date(cur.y, cur.m + 1, 0).getDate();
+      const startDow = first.getDay();
+      let html = '<div class="cal-grid">';
+      ['Su','Mo','Tu','We','Th','Fr','Sa'].forEach(d => { html += '<div class="cal-head">' + d + '</div>'; });
+      for (let i = 0; i < startDow; i++) html += '<div class="cal-cell empty"></div>';
+      for (let day = 1; day <= daysInMonth; day++) {
+        const key = cur.y + '-' + String(cur.m + 1).padStart(2, '0') + '-' + String(day).padStart(2, '0');
+        const evs = EVENTS[key];
+        if (evs) {
+          const chips = evs.map(([v, s]) =>
+            '<span class="cal-chip ' + s + '" title="' + VENUES[v] + ', ' + STATUS_LABEL[s] + '">' + v + '</span>').join('');
+          html += '<div class="cal-cell has-event"><span class="cal-day">' + day + '</span>' + chips + '</div>';
+        } else {
+          html += '<div class="cal-cell"><span class="cal-day">' + day + '</span></div>';
+        }
+      }
+      html += '</div>';
+      calMonthEl.innerHTML = html;
+    }
+    prevBtn.addEventListener('click', () => { if (cmp(cur, MIN) > 0) { cur.m--; if (cur.m < 0) { cur.m = 11; cur.y--; } renderMonth(); } });
+    nextBtn.addEventListener('click', () => { if (cmp(cur, MAX) < 0) { cur.m++; if (cur.m > 11) { cur.m = 0; cur.y++; } renderMonth(); } });
+    renderMonth();
   }
 
   // footer contact us toggle
