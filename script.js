@@ -35,6 +35,20 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // auto-rotating photo carousels with clickable dots (reusable for any .carousel on the site)
+  // images use data-src and only load once the carousel scrolls into view
+  const carouselLoadObs = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const carousel = entry.target;
+      carousel.querySelectorAll('.carousel-slide[data-src]').forEach(img => {
+        img.src = img.getAttribute('data-src');
+        img.removeAttribute('data-src');
+      });
+      observer.unobserve(carousel);
+      if (carousel._startAutoplay) carousel._startAutoplay();
+    });
+  }, { rootMargin: '200px 0px' });
+
   document.querySelectorAll('.carousel').forEach(carousel => {
     const slides = carousel.querySelectorAll('.carousel-slide');
     const dots = carousel.querySelectorAll('.carousel-dot');
@@ -57,11 +71,20 @@ document.addEventListener('DOMContentLoaded', () => {
     if (slides.length > 1) {
       dots.forEach((dot, i) => {
         dot.addEventListener('click', () => {
+          // in case someone clicks a dot before the carousel has scrolled into view
+          carousel.querySelectorAll('.carousel-slide[data-src]').forEach(img => {
+            img.src = img.getAttribute('data-src');
+            img.removeAttribute('data-src');
+          });
           goTo(i);
           startAutoplay();
         });
       });
-      startAutoplay();
+      carousel._startAutoplay = startAutoplay;
+      carouselLoadObs.observe(carousel);
+    } else {
+      // single-image "carousel" still needs its image loaded once visible
+      carouselLoadObs.observe(carousel);
     }
   });
 
@@ -237,7 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // [code, status, time]
     const EVENTS = {
       '2026-08-01': [['RR', 'past', '2:00 to 2:30 PM']],
-      '2026-08-07': [['SG', 'recruiting', '2:00 to 2:30 PM'], ['MV', 'recruiting', '1:00 to 1:30 PM']],
+      '2026-08-07': [['SG', 'full', '2:00 to 2:30 PM'], ['MV', 'full', '1:00 to 1:30 PM']],
       '2026-08-21': [['SG', 'recruiting', '2:00 to 2:30 PM'], ['MV', 'recruiting', '1:00 to 1:30 PM']],
       '2026-08-23': [['CM', 'recruiting', '2:00 to 2:45 PM']],
       '2026-08-30': [['BW', 'recruiting', '2:00 to 2:30 PM']]
