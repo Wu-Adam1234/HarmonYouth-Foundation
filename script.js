@@ -260,7 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // [code, status, time]
     const EVENTS = {
       '2026-08-01': [['RR', 'past', '2:00 to 2:30 PM']],
-      '2026-08-07': [['SG', 'full', '2:00 to 2:30 PM'], ['MV', 'full', '1:00 to 1:30 PM']],
+      '2026-08-07': [['SG', 'past', '2:00 to 2:30 PM'], ['MV', 'past', '1:00 to 1:30 PM']],
       '2026-08-21': [['SG', 'recruiting', '2:00 to 2:30 PM'], ['MV', 'recruiting', '1:00 to 1:30 PM']],
       '2026-08-23': [['CM', 'recruiting', '2:00 to 2:45 PM']],
       '2026-08-30': [['BW', 'recruiting', '2:00 to 2:30 PM']]
