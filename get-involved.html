@@ -110,7 +110,7 @@
             </div>
             <div>
               <label for="vparentemail2">Confirm parent or guardian email</label>
-              <input id="vparentemail2" type="email" placeholder="Type it once more" autocomplete="off" required>
+              <input id="vparentemail2" type="email" placeholder="Type it once more" autocomplete="off" data-confirm-for="vparentemail" required>
               <span class="fs-error" id="vemailMatchError"></span>
             </div>
             <div>
@@ -155,6 +155,16 @@
               <span data-fs-error="phone" class="fs-error"></span>
             </div>
             <div>
+              <label for="mparentemail">Parent or guardian email</label>
+              <input id="mparentemail" name="parent_email" type="email" placeholder="parent@email.com" data-fs-field required>
+              <span data-fs-error="parent_email" class="fs-error"></span>
+            </div>
+            <div>
+              <label for="mparentemail2">Confirm parent or guardian email</label>
+              <input id="mparentemail2" type="email" placeholder="Type it once more" autocomplete="off" data-confirm-for="mparentemail" required>
+              <span class="fs-error" id="memailMatchError"></span>
+            </div>
+            <div>
               <label for="minterest">I'd like to</label>
               <select id="minterest" name="interest" data-fs-field>
                 <option value="Join a build meeting">Join a build meeting</option>
@@ -191,6 +201,17 @@
               <label for="aemail">Email</label>
               <input id="aemail" name="email" type="email" placeholder="name@email.com" data-fs-field required>
               <span data-fs-error="email" class="fs-error"></span>
+            </div>
+            <div>
+              <label for="aparentemail">Parent or guardian email</label>
+              <input id="aparentemail" name="parent_email" type="email" placeholder="parent@email.com" data-fs-field>
+              <span data-fs-error="parent_email" class="fs-error"></span>
+              <p class="form-note">Only if you're under 18. Leave both blank otherwise.</p>
+            </div>
+            <div>
+              <label for="aparentemail2">Confirm parent or guardian email</label>
+              <input id="aparentemail2" type="email" placeholder="Type it once more" autocomplete="off" data-confirm-for="aparentemail">
+              <span class="fs-error" id="aemailMatchError"></span>
             </div>
             <div>
               <label for="amsg">Your message</label>

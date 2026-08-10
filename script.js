@@ -205,36 +205,40 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // parent/guardian email confirmation: live feedback + hard block on submit (runs before Formspree)
-  const pEmail = document.getElementById('vparentemail');
-  const pEmail2 = document.getElementById('vparentemail2');
-  const vMatchError = document.getElementById('vemailMatchError');
-  if (pEmail && pEmail2 && vMatchError) {
-    function emailsMatch() {
-      return pEmail.value.trim().toLowerCase() === pEmail2.value.trim().toLowerCase();
-    }
+  // works on any form: put data-confirm-for="<id of the first email field>" on the confirm input
+  document.querySelectorAll('input[data-confirm-for]').forEach(confirmEl => {
+    const primary = document.getElementById(confirmEl.dataset.confirmFor);
+    if (!primary) return;
+    const errEl = confirmEl.parentElement ? confirmEl.parentElement.querySelector('.fs-error') : null;
+    const form = confirmEl.closest('form');
+    const val = el => el.value.trim().toLowerCase();
+    const matches = () => val(primary) === val(confirmEl);
+    const bothBlank = () => !val(primary) && !val(confirmEl);
+
     function updateMatchUI() {
-      if (pEmail2.value && !emailsMatch()) {
-        vMatchError.textContent = "These don't match yet.";
-        pEmail2.style.borderColor = 'var(--rose)';
+      if (!errEl) return;
+      if (confirmEl.value && !matches()) {
+        errEl.textContent = "These don't match yet.";
+        confirmEl.style.borderColor = 'var(--rose)';
       } else {
-        vMatchError.textContent = '';
-        pEmail2.style.borderColor = pEmail2.value ? 'var(--sage)' : '';
+        errEl.textContent = '';
+        confirmEl.style.borderColor = confirmEl.value ? 'var(--sage)' : '';
       }
     }
-    pEmail2.addEventListener('input', updateMatchUI);
-    pEmail.addEventListener('input', updateMatchUI);
-    const vForm = document.getElementById('volunteerForm');
-    if (vForm) {
-      vForm.addEventListener('submit', (e) => {
-        if (!emailsMatch()) {
-          e.preventDefault();
-          e.stopImmediatePropagation();
-          vMatchError.textContent = 'Please make sure both parent or guardian email fields match before sending.';
-          pEmail2.focus();
-        }
+    primary.addEventListener('input', updateMatchUI);
+    confirmEl.addEventListener('input', updateMatchUI);
+
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        // blank on both sides is fine, that is how the optional version behaves
+        if (bothBlank() || matches()) return;
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        if (errEl) errEl.textContent = 'Please make sure both parent or guardian email fields match before sending.';
+        confirmEl.focus();
       }, true);
     }
-  }
+  });
 
   // list/calendar view toggle + month-browser calendar on the performances page
   const viewBtns = document.querySelectorAll('.view-btn');
