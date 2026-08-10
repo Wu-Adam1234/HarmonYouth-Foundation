@@ -26,10 +26,37 @@
 </nav>
 
 <div class="page-header">
-<div class="tag">Get involved</div>
-  <h1>Join as a performer</h1>
-  <p>Pick the option below that fits, fill out the form, and it lands straight in our inbox. Performing, joining Makers Making Change, or anything else, we'll get back to you.</p>
-  <p style="margin-top:14px;font-size:16px;color:var(--ivory);">Prefer to reach us directly? Email <a href="mailto:harmonyouthfoundation@gmail.com" style="color:var(--gold);text-decoration:underline;text-underline-offset:3px;">harmonyouthfoundation@gmail.com</a> or call or text <a href="tel:+14039266122" style="color:var(--gold);text-decoration:underline;text-underline-offset:3px;">(403) 926-6122</a></p>
+  <div class="ph-inner">
+    <div class="tag">Get involved</div>
+    <h1>Three ways in</h1>
+    <p>Play at a senior home, help build assistive devices, or ask us about something else. Pick the one that fits, fill out the form, and it lands straight in our inbox.</p>
+    <p class="ph-contact">Prefer to reach us directly? Email <a href="mailto:harmonyouthfoundation@gmail.com">harmonyouthfoundation@gmail.com</a> or call or text <a href="tel:+14039266122">(403) 926-6122</a></p>
+
+    <div class="route-nav">
+      <a href="#perform" class="route-btn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 18V5l12-2v13" stroke="currentColor" stroke-width="1.6"/><circle cx="6" cy="18" r="3" stroke="currentColor" stroke-width="1.6"/><circle cx="18" cy="16" r="3" stroke="currentColor" stroke-width="1.6"/></svg>
+        <span>
+          <span class="route-btn-label">Perform at a senior home</span>
+          <span class="route-btn-sub">Any instrument, any skill level. We handle the booking.</span>
+        </span>
+      </a>
+      <a href="#build" class="route-btn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0 5.2 5.2l-8.4 8.4a2.3 2.3 0 0 1-3.2-3.2l8.4-8.4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M14.7 6.3 12 3.6a3.5 3.5 0 0 0-4.9 4.9l2.7 2.7" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        <span>
+          <span class="route-btn-label">Build devices for people with disabilities</span>
+          <span class="route-btn-sub">3D printing and assembly with Makers Making Change.</span>
+        </span>
+      </a>
+      <a href="#other" class="route-btn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20 15a3 3 0 0 1-3 3H8l-4 3V6a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v9Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        <span>
+          <span class="route-btn-label">Ask about something else</span>
+          <span class="route-btn-sub">Marketing, donations, media, partnerships, questions.</span>
+        </span>
+      </a>
+    </div>
+  </div>
+
   <svg class="floating-note" style="top:24px;right:8%;width:34px;height:34px;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M9 18V5l12-2v13" stroke="#5B7B9A" stroke-width="1.6"/>
     <circle cx="6" cy="18" r="3" stroke="#5B7B9A" stroke-width="1.6"/>
@@ -39,145 +66,167 @@
 <div class="mini-keys" data-count="32"></div>
 
 <section class="form-section" style="position:relative;overflow:hidden;">
-<div class="section-inner">
-    <div class="triple-grid">
-      <div class="panel reveal">
-        <div class="tag" style="color:var(--gold);">For musicians</div>
-        <h3>Join the performer roster</h3>
-        <p class="desc">Any instrument, any voice, any skill level you're comfortable performing at. We'll add you to the list and check in before each show to see who can make it.</p>
-        <div class="volunteer-perk">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="9" r="6" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 14 7 22l5-3 5 3-1.5-8" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
-          <span>Volunteer hour certificates at every 5 hours performed (about 10 performances).</span>
+  <div class="section-inner">
+    <div class="involve-stack">
+
+      <article class="involve-card reveal" id="perform">
+        <div class="involve-intro">
+          <div class="tag" style="color:var(--gold);">For musicians</div>
+          <h3>Perform at a senior home</h3>
+          <p class="desc">Any instrument, any voice, any skill level you're comfortable playing in front of people. We add you to the roster and check in before each show to see who can make it, so signing up doesn't lock you into a date.</p>
+          <div class="volunteer-perk">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="9" r="6" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 14 7 22l5-3 5 3-1.5-8" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            <span>Volunteer hour certificates at every 5 hours performed (about 10 performances).</span>
+          </div>
         </div>
-        <div data-fs-success class="fs-success"></div>
-        <form id="volunteerForm">
-          <input type="hidden" name="_subject" value="New performer roster signup">
-          <div>
-            <label for="vname">Name</label>
-            <input id="vname" name="name" type="text" placeholder="Your name" data-fs-field required>
-          </div>
-          <div>
-            <label for="vinstrument">Instrument or voice</label>
-            <input id="vinstrument" name="instrument" type="text" placeholder="Piano, violin, voice" data-fs-field>
-          </div>
-          <div>
-            <label for="varea">General area or community</label>
-            <select id="varea" name="area" data-fs-field>
-              <option value="NW">NW</option>
-              <option value="SW">SW</option>
-            </select>
-          </div>
-          <div>
-            <label for="vemail">Performer email</label>
-            <input id="vemail" name="performer_email" type="email" placeholder="name@email.com" data-fs-field required>
-            <span data-fs-error="performer_email" class="fs-error"></span>
-          </div>
-          <div>
-            <label for="vparentemail">Parent or guardian email</label>
-            <input id="vparentemail" name="parent_email" type="email" placeholder="parent@email.com" data-fs-field required>
-            <span data-fs-error="parent_email" class="fs-error"></span>
-          </div>
-          <div>
-            <label for="vparentemail2">Confirm parent or guardian email</label>
-            <input id="vparentemail2" type="email" placeholder="Type it once more" autocomplete="off" required>
-            <span class="fs-error" id="vemailMatchError"></span>
-          </div>
-          <div>
-            <label for="vdates">Which dates are you interested in</label>
-            <input id="vdates" name="dates_interested" type="text" placeholder="e.g. Jul 10, Aug 7" data-fs-field>
-            <p class="form-note">Check out our <a href="performances.html" style="color:var(--gold);text-decoration:underline;">Performances</a> tab to see upcoming dates.</p>
-          </div>
-          <div>
-            <label for="vphone">Phone number</label>
-            <input id="vphone" name="phone" type="tel" placeholder="(403) 555-0123" data-fs-field required>
-            <span data-fs-error="phone" class="fs-error"></span>
-          </div>
-          <button type="submit" class="btn btn-primary" data-fs-submit-btn>Request to join</button>
-        </form>
-      </div>
-      <div class="panel reveal" id="making">
-        <div class="tag" style="color:var(--rose);">For makers</div>
-        <h3>Join Makers Making Change</h3>
-        <p class="desc">Help us 3D print and assemble assistive devices and adapted toys, or let us know about someone who could use one. No 3D printer needed, build meetings need hands more than they need hardware.</p>
-        <div data-fs-success class="fs-success"></div>
-        <form id="makerForm">
-          <input type="hidden" name="_subject" value="New Makers Making Change inquiry">
-          <div>
-            <label for="mname">Name</label>
-            <input id="mname" name="name" type="text" placeholder="Your name" data-fs-field required>
-          </div>
-          <div>
-            <label for="memail">Email</label>
-            <input id="memail" name="email" type="email" placeholder="name@email.com" data-fs-field required>
-            <span data-fs-error="email" class="fs-error"></span>
-          </div>
-          <div>
-            <label for="mphone">Phone number</label>
-            <input id="mphone" name="phone" type="tel" placeholder="(403) 555-0123" data-fs-field>
-            <span data-fs-error="phone" class="fs-error"></span>
-          </div>
-          <div>
-            <label for="minterest">I'd like to</label>
-            <select id="minterest" name="interest" data-fs-field>
-              <option value="Join a build meeting">Join a build meeting</option>
-              <option value="Request a device or toy for someone">Request a device or toy for someone</option>
-              <option value="Both">Both</option>
-            </select>
-          </div>
-          <div>
-            <label for="mmsg">Details</label>
-            <textarea id="mmsg" name="message" placeholder="Tell us a bit more, or describe the device or toy you're asking about." data-fs-field></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary" data-fs-submit-btn>Send request</button>
-        </form>
-      </div>
-      <div class="panel reveal" id="help">
-        <div class="tag" style="color:var(--ivory-dim);">Everything else</div>
-        <h3>Other inquiries</h3>
-        <p class="desc">Marketing, outreach, design, donations, media, partnerships, or something we haven't thought of yet. Tell us what's on your mind.</p>
-        <div data-fs-success class="fs-success"></div>
-        <form id="helpForm">
-          <input type="hidden" name="_subject" value="New general inquiry">
-          <div>
-            <label for="aname">Name</label>
-            <input id="aname" name="name" type="text" placeholder="Your name" data-fs-field required>
-          </div>
-          <div>
-            <label for="aemail">Email</label>
-            <input id="aemail" name="email" type="email" placeholder="name@email.com" data-fs-field required>
-            <span data-fs-error="email" class="fs-error"></span>
-          </div>
-          <div>
-            <label for="amsg">Your message</label>
-            <textarea id="amsg" name="message" placeholder="Tell us a bit about what you're reaching out about." data-fs-field required></textarea>
-          </div>
-          <button type="submit" class="btn btn-ghost" data-fs-submit-btn>Send message</button>
-        </form>
-      </div>
+        <div class="involve-form">
+          <div data-fs-success class="fs-success"></div>
+          <form id="volunteerForm">
+            <input type="hidden" name="_subject" value="New performer roster signup">
+            <div>
+              <label for="vname">Name</label>
+              <input id="vname" name="name" type="text" placeholder="Your name" data-fs-field required>
+            </div>
+            <div>
+              <label for="vinstrument">Instrument or voice</label>
+              <input id="vinstrument" name="instrument" type="text" placeholder="Piano, violin, voice" data-fs-field>
+            </div>
+            <div>
+              <label for="varea">General area or community</label>
+              <select id="varea" name="area" data-fs-field>
+                <option value="NW">NW</option>
+                <option value="SW">SW</option>
+              </select>
+            </div>
+            <div>
+              <label for="vemail">Performer email</label>
+              <input id="vemail" name="performer_email" type="email" placeholder="name@email.com" data-fs-field required>
+              <span data-fs-error="performer_email" class="fs-error"></span>
+            </div>
+            <div>
+              <label for="vparentemail">Parent or guardian email</label>
+              <input id="vparentemail" name="parent_email" type="email" placeholder="parent@email.com" data-fs-field required>
+              <span data-fs-error="parent_email" class="fs-error"></span>
+            </div>
+            <div>
+              <label for="vparentemail2">Confirm parent or guardian email</label>
+              <input id="vparentemail2" type="email" placeholder="Type it once more" autocomplete="off" required>
+              <span class="fs-error" id="vemailMatchError"></span>
+            </div>
+            <div>
+              <label for="vdates">Which dates are you interested in</label>
+              <input id="vdates" name="dates_interested" type="text" placeholder="e.g. Jul 10, Aug 7" data-fs-field>
+              <p class="form-note">Check our <a href="performances.html">Performances</a> tab for upcoming dates.</p>
+            </div>
+            <div>
+              <label for="vphone">Phone number</label>
+              <input id="vphone" name="phone" type="tel" placeholder="(403) 555-0123" data-fs-field required>
+              <span data-fs-error="phone" class="fs-error"></span>
+            </div>
+            <button type="submit" class="btn btn-primary" data-fs-submit-btn>Request to join</button>
+          </form>
+        </div>
+      </article>
+
+      <span id="making" class="anchor-alias" aria-hidden="true"></span>
+      <article class="involve-card reveal" id="build">
+        <div class="involve-intro">
+          <div class="tag" style="color:var(--rose);">For makers</div>
+          <h3>Build devices for people with disabilities</h3>
+          <p class="desc">Help us 3D print and assemble assistive devices and adapted toys through Makers Making Change, or tell us about someone who could use one. You don't need a printer of your own, build meetings need hands more than they need hardware.</p>
+          <p class="desc" style="margin-top:14px;">Not sure what this involves? The <a href="making.html" class="inline-link">Build page</a> walks through how a build meeting runs.</p>
+        </div>
+        <div class="involve-form">
+          <div data-fs-success class="fs-success"></div>
+          <form id="makerForm">
+            <input type="hidden" name="_subject" value="New Makers Making Change inquiry">
+            <div>
+              <label for="mname">Name</label>
+              <input id="mname" name="name" type="text" placeholder="Your name" data-fs-field required>
+            </div>
+            <div>
+              <label for="memail">Email</label>
+              <input id="memail" name="email" type="email" placeholder="name@email.com" data-fs-field required>
+              <span data-fs-error="email" class="fs-error"></span>
+            </div>
+            <div>
+              <label for="mphone">Phone number</label>
+              <input id="mphone" name="phone" type="tel" placeholder="(403) 555-0123" data-fs-field>
+              <span data-fs-error="phone" class="fs-error"></span>
+            </div>
+            <div>
+              <label for="minterest">I'd like to</label>
+              <select id="minterest" name="interest" data-fs-field>
+                <option value="Join a build meeting">Join a build meeting</option>
+                <option value="Request a device or toy for someone">Request a device or toy for someone</option>
+                <option value="Both">Both</option>
+              </select>
+            </div>
+            <div>
+              <label for="mmsg">Details</label>
+              <textarea id="mmsg" name="message" placeholder="Tell us a bit more, or describe the device or toy you're asking about." data-fs-field></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" data-fs-submit-btn>Send request</button>
+          </form>
+        </div>
+      </article>
+
+      <span id="help" class="anchor-alias" aria-hidden="true"></span>
+      <article class="involve-card reveal" id="other">
+        <div class="involve-intro">
+          <div class="tag" style="color:var(--ivory-dim);">Everything else</div>
+          <h3>Ask about something else</h3>
+          <p class="desc">Marketing, outreach, design, donations, media, partnerships, or something we haven't thought of yet. If you run a care home and want music in your building, this is the form to use.</p>
+          <p class="desc" style="margin-top:14px;">We're also looking for a Marketing and Outreach Lead. Details are on the <a href="team.html" class="inline-link">Meet the team page</a>.</p>
+        </div>
+        <div class="involve-form">
+          <div data-fs-success class="fs-success"></div>
+          <form id="helpForm">
+            <input type="hidden" name="_subject" value="New general inquiry">
+            <div>
+              <label for="aname">Name</label>
+              <input id="aname" name="name" type="text" placeholder="Your name" data-fs-field required>
+            </div>
+            <div>
+              <label for="aemail">Email</label>
+              <input id="aemail" name="email" type="email" placeholder="name@email.com" data-fs-field required>
+              <span data-fs-error="email" class="fs-error"></span>
+            </div>
+            <div>
+              <label for="amsg">Your message</label>
+              <textarea id="amsg" name="message" placeholder="Tell us a bit about what you're reaching out about." data-fs-field required></textarea>
+            </div>
+            <button type="submit" class="btn btn-ghost" data-fs-submit-btn>Send message</button>
+          </form>
+        </div>
+      </article>
+
     </div>
 
-    <div class="gofundme-card" style="margin-top:60px;">
-      <div class="gofundme-fallback">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 21s-7-4.35-9.5-8.5C1 9 2.5 5.5 6 5c2-.3 3.7.8 6 3.3C14.3 5.8 16 4.7 18 5c3.5.5 5 4 3.5 7.5C19 16.65 12 21 12 21Z" stroke="currentColor" stroke-width="1.6"/></svg>
-        <div>
-          <div class="gofundme-title">Prefer to support us another way?</div>
-          <div class="gofundme-sub">Donations through our GoFundMe go straight back into performances.</div>
+    <div class="involve-extras">
+      <div class="gofundme-card">
+        <div class="gofundme-fallback">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 21s-7-4.35-9.5-8.5C1 9 2.5 5.5 6 5c2-.3 3.7.8 6 3.3C14.3 5.8 16 4.7 18 5c3.5.5 5 4 3.5 7.5C19 16.65 12 21 12 21Z" stroke="currentColor" stroke-width="1.6"/></svg>
+          <div>
+            <div class="gofundme-title">Prefer to support us another way?</div>
+            <div class="gofundme-sub">Donations through our GoFundMe go straight back into performances.</div>
+          </div>
+          <a href="https://www.gofundme.com/f/help-harmonyouth-foundation-bring-music-to-seniors" target="_blank" rel="noopener" class="btn btn-primary">Donate</a>
         </div>
-        <a href="https://www.gofundme.com/f/help-harmonyouth-foundation-bring-music-to-seniors" target="_blank" rel="noopener" class="btn btn-primary">Donate</a>
+        <div class="gofundme-qr">
+          <img src="gofundme-qr.png" alt="Scan to donate to HarmonYouth Foundation on GoFundMe">
+          <span>Or scan to donate from your phone</span>
+        </div>
       </div>
-      <div class="gofundme-qr">
-        <img src="gofundme-qr.png" alt="Scan to donate to HarmonYouth Foundation on GoFundMe">
-        <span>Or scan to donate from your phone</span>
-      </div>
-    </div>
 
-    <div class="wechat-block">
-      <div class="wechat-qr">
-        <img src="wechat-qr.jpg" alt="HarmonYouth Foundation WeChat QR code">
-      </div>
-      <div class="wechat-text">
-        <h4>Friend me on WeChat</h4>
-        <p>Scan the QR code to add HarmonYouth on WeChat.</p>
+      <div class="wechat-block">
+        <div class="wechat-qr">
+          <img src="wechat-qr.jpg" alt="HarmonYouth Foundation WeChat QR code">
+        </div>
+        <div class="wechat-text">
+          <h4>Friend me on WeChat</h4>
+          <p>Scan the QR code to add HarmonYouth on WeChat.</p>
+        </div>
       </div>
     </div>
   </div>

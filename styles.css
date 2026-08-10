@@ -714,3 +714,75 @@ input:focus,select:focus,textarea:focus{border-color:var(--gold);}
 .cal-tip span{font-size:13px;color:var(--text-lo);}
 .cal-tip .cal-tip-status{font-size:11px;color:var(--gold);text-transform:uppercase;letter-spacing:.06em;font-weight:600;margin-top:2px;}
 .cal-chip{cursor:default;}
+
+/* ============================================================
+   GET INVOLVED PAGE
+   Route buttons in the header + stacked, evenly aligned form cards
+   ============================================================ */
+
+/* header content lines up with the .section-inner grid below it */
+.page-header .ph-inner{max-width:1080px;margin:0 auto;}
+.page-header p.ph-contact{font-size:16px;color:var(--text-hi);margin-top:16px;max-width:620px;}
+.page-header p.ph-contact a{color:var(--gold);text-decoration:underline;text-underline-offset:3px;}
+.page-header p.ph-contact a:hover{color:var(--rose);}
+
+/* three jump buttons */
+.route-nav{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:16px;margin-top:38px;max-width:1080px;
+}
+.route-btn{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:20px 22px;border-radius:16px;color:var(--text-hi);
+  background:var(--glass);border:1px solid var(--glass-border);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  transition:transform .25s ease, border-color .25s ease, background .25s ease;
+}
+.route-btn:hover{transform:translateY(-3px);border-color:var(--gold);background:rgba(255,255,255,0.08);}
+.route-btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+.route-btn > svg{color:var(--gold);flex-shrink:0;margin-top:2px;}
+.route-btn-label{display:block;font-family:var(--serif);font-size:17px;font-weight:500;line-height:1.25;}
+.route-btn-sub{display:block;font-size:13px;color:var(--text-lo);line-height:1.5;margin-top:6px;}
+@media(max-width:900px){
+  .route-nav{grid-template-columns:1fr;gap:12px;margin-top:30px;}
+}
+
+/* stacked form cards */
+.involve-stack{display:flex;flex-direction:column;gap:28px;}
+.anchor-alias{display:block;height:0;overflow:hidden;}
+.involve-card{
+  display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);
+  gap:48px;padding:40px;border-radius:20px;scroll-margin-top:110px;
+  background:var(--glass);border:1px solid var(--glass-border);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+}
+.involve-intro{align-self:start;}
+.involve-card .tag{margin-bottom:12px;}
+.involve-card h3{
+  font-family:var(--serif);font-size:26px;font-weight:500;
+  line-height:1.2;color:var(--text-hi);margin-bottom:12px;
+}
+.involve-card .desc{color:var(--text-lo);font-size:15px;line-height:1.65;margin:0;}
+.involve-card .inline-link{color:var(--gold);text-decoration:underline;text-underline-offset:3px;}
+.involve-card .inline-link:hover{color:var(--rose);}
+.involve-card .volunteer-perk{margin:22px 0 0;padding:14px 16px;}
+.involve-form form{gap:18px;}
+.involve-form form > div{display:flex;flex-direction:column;gap:6px;}
+.involve-form form .btn{margin-top:10px;}
+.involve-form .fs-error:empty{display:none;}
+.involve-form .form-note{margin-top:2px;}
+.involve-form .form-note a{color:var(--gold);text-decoration:underline;text-underline-offset:2px;}
+@media(max-width:900px){
+  .involve-card{grid-template-columns:1fr;gap:26px;padding:28px 22px;scroll-margin-top:92px;}
+  .involve-card h3{font-size:23px;}
+}
+
+/* donate + WeChat, held to the same rhythm as the cards above */
+.involve-extras{margin-top:56px;padding-top:44px;border-top:1px solid var(--glass-border);}
+.involve-extras .gofundme-card{margin-top:0;max-width:640px;}
+.involve-extras .wechat-block{margin-top:34px;padding-top:0;border-top:none;padding:22px;}
+
+@media(prefers-reduced-motion:reduce){
+  .route-btn{transition:none;}
+  .route-btn:hover{transform:none;}
+}

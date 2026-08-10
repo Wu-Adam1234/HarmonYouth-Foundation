@@ -169,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // pointer-tracking glow borders (vanilla port of the GlowingEffect component)
-  const glowTargets = document.querySelectorAll('.step, .panel, .gofundme-fallback, .wechat-block, .volunteer-perk, .past-show, .recruiting-banner .section-inner');
+  const glowTargets = document.querySelectorAll('.step, .panel, .involve-card, .route-btn, .gofundme-fallback, .wechat-block, .volunteer-perk, .past-show, .recruiting-banner .section-inner');
   glowTargets.forEach(el => el.classList.add('glow-card'));
   // mouse sheen on dark feature cards (from the CinematicHero card)
   const sheenTargets = document.querySelectorAll('.gofundme-fallback, .wechat-block, .founder-photo');
