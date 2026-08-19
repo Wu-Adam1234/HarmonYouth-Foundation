@@ -265,7 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const EVENTS = {
       '2026-08-01': [['RR', 'past', '2:00 to 2:30 PM']],
       '2026-08-07': [['SG', 'past', '2:00 to 2:30 PM'], ['MV', 'past', '1:00 to 1:30 PM']],
-      '2026-08-21': [['SG', 'recruiting', '2:00 to 2:30 PM'], ['MV', 'recruiting', '1:00 to 1:30 PM']],
+      '2026-08-21': [['SG', 'full', '2:00 to 2:30 PM'], ['MV', 'full', '1:00 to 1:30 PM']],
       '2026-08-23': [['CM', 'recruiting', '2:00 to 2:45 PM']],
       '2026-08-30': [['BW', 'recruiting', '2:00 to 2:30 PM']]
     };
@@ -348,17 +348,34 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // turn inline success messages into a full confirmation screen, hiding the form
+  const IG_LINK = '<a href="https://www.instagram.com/harmonyouthfoundation/" target="_blank" rel="noopener" class="fs-success-link">Instagram</a>';
+  const SHOWS_LINK = '<a href="performances.html" class="fs-success-link">Performances page</a>';
+  const SUCCESS_CONTENT = {
+    volunteerForm: {
+      title: "You're on the roster",
+      body: 'We\'ll email you before the next show that fits your dates. In the meantime, check our ' + SHOWS_LINK + ' for what\'s coming up, and follow us on ' + IG_LINK + ' for the latest updates.'
+    },
+    makerForm: {
+      title: 'Thanks for reaching out',
+      body: 'We\'ll follow up by email about the next build meeting or your request. In the meantime, check our ' + SHOWS_LINK + ' for what\'s coming up, and follow us on ' + IG_LINK + ' for the latest updates.'
+    },
+    helpForm: {
+      title: 'Message received',
+      body: 'We\'ll be in touch by email soon. In the meantime, check our ' + SHOWS_LINK + ' for what\'s coming up, and follow us on ' + IG_LINK + ' for the latest updates.'
+    }
+  };
   document.querySelectorAll('[data-fs-success]').forEach(successEl => {
     const panel = successEl.closest('.panel') || successEl.parentElement;
     const form = panel ? panel.querySelector('form') : null;
+    const custom = form && SUCCESS_CONTENT[form.id];
     const observer = new MutationObserver(() => {
       const msg = successEl.textContent.trim();
       if (msg && !successEl.classList.contains('fs-success-screen')) {
         if (form) form.style.display = 'none';
         successEl.classList.add('fs-success-screen');
         successEl.innerHTML =
-          '<div class="fs-success-title">Sent!</div>' +
-          '<div class="fs-success-msg">' + msg + '</div>';
+          '<div class="fs-success-title">' + (custom ? custom.title : 'Sent!') + '</div>' +
+          '<div class="fs-success-msg">' + (custom ? custom.body : msg) + '</div>';
       }
     });
     observer.observe(successEl, { childList: true, characterData: true, subtree: true });
