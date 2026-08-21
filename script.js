@@ -266,13 +266,18 @@ document.addEventListener('DOMContentLoaded', () => {
       '2026-08-01': [['RR', 'past', '2:00 to 2:30 PM']],
       '2026-08-07': [['SG', 'past', '2:00 to 2:30 PM'], ['MV', 'past', '1:00 to 1:30 PM']],
       '2026-08-21': [['SG', 'full', '2:00 to 2:30 PM'], ['MV', 'full', '1:00 to 1:30 PM']],
-      '2026-08-23': [['CM', 'recruiting', '2:00 to 2:45 PM']],
-      '2026-08-30': [['BW', 'recruiting', '2:00 to 2:30 PM']]
+      '2026-08-23': [['CM', 'full', '2:00 to 2:45 PM']],
+      '2026-08-30': [['BW', 'full', '2:00 to 2:30 PM']],
+      '2026-09-06': [['SG', 'talks', '12:00 to 12:30 PM']],
+      '2026-09-13': [['MV', 'talks', '11:30 AM to 12:00 PM']],
+      '2026-09-25': [['SG', 'talks', '3:30 to 4:00 PM']],
+      '2026-10-04': [['RR', 'talks', '3:30 to 4:00 PM']],
+      '2026-10-11': [['SG', 'talks', '12:00 to 12:30 PM']]
     };
     const STATUS_LABEL = { recruiting: 'Recruiting', full: 'Full', talks: 'In talks', past: 'Past performance', cancelled: 'Cancelled' };
     const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
     const MIN = { y: 2026, m: 7 }; // August 2026
-    const MAX = { y: 2026, m: 7 };
+    const MAX = { y: 2026, m: 9 }; // October 2026
     let cur = { y: 2026, m: 7 };
 
     const titleEl = document.getElementById('calTitle');
