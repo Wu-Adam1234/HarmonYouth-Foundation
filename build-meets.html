@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build meets, HarmonYouth Foundation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand"><img src="harmonyouth-logo.png" alt="HarmonYouth Foundation" class="logo-img"><span class="nav-brand-name">HarmonYouth Foundation</span></a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="mission.html">Mission</a>
+      <a href="making.html">Build</a>
+      <a href="team.html">Meet the team</a>
+      <a href="performances.html">Performances</a>
+      <a href="build-meets.html" class="active">Build meets</a>
+      <a href="get-involved.html">Get involved</a>
+    </div>
+    <button class="nav-toggle" aria-label="Open menu">&#9776;</button>
+  </div>
+</nav>
+
+<div class="page-header">
+<div class="tag">Schedule</div>
+  <h1>Upcoming build meets</h1>
+  <p>Build meets are where we assemble the 3D printed assistive devices and adapted toys we make through Makers Making Change. No printer and no experience needed, we'll show you what to do when you get there.</p>
+  <div style="margin-top:24px;display:flex;gap:14px;flex-wrap:wrap;">
+    <a href="get-involved.html#build" class="btn btn-primary">Sign up for a build meet</a>
+    <a href="making.html" class="btn btn-ghost">How a build meeting works</a>
+  </div>
+  <svg class="floating-note" style="top:24px;right:8%;width:34px;height:34px;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M9 18V5l12-2v13" stroke="#5B7B9A" stroke-width="1.6"/>
+    <circle cx="6" cy="18" r="3" stroke="#5B7B9A" stroke-width="1.6"/>
+    <circle cx="18" cy="16" r="3" stroke="#5B7B9A" stroke-width="1.6"/>
+  </svg>
+</div>
+<div class="mini-keys" data-count="32"></div>
+
+<section id="upcoming">
+  <div class="section-inner reveal">
+    <div class="tag">Upcoming</div>
+    <div class="view-toggle">
+      <button type="button" class="view-btn active" data-view="list">List</button>
+      <button type="button" class="view-btn" data-view="calendar">Calendar</button>
+    </div>
+    <div class="show-list" id="buildListView">
+      <div class="show-row">
+        <div class="show-date">Sep 30</div>
+        <div class="show-venue"><span>Build meet</span><span class="sub">9:00 AM to 12:00 PM &nbsp;&middot;&nbsp; Location to be confirmed</span></div>
+        <div class="show-status">Spots open</div>
+      </div>
+    </div>
+    <div class="calendar-view" id="buildCalendarView" hidden>
+      <div class="cal-nav">
+        <button type="button" class="cal-nav-btn prev" id="buildCalPrev" aria-label="Previous month">&larr; Prev</button>
+        <div class="cal-title" id="buildCalTitle"></div>
+        <button type="button" class="cal-nav-btn next" id="buildCalNext" aria-label="Next month">Next &rarr;</button>
+      </div>
+      <div class="cal-month" id="buildCalMonth"></div>
+      <div class="cal-legend" id="buildCalLegend"></div>
+    </div>
+    <p style="margin-top:30px;color:#5C6B7A;font-size:15px;">Want in on one of these? Sign up through Get Involved and we'll email you the address before the meet. Every 4 hours earns a volunteer hour certificate, time at performances counts toward the same total, and we can write a volunteer service letter on request.</p>
+    <div style="margin-top:24px;display:flex;gap:14px;flex-wrap:wrap;">
+      <a href="get-involved.html#build" class="btn btn-primary">Sign up</a>
+      <a href="mailto:harmonyouthfoundation@gmail.com" class="btn btn-ghost-dark">Contact us</a>
+    </div>
+  </div>
+</section>
+
+<div class="mini-keys" data-count="32"></div>
+
+<section class="support-section">
+  <div class="section-inner reveal">
+    <div class="tag" style="color:var(--gold);">What to expect</div>
+    <h2 style="color:var(--ivory);">Three hours, a table full of parts, and a finished device at the end</h2>
+    <p style="margin-top:16px;color:var(--ivory-dim);font-size:16px;line-height:1.7;max-width:620px;">We print the pieces ahead of time. At the meet, we sort them, put them together, wire up any switches, and test that everything actually works before it goes to the person who asked for it. Bring nothing but yourself, though a phone for the assembly instructions helps.</p>
+    <div class="volunteer-perk" style="margin-top:22px;max-width:620px;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="9" r="6" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 14 7 22l5-3 5 3-1.5-8" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      <span>Volunteer hour certificates at every 4 hours. Performances and build meetings both count toward the total, and we can write a volunteer service letter on request.</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><img src="harmonyouth-logo.png" alt="HarmonYouth Foundation" class="footer-logo-img"><span class="footer-brand-name">HarmonYouth Foundation</span></div>
+    <div class="footer-links">
+      <a href="mission.html">Mission</a>
+      <a href="making.html">Build</a>
+      <a href="team.html">Meet the team</a>
+      <a href="performances.html">Performances</a>
+      <a href="get-involved.html">Get involved</a>
+    </div>
+  </div>
+  <div class="footer-contact">
+    <button class="contact-toggle" type="button">Contact us</button>
+    <span class="contact-email" hidden><a href="mailto:harmonyouthfoundation@gmail.com">harmonyouthfoundation@gmail.com</a> &nbsp;|&nbsp; <a href="tel:+14039266122">(403) 926-6122</a></span>
+  </div>
+  <div class="footer-social">
+    <a href="https://instagram.com/harmonyouthfoundation" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor"/></svg>
+      Follow us on Instagram @harmonyouthfoundation
+    </a>
+  </div>
+  <div class="footer-fine">We play music. We build devices. We show up for people. &mdash; HarmonYouth Foundation. Calgary, AB. Started and run by students.</div>
+</footer>
+
+<div class="scroll-piano" id="scrollPiano"></div>
+<script src="script.js"></script>
+</body>
+</html>

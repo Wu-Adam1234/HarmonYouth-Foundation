@@ -240,58 +240,96 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // list/calendar view toggle + month-browser calendar on the performances page
-  const viewBtns = document.querySelectorAll('.view-btn');
-  const listView = document.getElementById('listView');
-  const calView = document.getElementById('calendarView');
-  const calMonthEl = document.getElementById('calMonth');
-  if (viewBtns.length && listView && calView) {
-    viewBtns.forEach(btn => {
+  // list/calendar view toggle — scoped per section, so more than one can live on a page
+  document.querySelectorAll('.view-toggle').forEach(toggle => {
+    const scope = toggle.closest('.section-inner') || document;
+    const listView = scope.querySelector('.show-list');
+    const calView = scope.querySelector('.calendar-view');
+    if (!listView || !calView) return;
+    toggle.querySelectorAll('.view-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        viewBtns.forEach(b => b.classList.toggle('active', b === btn));
+        toggle.querySelectorAll('.view-btn').forEach(b => b.classList.toggle('active', b === btn));
         const cal = btn.dataset.view === 'calendar';
         listView.hidden = cal;
         calView.hidden = !cal;
       });
     });
-  }
-  if (calMonthEl) {
-    const VENUES = {
+  });
+
+  // ---------------------------------------------------------------------
+  // SCHEDULE DATA — this is the part you edit when dates change.
+  // Format: 'YYYY-MM-DD': [['VENUE_CODE', 'status', 'time']]
+  // Statuses: recruiting, full, talks, past, cancelled
+  // ---------------------------------------------------------------------
+
+  // Performances page
+  const PERFORMANCE_CALENDAR = {
+    venues: {
       SG: 'The Scenic Grande', MV: 'The Manor Village at Rocky Ridge',
       RR: 'Rocky Ridge Retirement Community', CM: 'Cambridge Manor',
       BW: 'Boardwalk Retirement Community'
-    };
-    // [code, status, time]
-    const EVENTS = {
+    },
+    events: {
       '2026-08-01': [['RR', 'past', '2:00 to 2:30 PM']],
       '2026-08-07': [['SG', 'past', '2:00 to 2:30 PM'], ['MV', 'past', '1:00 to 1:30 PM']],
-      '2026-08-21': [['SG', 'full', '2:00 to 2:30 PM'], ['MV', 'full', '1:00 to 1:30 PM']],
-      '2026-08-23': [['CM', 'full', '2:00 to 2:45 PM']],
+      '2026-08-21': [['SG', 'past', '2:00 to 2:30 PM'], ['MV', 'past', '1:00 to 1:30 PM']],
+      '2026-08-23': [['CM', 'past', '2:00 to 2:45 PM']],
       '2026-08-30': [['BW', 'full', '2:00 to 2:30 PM']],
       '2026-09-06': [['SG', 'talks', '12:00 to 12:30 PM']],
       '2026-09-13': [['MV', 'talks', '11:30 AM to 12:00 PM']],
       '2026-09-25': [['SG', 'talks', '3:30 to 4:00 PM']],
       '2026-10-04': [['RR', 'talks', '3:30 to 4:00 PM']],
       '2026-10-11': [['SG', 'talks', '12:00 to 12:30 PM']]
-    };
-    const STATUS_LABEL = { recruiting: 'Recruiting', full: 'Full', talks: 'In talks', past: 'Past performance', cancelled: 'Cancelled' };
-    const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-    const MIN = { y: 2026, m: 7 }; // August 2026
-    const MAX = { y: 2026, m: 9 }; // October 2026
-    let cur = { y: 2026, m: 7 };
+    },
+    min: { y: 2026, m: 7 },   // August 2026
+    max: { y: 2026, m: 9 },   // October 2026
+    start: { y: 2026, m: 7 }, // month the calendar opens on
+    labels: { past: 'Past performance' },
+    note: 'Blue = recruiting, gray = past. Hover a chip for venue and time.'
+  };
 
-    const titleEl = document.getElementById('calTitle');
-    const prevBtn = document.getElementById('calPrev');
-    const nextBtn = document.getElementById('calNext');
-    const legendEl = document.getElementById('calLegend');
-    legendEl.innerHTML = Object.entries(VENUES).map(([k, v]) => '<span><b>' + k + '</b> ' + v + '</span>').join(' ')
-      + '<span class="cal-legend-note">Blue = recruiting, gray = past. Hover a chip for venue and time.</span>';
+  // Build meets page
+  const BUILD_MEET_CALENDAR = {
+    venues: {
+      BM: 'Build meeting, location to be confirmed'
+    },
+    events: {
+      '2026-09-30': [['BM', 'recruiting', '9:00 AM to 12:00 PM']]
+    },
+    min: { y: 2026, m: 8 },   // September 2026
+    max: { y: 2026, m: 8 },   // September 2026
+    start: { y: 2026, m: 8 },
+    labels: { recruiting: 'Spots open', past: 'Past meet' },
+    note: 'Blue = spots open, gray = past. Hover a chip for details and time.'
+  };
+
+  const STATUS_LABEL = { recruiting: 'Recruiting', full: 'Full', talks: 'In talks', past: 'Past', cancelled: 'Cancelled' };
+  const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+  function initCalendar(monthEl, cfg) {
+    if (!monthEl) return;
+    const VENUES = cfg.venues, EVENTS = cfg.events;
+    const LABEL = Object.assign({}, STATUS_LABEL, cfg.labels || {});
+    const MIN = cfg.min, MAX = cfg.max;
+    const cur = { y: cfg.start.y, m: cfg.start.m };
+    const root = monthEl.closest('.calendar-view') || document;
+    const titleEl = root.querySelector('.cal-title');
+    const prevBtn = root.querySelector('.cal-nav-btn.prev');
+    const nextBtn = root.querySelector('.cal-nav-btn.next');
+    const legendEl = root.querySelector('.cal-legend');
+    if (legendEl) {
+      legendEl.innerHTML = Object.entries(VENUES).map(([k, v]) => '<span><b>' + k + '</b> ' + v + '</span>').join(' ')
+        + '<span class="cal-legend-note">' + cfg.note + '</span>';
+    }
 
     // floating tooltip so details are readable and never clipped
-    const tip = document.createElement('div');
-    tip.className = 'cal-tip';
-    tip.hidden = true;
-    document.body.appendChild(tip);
+    let tip = document.querySelector('.cal-tip');
+    if (!tip) {
+      tip = document.createElement('div');
+      tip.className = 'cal-tip';
+      tip.hidden = true;
+      document.body.appendChild(tip);
+    }
 
     function cmp(a, b) { return (a.y * 12 + a.m) - (b.y * 12 + b.m); }
 
@@ -309,16 +347,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const evs = EVENTS[key];
         if (evs) {
           const chips = evs.map(([v, s, t]) =>
-            '<span class="cal-chip ' + s + '" data-venue="' + VENUES[v] + '" data-time="' + t + '" data-status="' + STATUS_LABEL[s] + '">' + v + '</span>').join('');
+            '<span class="cal-chip ' + s + '" data-venue="' + VENUES[v] + '" data-time="' + t + '" data-status="' + LABEL[s] + '">' + v + '</span>').join('');
           html += '<div class="cal-cell has-event"><span class="cal-day">' + day + '</span>' + chips + '</div>';
         } else {
           html += '<div class="cal-cell"><span class="cal-day">' + day + '</span></div>';
         }
       }
       html += '</div>';
-      calMonthEl.innerHTML = html;
+      monthEl.innerHTML = html;
 
-      calMonthEl.querySelectorAll('.cal-chip').forEach(chip => {
+      monthEl.querySelectorAll('.cal-chip').forEach(chip => {
         chip.addEventListener('mouseenter', () => {
           tip.innerHTML = '<strong>' + chip.dataset.venue + '</strong>'
             + '<span>' + chip.dataset.time + '</span>'
@@ -336,6 +374,9 @@ document.addEventListener('DOMContentLoaded', () => {
     nextBtn.addEventListener('click', () => { if (cmp(cur, MAX) < 0) { cur.m++; if (cur.m > 11) { cur.m = 0; cur.y++; } renderMonth(); } });
     renderMonth();
   }
+
+  initCalendar(document.getElementById('calMonth'), PERFORMANCE_CALENDAR);
+  initCalendar(document.getElementById('buildCalMonth'), BUILD_MEET_CALENDAR);
 
   // footer contact us toggle
   document.querySelectorAll('.footer-contact').forEach(block => {
