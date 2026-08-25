@@ -614,9 +614,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const CAP_RANGES = [[0.03, 0.33], [0.37, 0.65], [0.69, 1.01]];
 
   const frames = new Array(TOTAL);
-  let loadedCount = 0;
+  let loadedCount = 0;   // settled, either way
+  let okCount = 0;       // actually decoded
+  let failCount = 0;     // 404 or decode error
   let lastDrawn = -1;
   let loaderHidden = false;
+  let bailed = false;
 
   function pad(n) { return String(n).padStart(3, '0'); }
 
@@ -637,12 +640,16 @@ document.addEventListener('DOMContentLoaded', () => {
     lastDrawn = -1;
   }
 
-  // pick the closest frame that has actually finished loading
+  // A frame is usable only if it decoded. A 404'd image also reports complete:true
+  // but has naturalWidth 0, so checking complete alone silently yields a black canvas.
+  function usable(f) { return f && f.complete && f.naturalWidth > 0; }
+
+  // pick the closest frame that actually decoded
   function nearestLoaded(i) {
-    if (frames[i] && frames[i].complete) return i;
+    if (usable(frames[i])) return i;
     for (let d = 1; d < TOTAL; d++) {
-      if (frames[i - d] && frames[i - d].complete) return i - d;
-      if (frames[i + d] && frames[i + d].complete) return i + d;
+      if (usable(frames[i - d])) return i - d;
+      if (usable(frames[i + d])) return i + d;
     }
     return -1;
   }
@@ -671,7 +678,7 @@ document.addEventListener('DOMContentLoaded', () => {
       dx = (cw - dw) / 2;
       dy = (ch - dh) / 2;
     }
-    ctx.drawImage(img, dx, dy, dw, dh);
+    try { ctx.drawImage(img, dx, dy, dw, dh); } catch (e) { return; }
     lastDrawn = i;
   }
 
@@ -682,14 +689,28 @@ document.addEventListener('DOMContentLoaded', () => {
   function loadOne(i, done) {
     const img = new Image();
     img.decoding = 'async';
-    img.onload = img.onerror = () => {
+    img.onload = () => { okCount++; settled(); };
+    img.onerror = () => { failCount++; settled(); };
+    function settled() {
       loadedCount++;
       if (loadingFill) loadingFill.style.width = Math.round((loadedCount / TOTAL) * 100) + '%';
-      if (!loaderHidden && loadedCount >= Math.min(14, TOTAL)) { hideLoader(); render(); }
+      // If the first handful all 404, the frames folder isn't deployed. Don't make
+      // people scroll three screens past a black rectangle — collapse the section.
+      if (!bailed && okCount === 0 && failCount >= 6) { bail(); }
+      if (!loaderHidden && okCount >= Math.min(8, TOTAL)) { hideLoader(); render(); }
       done();
-    };
+    }
     img.src = PREFIX + pad(i + 1) + '.webp';
     frames[i] = img;
+  }
+
+  function bail() {
+    bailed = true;
+    hideLoader();
+    scene.classList.add('film-unavailable');
+    caps.forEach(c => c.classList.add('show'));
+    console.warn('[film] frame images failed to load from ' + PREFIX +
+      ' — check that the assets/piano folder was uploaded.');
   }
 
   function pump() {
@@ -724,6 +745,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function render() {
+    if (bailed) return;
     const p = reduced ? 0.98 : progress();
     draw(Math.round(p * (TOTAL - 1)));
     if (progressFill) progressFill.style.width = (p * 100).toFixed(1) + '%';
