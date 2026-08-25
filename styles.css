@@ -790,3 +790,175 @@ input:focus,select:focus,textarea:focus{border-color:var(--gold);}
   .route-btn{transition:none;}
   .route-btn:hover{transform:none;}
 }
+
+/* ============================================================
+   MISSION PAGE: PROGRAM STRUCTURE
+   (jump cards at the top, then two labelled program bands)
+   ============================================================ */
+.program-jump{background:var(--bg-2);padding:0 0 54px;}
+.program-jump-inner{
+  max-width:1080px;margin:0 auto;padding:0 6%;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
+}
+@media(max-width:860px){
+  .program-jump{padding-bottom:40px;}
+  .program-jump-inner{grid-template-columns:1fr;}
+}
+.pj-card{
+  display:flex;flex-direction:column;gap:5px;
+  background:var(--glass);border:1px solid var(--glass-border);
+  border-radius:16px;padding:20px 22px;
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  transition:transform .25s ease, border-color .25s ease, background .25s ease;
+}
+.pj-card:hover{transform:translateY(-3px);border-color:var(--gold);background:rgba(255,255,255,0.08);}
+.pj-kicker{
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--gold);font-weight:600;
+}
+.pj-title{font-family:var(--serif);font-size:20px;color:var(--text-hi);line-height:1.2;}
+.pj-sub{font-size:13.5px;color:var(--text-lo);line-height:1.5;}
+
+.program-band{
+  background:var(--bg-2);
+  border-top:1px solid var(--glass-border);
+  border-bottom:1px solid var(--glass-border);
+  padding-top:70px;padding-bottom:70px;
+}
+.program-head{display:flex;align-items:flex-start;gap:22px;}
+.program-no{
+  font-family:var(--serif);font-size:52px;line-height:.9;font-weight:300;
+  color:var(--gold);opacity:.55;flex:0 0 auto;
+}
+.program-head h2{margin-top:4px;}
+.program-lede{
+  margin-top:20px;max-width:720px;
+  font-size:17px;line-height:1.75;color:var(--text-lo);
+}
+.program-ctas{margin-top:26px;display:flex;gap:14px;flex-wrap:wrap;}
+@media(max-width:560px){
+  .program-no{font-size:38px;}
+  .program-head{gap:14px;}
+}
+
+/* placeholder used until a team photo exists */
+.founder-photo.is-placeholder{
+  background:var(--glass);
+  border:1px dashed var(--glass-border);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+}
+.photo-placeholder{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  width:100%;height:100%;color:var(--gold);
+}
+.photo-placeholder span{
+  font-family:var(--serif);font-size:19px;color:var(--text-hi);margin-top:6px;
+}
+.photo-placeholder small{
+  font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-lo);
+}
+
+/* ============================================================
+   SCROLL-SCRUBBED FILM SECTION (homepage)
+   ============================================================ */
+.film-scene{
+  position:relative;height:360vh;padding:0;
+  background:#000;
+}
+.film-sticky{
+  position:sticky;top:0;height:100vh;width:100%;
+  overflow:hidden;display:block;background:#000;
+}
+.film-canvas{
+  position:absolute;inset:0;width:100%;height:100%;display:block;
+}
+.film-vignette{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse at 50% 45%, transparent 30%, rgba(0,0,0,0.55) 78%, rgba(0,0,0,0.88) 100%),
+    linear-gradient(to bottom, rgba(0,0,0,0.72) 0%, transparent 26%, transparent 62%, rgba(0,0,0,0.85) 100%);
+}
+.film-grain{
+  position:absolute;inset:-120px;pointer-events:none;opacity:.055;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>");
+  animation:filmGrain 700ms steps(4) infinite;
+}
+@keyframes filmGrain{
+  0%{transform:translate(0,0);}   25%{transform:translate(-14px,9px);}
+  50%{transform:translate(11px,-12px);} 75%{transform:translate(-8px,-6px);}
+  100%{transform:translate(0,0);}
+}
+.film-copy{
+  position:absolute;inset:0;display:flex;align-items:flex-end;
+  padding:0 8% 13vh;pointer-events:none;
+}
+.film-cap{
+  position:absolute;left:8%;right:8%;bottom:13vh;max-width:640px;
+  opacity:0;transform:translateY(26px);
+  transition:opacity .55s ease, transform .55s ease;
+}
+.film-cap.show{opacity:1;transform:translateY(0);pointer-events:auto;}
+.film-kicker{
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:#E8C87A;font-weight:600;margin-bottom:12px;
+}
+.film-cap h2{
+  font-family:var(--serif);font-weight:300;color:#fff;
+  font-size:clamp(30px,5vw,58px);line-height:1.06;letter-spacing:-.01em;
+}
+.film-cap p{
+  margin-top:16px;font-size:clamp(15px,1.5vw,18px);line-height:1.7;
+  color:rgba(255,255,255,0.74);max-width:520px;
+}
+.film-ctas{margin-top:26px;display:flex;gap:13px;flex-wrap:wrap;}
+.film-progress{
+  position:absolute;left:8%;right:8%;bottom:7vh;height:2px;
+  background:rgba(255,255,255,0.13);border-radius:2px;overflow:hidden;
+}
+.film-progress i{
+  display:block;height:100%;width:0%;
+  background:linear-gradient(90deg,#C9A15A,#F0D89B);
+  box-shadow:0 0 14px rgba(232,200,122,0.55);
+}
+.film-loading{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:12px;z-index:3;
+  background:#000;transition:opacity .5s ease;
+}
+.film-loading.done{opacity:0;pointer-events:none;}
+.film-loading span{
+  font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,0.45);
+}
+.film-loading-bar{
+  width:180px;height:2px;background:rgba(255,255,255,0.12);
+  border-radius:2px;overflow:hidden;
+}
+.film-loading-bar i{
+  display:block;height:100%;width:0%;background:#E8C87A;transition:width .2s ease;
+}
+@media(max-width:768px){
+  .film-scene{height:300vh;}
+  /* image sits in the upper part of the screen on phones, copy below it */
+  .film-cap{bottom:14vh;left:6%;right:6%;}
+  .film-copy{padding:0 6% 14vh;}
+  .film-progress{left:6%;right:6%;bottom:7vh;}
+  .film-vignette{
+    background:
+      radial-gradient(ellipse at 50% 32%, transparent 34%, rgba(0,0,0,0.5) 74%, rgba(0,0,0,0.9) 100%),
+      linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 18%, rgba(0,0,0,0.55) 58%, rgba(0,0,0,0.94) 82%);
+  }
+  .film-ctas{flex-direction:column;align-items:flex-start;}
+}
+/* no scroll animation for people who asked not to have one */
+@media(prefers-reduced-motion:reduce){
+  .film-scene{height:auto;}
+  .film-sticky{position:relative;height:78vh;}
+  .film-grain{animation:none;}
+  .film-cap{opacity:1;transform:none;position:relative;left:auto;right:auto;bottom:auto;}
+  .film-cap:not([data-cap="2"]){display:none;}
+  .film-progress{display:none;}
+}
+
+/* fixed nav sits ~84px tall, so anchored sections need clearance */
+#why, #music, #build, #upcoming, #past, #perform, #support{scroll-margin-top:104px;}

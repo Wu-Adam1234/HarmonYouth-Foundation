@@ -276,7 +276,7 @@ document.addEventListener('DOMContentLoaded', () => {
       '2026-08-23': [['CM', 'past', '2:00 to 2:45 PM']],
       '2026-08-30': [['BW', 'full', '2:00 to 2:30 PM']],
       '2026-09-06': [['SG', 'talks', '12:00 to 12:30 PM']],
-      '2026-09-13': [['MV', 'talks', '11:30 AM to 12:00 PM']],
+      '2026-09-13': [['MV', 'recruiting', '11:00 to 11:30 AM']],
       '2026-09-25': [['SG', 'talks', '3:30 to 4:00 PM']],
       '2026-10-04': [['RR', 'talks', '3:30 to 4:00 PM']],
       '2026-10-11': [['SG', 'talks', '12:00 to 12:30 PM']]
@@ -585,4 +585,171 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', updateOnScroll);
     updateOnScroll();
   }
+});
+
+// =====================================================================
+// SCROLL-SCRUBBED FILM SECTION (homepage)
+// Frames live in assets/piano/. Desktop set: d_001..d_NNN. Mobile: m_001..m_NNN.
+// The number of frames is read from data-frames on #filmScene.
+// =====================================================================
+document.addEventListener('DOMContentLoaded', () => {
+  const scene = document.getElementById('filmScene');
+  if (!scene) return;
+
+  const canvas = document.getElementById('filmCanvas');
+  const ctx = canvas && canvas.getContext ? canvas.getContext('2d', { alpha: false }) : null;
+  if (!ctx) return;
+
+  const TOTAL = parseInt(scene.dataset.frames, 10) || 120;
+  const isSmall = window.matchMedia('(max-width: 768px)').matches;
+  const PREFIX = 'assets/piano/' + (isSmall ? 'm_' : 'd_');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const loadingEl = document.getElementById('filmLoading');
+  const loadingFill = document.getElementById('filmLoadingFill');
+  const progressFill = document.getElementById('filmProgressFill');
+  const caps = Array.from(scene.querySelectorAll('.film-cap'));
+
+  // caption visibility windows, as fractions of scroll progress through the section
+  const CAP_RANGES = [[0.03, 0.33], [0.37, 0.65], [0.69, 1.01]];
+
+  const frames = new Array(TOTAL);
+  let loadedCount = 0;
+  let lastDrawn = -1;
+  let loaderHidden = false;
+
+  function pad(n) { return String(n).padStart(3, '0'); }
+
+  function hideLoader() {
+    if (loaderHidden || !loadingEl) return;
+    loaderHidden = true;
+    loadingEl.classList.add('done');
+  }
+
+  function sizeCanvas() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const w = scene.clientWidth;
+    const h = window.innerHeight;
+    canvas.width = Math.round(w * dpr);
+    canvas.height = Math.round(h * dpr);
+    canvas.style.width = w + 'px';
+    canvas.style.height = h + 'px';
+    lastDrawn = -1;
+  }
+
+  // pick the closest frame that has actually finished loading
+  function nearestLoaded(i) {
+    if (frames[i] && frames[i].complete) return i;
+    for (let d = 1; d < TOTAL; d++) {
+      if (frames[i - d] && frames[i - d].complete) return i - d;
+      if (frames[i + d] && frames[i + d].complete) return i + d;
+    }
+    return -1;
+  }
+
+  function draw(index) {
+    const i = nearestLoaded(index);
+    if (i < 0 || i === lastDrawn) return;
+    const img = frames[i];
+    const cw = canvas.width, ch = canvas.height;
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 0, cw, ch);
+
+    // A 16:9 frame cropped to fill a tall phone screen loses the piano entirely,
+    // so on narrow screens we fit the full width and sit it in the upper half,
+    // which leaves the lower area clear for the caption.
+    let dw, dh, dx, dy;
+    if (cw / ch < 1.1) {
+      dw = cw;
+      dh = img.naturalHeight * (cw / img.naturalWidth);
+      dx = 0;
+      dy = ch * 0.36 - dh / 2;
+    } else {
+      const scale = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
+      dw = img.naturalWidth * scale;
+      dh = img.naturalHeight * scale;
+      dx = (cw - dw) / 2;
+      dy = (ch - dh) / 2;
+    }
+    ctx.drawImage(img, dx, dy, dw, dh);
+    lastDrawn = i;
+  }
+
+  // ---- loading, in small batches so we don't fire 120 requests at once ----
+  let nextToLoad = 0;
+  const CONCURRENCY = 6;
+
+  function loadOne(i, done) {
+    const img = new Image();
+    img.decoding = 'async';
+    img.onload = img.onerror = () => {
+      loadedCount++;
+      if (loadingFill) loadingFill.style.width = Math.round((loadedCount / TOTAL) * 100) + '%';
+      if (!loaderHidden && loadedCount >= Math.min(14, TOTAL)) { hideLoader(); render(); }
+      done();
+    };
+    img.src = PREFIX + pad(i + 1) + '.webp';
+    frames[i] = img;
+  }
+
+  function pump() {
+    while (nextToLoad < TOTAL) {
+      const i = nextToLoad++;
+      loadOne(i, pump);
+      if (nextToLoad % CONCURRENCY === 0) return;
+    }
+  }
+
+  let started = false;
+  function startLoading() {
+    if (started) return;
+    started = true;
+    for (let c = 0; c < CONCURRENCY; c++) pump();
+    // safety net: never leave the loader up forever on a bad connection
+    setTimeout(() => { hideLoader(); render(); }, 8000);
+  }
+
+  // only start fetching once the section is within a couple of screens
+  const nearObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { startLoading(); nearObs.disconnect(); } });
+  }, { rootMargin: '150% 0px' });
+  nearObs.observe(scene);
+
+  // ---- scroll -> frame ----
+  function progress() {
+    const rect = scene.getBoundingClientRect();
+    const travel = scene.offsetHeight - window.innerHeight;
+    if (travel <= 0) return 0;
+    return Math.min(Math.max(-rect.top / travel, 0), 1);
+  }
+
+  function render() {
+    const p = reduced ? 0.98 : progress();
+    draw(Math.round(p * (TOTAL - 1)));
+    if (progressFill) progressFill.style.width = (p * 100).toFixed(1) + '%';
+    caps.forEach((cap, i) => {
+      const r = CAP_RANGES[i] || [0, 1];
+      cap.classList.toggle('show', p >= r[0] && p < r[1]);
+    });
+  }
+
+  sizeCanvas();
+
+  if (reduced) {
+    // one still frame, no scroll wiring
+    startLoading();
+    window.addEventListener('resize', () => { sizeCanvas(); render(); });
+    caps.forEach(c => c.classList.add('show'));
+    return;
+  }
+
+  let ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => { render(); ticking = false; });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', () => { sizeCanvas(); render(); });
+  render();
 });

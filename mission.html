@@ -16,7 +16,6 @@
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="mission.html" class="active">Mission</a>
-      <a href="making.html">Build</a>
       <a href="team.html">Meet the team</a>
       <a href="performances.html">Performances</a>
       <a href="build-meets.html">Build meets</a>
@@ -29,22 +28,47 @@
 <div class="page-header">
 <div class="tag">Our mission</div>
   <h1>Students showing up for people who don't always get thought of first.</h1>
-  <p>HarmonYouth Foundation started with live music at senior homes, because most of them don't get much of it and the people there still love it. We've since added a second program: building assistive devices and adapted toys for people with disabilities.</p>
+  <p>HarmonYouth Foundation runs two programs. We play live music at senior homes on a set schedule, and we 3D print and assemble assistive devices and adapted toys for people with disabilities. Same reason behind both.</p>
   <svg class="floating-note" style="top:24px;right:8%;width:34px;height:34px;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M9 18V5l12-2v13" stroke="#5B7B9A" stroke-width="1.6"/>
     <circle cx="6" cy="18" r="3" stroke="#5B7B9A" stroke-width="1.6"/>
     <circle cx="18" cy="16" r="3" stroke="#5B7B9A" stroke-width="1.6"/>
   </svg>
 </div>
+
+<!-- ============ JUMP NAV: makes the two programs obvious up front ============ -->
+<div class="program-jump">
+  <div class="program-jump-inner">
+  <a href="#why" class="pj-card">
+    <span class="pj-kicker">Start here</span>
+    <span class="pj-title">Why we exist</span>
+    <span class="pj-sub">The idea behind both programs</span>
+  </a>
+  <a href="#music" class="pj-card">
+    <span class="pj-kicker">Program 01</span>
+    <span class="pj-title">Music at senior homes</span>
+    <span class="pj-sub">Student musicians, 2+ shows a month</span>
+  </a>
+  <a href="#build" class="pj-card">
+    <span class="pj-kicker">Program 02</span>
+    <span class="pj-title">Build</span>
+    <span class="pj-sub">Assistive devices and adapted toys</span>
+  </a>
+  </div>
+</div>
+
 <div class="mini-keys" data-count="32"></div>
 
-<section>
+<!-- ============ WHY WE EXIST ============ -->
+<section id="why">
   <div class="section-inner reveal">
+    <div class="tag">Why we exist</div>
+    <h2>Two programs, one reason.</h2>
     <div class="mission-grid">
       <div class="mission-text">
         <p>Most senior homes only bring in entertainment once in a while. A holiday concert, maybe a choir that visits once a year. We wanted something that shows up on the calendar every month, so residents actually start looking forward to it.</p>
         <p>We also wanted to give student musicians somewhere to play after their last recital or exam is done. Nobody has to commit to every single date. You sign up for whatever works for you, and you get a real audience instead of a panel scoring you out of ten.</p>
-        <p>Music is how we started, but it isn't the whole picture. Through Makers Making Change, a program of the Neil Squire Society, we now also 3D print and assemble assistive devices and adapted toys for people with disabilities in our community. <a href="making.html" style="color:var(--gold);text-decoration:underline;text-underline-offset:3px;">Read more about our Making program</a>.</p>
+        <p>Music is how we started, but it isn't the whole picture. A lot of the same students are good with their hands and have access to a 3D printer, so we added a second program: building assistive devices and adapted toys for people with disabilities. Different skill set, same reason for doing it.</p>
       </div>
       <div class="mission-stats">
         <div class="stat">
@@ -56,8 +80,12 @@
           <div class="num">5 to 10</div><div class="label">student musicians per show</div>
         </div>
         <div class="stat">
+          <svg class="stat-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="9" r="6" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 14 7 22l5-3 5 3-1.5-8" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          <div class="num">4 hours</div><div class="label">of performing or building earns a volunteer hour certificate, with service letters on request</div>
+        </div>
+        <div class="stat">
           <svg class="stat-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 21s-7-4.35-9.5-8.5C1 9 2.5 5.5 6 5c2-.3 3.7.8 6 3.3C14.3 5.8 16 4.7 18 5c3.5.5 5 4 3.5 7.5C19 16.65 12 21 12 21Z" stroke="currentColor" stroke-width="1.6"/></svg>
-          <div class="num">Open</div><div class="label">to new homes and musicians</div>
+          <div class="num">Open</div><div class="label">to new homes, new musicians, and new makers</div>
         </div>
       </div>
     </div>
@@ -65,6 +93,24 @@
 </section>
 
 <div class="mini-keys" data-count="32"></div>
+
+<!-- ============ PROGRAM 01: MUSIC ============ -->
+<section class="program-band" id="music">
+  <div class="section-inner reveal">
+    <div class="program-head">
+      <div class="program-no">01</div>
+      <div>
+        <div class="tag" style="color:var(--gold);">Program one</div>
+        <h2>Music at senior homes</h2>
+      </div>
+    </div>
+    <p class="program-lede">Student musicians from around Calgary perform at senior homes on a set schedule, not as a one-off concert. Each show runs about 30 to 45 minutes: piano, strings, voice, whatever people bring, in whatever common room the home gives us.</p>
+    <div class="program-ctas">
+      <a href="get-involved.html#perform" class="btn btn-primary">Join as a performer</a>
+      <a href="performances.html" class="btn btn-ghost">See upcoming shows</a>
+    </div>
+  </div>
+</section>
 
 <section class="how">
   <div class="section-inner reveal">
@@ -99,11 +145,111 @@
   </div>
 </section>
 
+<div class="mini-keys" data-count="32"></div>
+
+<!-- ============ PROGRAM 02: BUILD (merged in from the old Build page) ============ -->
+<section class="program-band" id="build">
+  <div class="section-inner reveal">
+    <div class="program-head">
+      <div class="program-no">02</div>
+      <div>
+        <div class="tag" style="color:var(--gold);">Program two</div>
+        <h2>Build: assistive devices and adapted toys</h2>
+      </div>
+    </div>
+    <p class="program-lede">Music was never the whole plan. HarmonYouth members 3D print and assemble assistive devices and adapted toys for people with disabilities, through Makers Making Change, a program of the Neil Squire Society.</p>
+    <div class="program-ctas">
+      <a href="get-involved.html#build" class="btn btn-primary">Join a build meeting</a>
+      <a href="build-meets.html" class="btn btn-ghost">Upcoming build meets</a>
+      <a href="https://www.makersmakingchange.com/" target="_blank" rel="noopener" class="btn btn-ghost">Visit Makers Making Change</a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-inner reveal">
+    <div class="mission-grid">
+      <div class="mission-text">
+        <p>A lot of assistive technology is either expensive or hard to get hold of, even though the designs to build it are often free. Makers Making Change keeps an open-source library of assistive devices and adapted toys, reviewed by occupational therapists and disability professionals, that anyone with a 3D printer and some patience can build.</p>
+        <p>We print the parts, then get together to assemble them, the same way we get together to rehearse and perform. Finished devices and toys go to people with disabilities in our community who could use them, at little to no cost.</p>
+        <p>It's a different kind of showing up than a piano recital, but it's the same idea: students doing something useful for people who don't always get thought of first.</p>
+      </div>
+      <div class="mission-stats">
+        <div class="stat">
+          <svg class="stat-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 20h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M7 9l3 3-3 3M13 15h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div class="num">Open</div><div class="label">source designs, reviewed by disability professionals</div>
+        </div>
+        <div class="stat">
+          <svg class="stat-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6"/></svg>
+          <div class="num">3D printed</div><div class="label">parts, assembled together at build meetings</div>
+        </div>
+        <div class="stat">
+          <svg class="stat-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 21s-7-4.35-9.5-8.5C1 9 2.5 5.5 6 5c2-.3 3.7.8 6 3.3C14.3 5.8 16 4.7 18 5c3.5.5 5 4 3.5 7.5C19 16.65 12 21 12 21Z" stroke="currentColor" stroke-width="1.6"/></svg>
+          <div class="num">Low cost</div><div class="label">to the people who receive the devices and toys</div>
+        </div>
+        <div class="stat">
+          <svg class="stat-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="9" r="6" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 14 7 22l5-3 5 3-1.5-8" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          <div class="num">4 hours</div><div class="label">of performing or building earns a volunteer hour certificate, with service letters on request</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="how">
+  <div class="section-inner reveal">
+    <div class="tag">How a build meeting works</div>
+    <h2>From design file to finished device.</h2>
+    <div class="steps">
+      <div class="step">
+        <svg class="step-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="4" width="18" height="17" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 9h18" stroke="currentColor" stroke-width="1.6"/><path d="M8 2v4M16 2v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <div class="step-no">01</div>
+        <h3>A request comes in</h3>
+        <p>Through Makers Making Change, someone with a disability, a family member, or a disability professional identifies a device or adapted toy that would help.</p>
+      </div>
+      <div class="step">
+        <svg class="step-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6"/></svg>
+        <div class="step-no">02</div>
+        <h3>We print the parts</h3>
+        <p>We pull the design from the open-source library and 3D print the pieces ahead of the next meeting.</p>
+      </div>
+      <div class="step">
+        <svg class="step-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="18" r="3" stroke="currentColor" stroke-width="1.6"/><circle cx="18" cy="16" r="3" stroke="currentColor" stroke-width="1.6"/><path d="M11 18V4l10-2v14" stroke="currentColor" stroke-width="1.6"/></svg>
+        <div class="step-no">03</div>
+        <h3>We assemble together</h3>
+        <p>Members meet up to put the pieces together, wire switches, and test that everything actually works before it goes anywhere.</p>
+      </div>
+      <div class="step">
+        <svg class="step-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 7l1.5-2.5A2 2 0 0 1 6.2 3.5h11.6a2 2 0 0 1 1.7 1L21 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="3" y="7" width="18" height="13" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="13.5" r="3.2" stroke="currentColor" stroke-width="1.6"/></svg>
+        <div class="step-no">04</div>
+        <h3>It goes to the person who needs it</h3>
+        <p>The finished device or toy gets delivered, at little to no cost, to the person or family who requested it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="support-section">
+  <div class="section-inner reveal">
+    <div class="tag" style="color:var(--gold);">Want in?</div>
+    <h2 style="color:var(--ivory);">You don't need to own a 3D printer</h2>
+    <p style="margin-top:16px;color:var(--ivory-dim);font-size:16px;line-height:1.7;max-width:620px;">Build meetings need people to assemble, test, and problem-solve, not just print. If you'd like to join one, or you know someone who could use a device or adapted toy, reach out through Get Involved. Dates are on the <a href="build-meets.html" class="inline-link">Build meets page</a>.</p>
+    <div class="volunteer-perk" style="margin-top:22px;max-width:620px;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="9" r="6" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 14 7 22l5-3 5 3-1.5-8" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      <span>Volunteer hour certificates at every 4 hours. Performances and build meetings both count toward the same total, and we can write a volunteer service letter on request.</span>
+    </div>
+    <div style="margin-top:8px;">
+      <a href="get-involved.html" class="btn btn-primary">Get involved</a>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="footer-grid">
     <div class="footer-brand"><img src="harmonyouth-logo.png" alt="HarmonYouth Foundation" class="footer-logo-img"><span class="footer-brand-name">HarmonYouth Foundation</span></div>
     <div class="footer-links">
-      <a href="making.html">Build</a>
+      <a href="mission.html">Mission</a>
+      <a href="mission.html#build">Build program</a>
       <a href="team.html">Meet the team</a>
       <a href="performances.html">Performances</a>
       <a href="build-meets.html">Build meets</a>
