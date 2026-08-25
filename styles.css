@@ -869,8 +869,10 @@ input:focus,select:focus,textarea:focus{border-color:var(--gold);}
   position:sticky;top:0;height:100vh;width:100%;
   overflow:hidden;display:block;background:#000;
 }
-.film-canvas{
+.film-video{
   position:absolute;inset:0;width:100%;height:100%;display:block;
+  object-fit:cover;object-position:center center;
+  background:#000;pointer-events:none;
 }
 .film-vignette{
   position:absolute;inset:0;pointer-events:none;
@@ -943,6 +945,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--gold);}
   .film-cap{bottom:14vh;left:6%;right:6%;}
   .film-copy{padding:0 6% 14vh;}
   .film-progress{left:6%;right:6%;bottom:7vh;}
+  .film-video{object-fit:contain;object-position:center 26%;}
   .film-vignette{
     background:
       radial-gradient(ellipse at 50% 32%, transparent 34%, rgba(0,0,0,0.5) 74%, rgba(0,0,0,0.9) 100%),
@@ -954,7 +957,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--gold);}
    instead of three screens of black */
 .film-scene.film-unavailable{height:auto;}
 .film-scene.film-unavailable .film-sticky{position:relative;height:auto;padding:90px 0;}
-.film-scene.film-unavailable .film-canvas,
+.film-scene.film-unavailable .film-video,
 .film-scene.film-unavailable .film-progress,
 .film-scene.film-unavailable .film-vignette{display:none;}
 .film-scene.film-unavailable .film-copy{position:relative;inset:auto;display:block;padding:0 8%;}

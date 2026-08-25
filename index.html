@@ -44,11 +44,16 @@
 </section>
 
 <!-- ============ SCROLL-SCRUBBED FILM SECTION ============
-     Frames live in assets/piano/ (d_001..d_120 desktop, m_001..m_120 mobile).
-     To swap the film: re-export frames with the same naming and update data-frames. -->
-<section class="film-scene" id="filmScene" data-frames="120">
+     One video file: assets/piano-film.mp4. Scroll position drives its playhead.
+     To swap the film, replace that file (see the guide for the encode settings). -->
+<section class="film-scene" id="filmScene">
   <div class="film-sticky">
-    <canvas class="film-canvas" id="filmCanvas" aria-hidden="true"></canvas>
+    <video class="film-video" id="filmVideo"
+           muted playsinline preload="auto"
+           disablepictureinpicture aria-hidden="true">
+      <source src="assets/piano-film.webm" type="video/webm">
+      <source src="assets/piano-film.mp4" type="video/mp4">
+    </video>
     <div class="film-vignette" aria-hidden="true"></div>
     <div class="film-grain" aria-hidden="true"></div>
 

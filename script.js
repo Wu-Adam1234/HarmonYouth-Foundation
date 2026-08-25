@@ -589,22 +589,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // =====================================================================
 // SCROLL-SCRUBBED FILM SECTION (homepage)
-// Frames live in assets/piano/. Desktop set: d_001..d_NNN. Mobile: m_001..m_NNN.
-// The number of frames is read from data-frames on #filmScene.
+// One video file at assets/piano-film.mp4. Scroll position drives the playhead.
+// If the browser won't let us seek it, we fall back to letting it loop on its own,
+// and if the file is missing entirely we collapse the section.
 // =====================================================================
 document.addEventListener('DOMContentLoaded', () => {
   const scene = document.getElementById('filmScene');
   if (!scene) return;
+  const video = document.getElementById('filmVideo');
+  if (!video) return;
 
-  const canvas = document.getElementById('filmCanvas');
-  const ctx = canvas && canvas.getContext ? canvas.getContext('2d', { alpha: false }) : null;
-  if (!ctx) return;
-
-  const TOTAL = parseInt(scene.dataset.frames, 10) || 120;
-  const isSmall = window.matchMedia('(max-width: 768px)').matches;
-  const PREFIX = 'assets/piano/' + (isSmall ? 'm_' : 'd_');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
   const loadingEl = document.getElementById('filmLoading');
   const loadingFill = document.getElementById('filmLoadingFill');
   const progressFill = document.getElementById('filmProgressFill');
@@ -613,130 +608,31 @@ document.addEventListener('DOMContentLoaded', () => {
   // caption visibility windows, as fractions of scroll progress through the section
   const CAP_RANGES = [[0.03, 0.33], [0.37, 0.65], [0.69, 1.01]];
 
-  const frames = new Array(TOTAL);
-  let loadedCount = 0;   // settled, either way
-  let okCount = 0;       // actually decoded
-  let failCount = 0;     // 404 or decode error
-  let lastDrawn = -1;
-  let loaderHidden = false;
-  let bailed = false;
-
-  function pad(n) { return String(n).padStart(3, '0'); }
+  let ready = false, bailed = false, looping = false, unlocked = false;
 
   function hideLoader() {
-    if (loaderHidden || !loadingEl) return;
-    loaderHidden = true;
-    loadingEl.classList.add('done');
+    if (loadingEl) loadingEl.classList.add('done');
   }
 
-  function sizeCanvas() {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const w = scene.clientWidth;
-    const h = window.innerHeight;
-    canvas.width = Math.round(w * dpr);
-    canvas.height = Math.round(h * dpr);
-    canvas.style.width = w + 'px';
-    canvas.style.height = h + 'px';
-    lastDrawn = -1;
-  }
-
-  // A frame is usable only if it decoded. A 404'd image also reports complete:true
-  // but has naturalWidth 0, so checking complete alone silently yields a black canvas.
-  function usable(f) { return f && f.complete && f.naturalWidth > 0; }
-
-  // pick the closest frame that actually decoded
-  function nearestLoaded(i) {
-    if (usable(frames[i])) return i;
-    for (let d = 1; d < TOTAL; d++) {
-      if (usable(frames[i - d])) return i - d;
-      if (usable(frames[i + d])) return i + d;
-    }
-    return -1;
-  }
-
-  function draw(index) {
-    const i = nearestLoaded(index);
-    if (i < 0 || i === lastDrawn) return;
-    const img = frames[i];
-    const cw = canvas.width, ch = canvas.height;
-    ctx.fillStyle = '#000';
-    ctx.fillRect(0, 0, cw, ch);
-
-    // A 16:9 frame cropped to fill a tall phone screen loses the piano entirely,
-    // so on narrow screens we fit the full width and sit it in the upper half,
-    // which leaves the lower area clear for the caption.
-    let dw, dh, dx, dy;
-    if (cw / ch < 1.1) {
-      dw = cw;
-      dh = img.naturalHeight * (cw / img.naturalWidth);
-      dx = 0;
-      dy = ch * 0.36 - dh / 2;
-    } else {
-      const scale = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
-      dw = img.naturalWidth * scale;
-      dh = img.naturalHeight * scale;
-      dx = (cw - dw) / 2;
-      dy = (ch - dh) / 2;
-    }
-    try { ctx.drawImage(img, dx, dy, dw, dh); } catch (e) { return; }
-    lastDrawn = i;
-  }
-
-  // ---- loading, in small batches so we don't fire 120 requests at once ----
-  let nextToLoad = 0;
-  const CONCURRENCY = 6;
-
-  function loadOne(i, done) {
-    const img = new Image();
-    img.decoding = 'async';
-    img.onload = () => { okCount++; settled(); };
-    img.onerror = () => { failCount++; settled(); };
-    function settled() {
-      loadedCount++;
-      if (loadingFill) loadingFill.style.width = Math.round((loadedCount / TOTAL) * 100) + '%';
-      // If the first handful all 404, the frames folder isn't deployed. Don't make
-      // people scroll three screens past a black rectangle — collapse the section.
-      if (!bailed && okCount === 0 && failCount >= 6) { bail(); }
-      if (!loaderHidden && okCount >= Math.min(8, TOTAL)) { hideLoader(); render(); }
-      done();
-    }
-    img.src = PREFIX + pad(i + 1) + '.webp';
-    frames[i] = img;
-  }
-
+  // the file is missing or won't decode: collapse rather than leave a black hole
   function bail() {
+    if (bailed) return;
     bailed = true;
     hideLoader();
     scene.classList.add('film-unavailable');
     caps.forEach(c => c.classList.add('show'));
-    console.warn('[film] frame images failed to load from ' + PREFIX +
-      ' — check that the assets/piano folder was uploaded.');
+    console.warn('[film] assets/piano-film.mp4 failed to load — check it was uploaded.');
   }
 
-  function pump() {
-    while (nextToLoad < TOTAL) {
-      const i = nextToLoad++;
-      loadOne(i, pump);
-      if (nextToLoad % CONCURRENCY === 0) return;
-    }
+  // seeking refused (some mobile browsers): just let it play through on a loop
+  function fallbackToLoop() {
+    if (looping || bailed) return;
+    looping = true;
+    video.loop = true;
+    const pl = video.play();
+    if (pl && pl.catch) pl.catch(() => {});
   }
 
-  let started = false;
-  function startLoading() {
-    if (started) return;
-    started = true;
-    for (let c = 0; c < CONCURRENCY; c++) pump();
-    // safety net: never leave the loader up forever on a bad connection
-    setTimeout(() => { hideLoader(); render(); }, 8000);
-  }
-
-  // only start fetching once the section is within a couple of screens
-  const nearObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { startLoading(); nearObs.disconnect(); } });
-  }, { rootMargin: '150% 0px' });
-  nearObs.observe(scene);
-
-  // ---- scroll -> frame ----
   function progress() {
     const rect = scene.getBoundingClientRect();
     const travel = scene.offsetHeight - window.innerHeight;
@@ -744,10 +640,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return Math.min(Math.max(-rect.top / travel, 0), 1);
   }
 
-  function render() {
-    if (bailed) return;
-    const p = reduced ? 0.98 : progress();
-    draw(Math.round(p * (TOTAL - 1)));
+  function paintCaptions(p) {
     if (progressFill) progressFill.style.width = (p * 100).toFixed(1) + '%';
     caps.forEach((cap, i) => {
       const r = CAP_RANGES[i] || [0, 1];
@@ -755,23 +648,93 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  sizeCanvas();
+  // iOS won't allow programmatic seeking until the video has been played once,
+  // so the first scroll quietly starts and immediately pauses it.
+  function unlock() {
+    if (unlocked) return;
+    unlocked = true;
+    const pl = video.play();
+    if (pl && pl.then) {
+      pl.then(() => { if (!looping) video.pause(); }).catch(() => {});
+    }
+  }
+
+  function onMeta() {
+    if (ready || bailed) return;
+    if (!isFinite(video.duration) || video.duration <= 0) { bail(); return; }
+    ready = true;
+    hideLoader();
+    render();
+  }
+  video.addEventListener('loadedmetadata', onMeta);
+  // the video may already have metadata by the time this script runs, in which case
+  // the event above has been and gone — check directly rather than waiting forever
+  if (video.readyState >= 1) onMeta();
+  // and the source 404 may also already have happened: NETWORK_NO_SOURCE (3) means
+  // the browser tried every <source> and came up empty
+  if (video.networkState === 3) bail();
+
+  video.addEventListener('progress', () => {
+    if (loadingFill && video.buffered.length && isFinite(video.duration)) {
+      const pct = (video.buffered.end(video.buffered.length - 1) / video.duration) * 100;
+      loadingFill.style.width = Math.min(pct, 100).toFixed(0) + '%';
+    }
+  });
+
+  video.addEventListener('error', bail);
+  // with <source> children the error lands on the last source, not the video
+  Array.from(video.querySelectorAll('source')).forEach((el, i, all) => {
+    el.addEventListener('error', () => { if (i === all.length - 1) bail(); });
+  });
+  setTimeout(() => { if (!ready && video.networkState === 3) bail(); }, 1500);
+  // nothing at all after 10s on a working connection means something's wrong
+  setTimeout(() => { if (!ready) bail(); }, 10000);
+
+  function render() {
+    if (bailed) return;
+    const p = reduced ? 0.98 : progress();
+    paintCaptions(p);
+    if (!ready || looping) return;
+    const target = Math.min(Math.max(p * (video.duration - 0.05), 0), video.duration - 0.05);
+    try {
+      video.currentTime = target;
+    } catch (e) {
+      fallbackToLoop();
+    }
+  }
 
   if (reduced) {
-    // one still frame, no scroll wiring
-    startLoading();
-    window.addEventListener('resize', () => { sizeCanvas(); render(); });
+    // hold on a late frame, no scroll wiring
+    const holdFrame = () => { try { video.currentTime = video.duration * 0.9; } catch (e) {} };
+    video.addEventListener('loadeddata', holdFrame);
+    if (video.readyState >= 2) holdFrame();
     caps.forEach(c => c.classList.add('show'));
     return;
   }
 
   let ticking = false;
   function onScroll() {
+    unlock();
     if (ticking) return;
     ticking = true;
     requestAnimationFrame(() => { render(); ticking = false; });
   }
   window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', () => { sizeCanvas(); render(); });
+  window.addEventListener('resize', render);
+
+  // if we've been asked to seek but the playhead never actually moved, give up on
+  // scrubbing and loop instead
+  let seekChecks = 0;
+  const seekWatch = setInterval(() => {
+    if (bailed || looping) { clearInterval(seekWatch); return; }
+    if (!ready) return;
+    seekChecks++;
+    if (seekChecks > 6 && video.currentTime === 0 && progress() > 0.15) {
+      fallbackToLoop();
+      clearInterval(seekWatch);
+    }
+    if (seekChecks > 20) clearInterval(seekWatch);
+  }, 500);
+
   render();
 });

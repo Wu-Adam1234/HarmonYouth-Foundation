@@ -22,7 +22,7 @@ A 6-page static website. No frameworks, no build step, no npm — just HTML, CSS
 | Build meets | `build-meets.html` | Upcoming build meeting dates (list + calendar views), what to expect at one. No Past section yet — there hasn't been a meet to photograph |
 | Get involved | `get-involved.html` | Three jump buttons at the top, then three stacked signup cards: perform at a senior home, build assistive devices, everything else — plus donate card and WeChat QR |
 
-Shared across all pages: `styles.css` (all styling), `script.js` (all interactivity), `harmonyouth-logo.png`. There's also an `assets/piano/` folder holding the frames for the homepage film section (see section 3).
+Shared across all pages: `styles.css` (all styling), `script.js` (all interactivity), `harmonyouth-logo.png`. There's also an `assets/` folder holding the two video files for the homepage film section (see section 3).
 
 **The Build page is gone.** `making.html` was deleted and all of its content moved into `mission.html` as "Program 02". Every link that used to point at `making.html` now points at `mission.html#build`. If you find a stray one anywhere (an old Instagram bio link, a flyer QR code), that's the address to use.
 
@@ -244,24 +244,32 @@ Anchor targets (`#why`, `#music`, `#build`) have `scroll-margin-top:104px` so th
 
 Between the piano hero and the "What we do" block, `index.html` has a scroll-scrubbed film: a grand piano dissolving into a spiral of golden notes, tied to your scroll position rather than playing on a timer.
 
-**How it's built.** The source MP4 was cut into 120 still frames, stored in `assets/piano/` — `d_001.webp` through `d_120.webp` at 1280×720 for desktop (about 4.1MB total), and `m_001.webp` through `m_120.webp` at 640×360 for phones (about 1.8MB). A `<canvas>` draws whichever frame matches how far you've scrolled through the section. Frames, not a `<video>` tag, because scroll-scrubbing a video is unreliable on iPhones.
+**How it's built.** It's a single `<video>` element pointing at `assets/piano-film.mp4` (with `assets/piano-film.webm` as a fallback for browsers that prefer it). Scrolling through the section sets the video's playhead instead of letting it play on its own, so the piano dissolves into golden notes at exactly the rate you scroll.
+
+*(This started out as 120 separate image frames. That worked, but it meant 240 files, which is more than GitHub's web uploader accepts in one go. Two video files are far easier to keep updated.)*
 
 **Where the code is.** The markup is the `<section class="film-scene" id="filmScene">` block in `index.html`. The styling is the `SCROLL-SCRUBBED FILM SECTION` block near the bottom of `styles.css`. The logic is the last block in `script.js`, commented the same way.
 
 **To change the captions:** edit the three `.film-cap` divs in `index.html`. They fade in and out at fixed points in the scroll, set by `CAP_RANGES` in `script.js` — `[[0.03, 0.33], [0.37, 0.65], [0.69, 1.01]]`, as fractions of the way through the section. The gaps between those ranges are intentional; they give the image a moment on its own.
 
-**To make the scroll slower or faster:** change `height:360vh` on `.film-scene` in `styles.css`. Taller means more scrolling per frame, so a slower, more drawn-out animation.
+**To make the scroll slower or faster:** change `height:360vh` on `.film-scene` in `styles.css`. Taller means more scrolling per second of video.
 
-**To swap in a different video:** export frames with the same naming pattern into `assets/piano/`, then update `data-frames="120"` on the section if the count changed. The commands used were:
+**To swap in a different video:** replace both files, keeping the names. The encode settings matter — the `-g 12` flag puts a keyframe every half second, which is what makes seeking smooth rather than steppy:
 
 ```bash
-ffmpeg -i INPUT.mp4 -vf "fps=12,scale=1280:720:flags=lanczos" -c:v libwebp -quality 74 assets/piano/d_%03d.webp
-ffmpeg -i INPUT.mp4 -vf "fps=12,scale=640:360:flags=lanczos"  -c:v libwebp -quality 60 assets/piano/m_%03d.webp
+ffmpeg -i INPUT.mp4 -an -c:v libx264 -profile:v main -pix_fmt yuv420p -crf 24 \
+  -preset slow -g 12 -keyint_min 12 -sc_threshold 0 -movflags +faststart \
+  assets/piano-film.mp4
+
+ffmpeg -i INPUT.mp4 -an -c:v libvpx-vp9 -crf 34 -b:v 0 -row-mt 1 -speed 2 \
+  -g 12 -keyint_min 12 assets/piano-film.webm
 ```
 
-**Things it already handles**, so don't be alarmed: frames only start downloading when you scroll within about 1.5 screens of the section; they load six at a time rather than all at once; if you scroll faster than they arrive it draws the nearest frame it has instead of going black; there's an 8-second failsafe so a bad connection never leaves the loading bar stuck; and anyone with "reduce motion" turned on in their OS gets a single still frame and no scroll animation at all.
+Keep it short (around 10 seconds) and silent. There's no audio track and no controls, so a long clip just means a lot of scrolling.
 
-**When uploading to GitHub,** drag the whole `assets` folder in. It's 240 files, so it takes longer than the single-file uploads you're used to — that's normal, not a stall.
+**Things it already handles**, so don't be alarmed: if the browser won't allow seeking (which some mobile browsers block), it quietly switches to letting the video loop on its own instead; on iPhones the first scroll silently starts and pauses the video, because iOS won't allow seeking until a video has played once; anyone with "reduce motion" turned on gets a single held frame and no scroll animation; and if the video files are missing entirely, the section collapses to a normal-height text block and logs a warning naming the missing file, rather than leaving three screens of black.
+
+**One requirement worth knowing:** scroll-scrubbing needs the server to support HTTP range requests. GitHub Pages does. If you ever preview the site with a bare `python3 -m http.server`, the video will load but refuse to scrub — that's the local server, not a bug in the site.
 
 ---
 
@@ -322,7 +330,7 @@ Both `SHOWS_LINK` (→ `performances.html`) and `IG_LINK` (→ the Instagram pro
 - **Get photo consent before posting anyone.** `HarmonYouth_Photo_Release_Form.docx` covers this — it authorizes website, social media, and roster use, and requires an email and phone number. For residents, a staff member or family member typically needs to sign. This matters more than it sounds like it does; care facilities are strict about resident privacy for good reason.
 - **Update statuses after each show.** A page full of "Recruiting" for dates that already passed looks abandoned.
 - **Add Arthur's photo.** His bio on `team.html` currently shows a placeholder card reading "Cello · photo coming soon". Save a photo as `arthur-cofounder.jpg`, then in `team.html` replace the whole `<div class="photo-placeholder">` block with the `<img>` tag sitting commented out directly above it.
-- **Photo file sizes.** The site is currently ~32MB, photos plus the film frames. It's fine now, but if it keeps growing, page loads on phones will suffer. Compress before uploading, always. Galleries load lazily, so the cost lands on people who scroll down to Past, not on everyone.
+- **Photo file sizes.** The site is currently ~31MB, mostly photos. It's fine now, but if it keeps growing, page loads on phones will suffer. Compress before uploading, always. Galleries load lazily, so the cost lands on people who scroll down to Past, not on everyone.
 - **Fill in the build meet location.** Two spots on the site currently say "Location to be confirmed." Someone deciding whether to come needs to know where they're going.
 
 ---
@@ -360,7 +368,7 @@ The visual style is dark glass-morphism (frosted translucent cards, pill buttons
 - **Verify Google Maps links after adding them.** Some venue links use map *searches* rather than pinned locations; click them once after uploading to confirm they land on the right building.
 - **The Build section describes the program at a general level.** As specific device/toy builds happen, it's worth adding real numbers (devices built, families helped) the same way the performance stats work.
 - **Arthur's bio has no photo yet**, and it tells a very similar story to Adam's — both open on a first visit to a senior home where residents ended up humming along. The wording was adjusted so they don't repeat each other line for line, but read back to back it's still noticeably the same arc. Worth a look next time either bio gets touched.
-- **The film frames are a fixed 10-second clip.** If the org ever gets real performance footage, that would be a stronger thing to scrub through than a stock render.
+- **The film is a fixed 10-second stock clip.** If the org ever gets real performance footage, that would be a stronger thing to scrub through.
 - **`build-meets.html` has no Past section.** Once the September 30 meet happens, add one by copying the `<section id="past">` block out of `performances.html` — the `past-show` markup and the lazy-loading carousel work identically. You'd also want to add a "Past meets & photos" button to the page header, matching the pair on Performances.
 - **The build meet location is a placeholder.** See the note in section 3 for the two spots to change.
 
@@ -378,7 +386,7 @@ The visual style is dark glass-morphism (frosted translucent cards, pill buttons
 | Past galleries | `performances.html` → `Past` section |
 | Build program content | `mission.html` → `#build` (Program 02) |
 | Mission page jump cards | `mission.html` → `.program-jump-inner` |
-| Homepage film frames | `assets/piano/` |
+| Homepage film video | `assets/piano-film.mp4` and `.webm` |
 | Film section code | `index.html` → `#filmScene`; `script.js` → last block; `styles.css` → film section |
 | Build meet schedule page | `build-meets.html` (nav label "Build meets") |
 | Get Involved forms (performer / maker / other) | `get-involved.html` → `.involve-stack`, one `.involve-card` each |
