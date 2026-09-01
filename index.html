@@ -1,177 +1,347 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-hy-theme="dark">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HarmonYouth Foundation</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HarmonYouth Foundation &mdash; Music with somewhere to go</title>
+<meta name="description" content="Student-run in Calgary. We put musicians in senior homes on a set schedule, and we build assistive devices for people with disabilities.">
+<meta property="og:title" content="HarmonYouth Foundation &mdash; Music with somewhere to go">
+<meta property="og:description" content="Student-run in Calgary. We put musicians in senior homes on a set schedule, and we build assistive devices for people with disabilities.">
+<meta property="og:image" content="cambridgemanor-aug23-3.jpg">
+<link rel="icon" href="harmonyouth-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=2">
+<script defer src="site.js?v=2"></script>
 </head>
-<body>
-
-<nav>
-  <a href="index.html" class="nav-brand"><img src="harmonyouth-logo.png" alt="HarmonYouth Foundation" class="logo-img"><span class="nav-brand-name">HarmonYouth Foundation</span></a>
-  <div class="nav-right">
-    <div class="nav-links">
-      <a href="index.html" class="active">Home</a>
-      <a href="mission.html">Mission</a>
-      <a href="team.html">Meet the team</a>
-      <a href="performances.html">Performances</a>
-      <a href="build-meets.html">Build meets</a>
-      <a href="get-involved.html">Get involved</a>
-    </div>
-    <button class="nav-toggle" aria-label="Open menu">&#9776;</button>
-  </div>
-</nav>
-
-<section class="hero">
-<div class="hero-inner">
-    <div class="eyebrow">HarmonYouth Foundation, Calgary</div>
-    <h1>Students showing up for their community, with music and with their hands.</h1>
-    <p style="font-family:var(--serif);font-style:italic;color:var(--rose);font-size:18px;margin-top:6px;">We play music. We build devices. We show up for people.</p>
-    <p class="lede">Every month, student musicians from around Calgary show up at senior homes and play. Piano, strings, voice, whatever people bring. Alongside that, our members 3D print and assemble assistive devices and adapted toys for people with disabilities, through Makers Making Change.</p>
-    <div class="hero-ctas">
-      <a href="get-involved.html#perform" class="btn btn-primary">Join as a performer</a>
-      <a href="mission.html#build" class="btn btn-ghost">See our Build program</a>
-    </div>
-  </div>
-  <div class="piano-wrap" id="pianoWrap">
-    <div class="piano" id="piano"></div>
-    <div class="bkeys" id="bkeys"></div>
-  </div>
-  <div class="piano-hint">run your mouse along the keys, click one to play it</div>
-</section>
-
-<!-- ============ SCROLL-SCRUBBED FILM SECTION ============
-     One video file: assets/piano-film.mp4. Scroll position drives its playhead.
-     To swap the film, replace that file (see the guide for the encode settings). -->
-<section class="film-scene" id="filmScene">
-  <div class="film-sticky">
-    <video class="film-video" id="filmVideo"
-           muted playsinline preload="auto"
-           disablepictureinpicture aria-hidden="true">
-      <source src="assets/piano-film.webm" type="video/webm">
-      <source src="assets/piano-film.mp4" type="video/mp4">
-    </video>
-    <div class="film-vignette" aria-hidden="true"></div>
-    <div class="film-grain" aria-hidden="true"></div>
-
-    <div class="film-loading" id="filmLoading" aria-hidden="true">
-      <div class="film-loading-bar"><i id="filmLoadingFill"></i></div>
-      <span>Loading</span>
-    </div>
-
-    <div class="film-copy">
-      <div class="film-cap" data-cap="0">
-        <div class="film-kicker">How it starts</div>
-        <h2>One piano. One afternoon.</h2>
-        <p>No organization, no event. Just a student asking a senior home whether they could come in and play for an hour.</p>
-      </div>
-      <div class="film-cap" data-cap="1">
-        <div class="film-kicker">What happens</div>
-        <h2>The room changes.</h2>
-        <p>People who had barely spoken all visit start humming along. That's the part that's hard to explain to anyone who hasn't watched it happen.</p>
-      </div>
-      <div class="film-cap" data-cap="2">
-        <div class="film-kicker">What it turned into</div>
-        <h2>Then it keeps going.</h2>
-        <p>Two or more performances a month, a roster of student musicians across Calgary, and a second program building assistive devices for people who need them.</p>
-        <div class="film-ctas">
-          <a href="performances.html" class="btn btn-primary">See where we're playing</a>
-          <a href="mission.html" class="btn btn-ghost">Read our mission</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="film-progress" aria-hidden="true"><i id="filmProgressFill"></i></div>
-  </div>
-</section>
-
-
-<section>
-  <div class="section-inner reveal">
-    <div class="tag">What we do</div>
-    <h2>Most homes only see entertainment once in a while. We wanted to make it a regular thing.</h2>
-    <div class="mission-grid">
-      <div class="mission-text">
-        <p>HarmonYouth Foundation puts together student musicians who perform at senior homes on a regular schedule, not as a one-off concert. Each show runs about 30 to 45 minutes, with anywhere from 5 to 10 performers depending on who's free that week.</p>
-        <p>The point is that residents start to expect it. It becomes part of their week instead of something they forget happened by the next month. And the musicians get to play for people who actually want to listen, not a panel of judges.</p>
-        <p>Music is one half of what we do. The other is our Build program: members 3D print and assemble assistive devices and adapted toys for people with disabilities through Makers Making Change, a program of the Neil Squire Society.</p>
-        <a href="mission.html" class="btn btn-ghost-dark" style="margin-top:8px;">Read more about us</a>
-        <a href="mission.html#build" class="btn btn-ghost-dark" style="margin-top:8px;margin-left:12px;">See our Build program</a>
-      </div>
-      <div class="mission-stats">
-        <div class="stat">
-          <svg class="stat-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="4" width="18" height="17" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 9h18" stroke="currentColor" stroke-width="1.6"/><path d="M8 2v4M16 2v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-          <div class="num">2+</div><div class="label">performances every single month</div>
-        </div>
-        <div class="stat">
-          <svg class="stat-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="18" r="3" stroke="currentColor" stroke-width="1.6"/><circle cx="18" cy="16" r="3" stroke="currentColor" stroke-width="1.6"/><path d="M11 18V4l10-2v14" stroke="currentColor" stroke-width="1.6"/></svg>
-          <div class="num">5 to 10</div><div class="label">student musicians per show</div>
-        </div>
-        <div class="stat">
-          <svg class="stat-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 21s-7-4.35-9.5-8.5C1 9 2.5 5.5 6 5c2-.3 3.7.8 6 3.3C14.3 5.8 16 4.7 18 5c3.5.5 5 4 3.5 7.5C19 16.65 12 21 12 21Z" stroke="currentColor" stroke-width="1.6"/></svg>
-          <div class="num">Open</div><div class="label">roster, all instruments and voice welcome</div>
-        </div>
-        <div class="stat">
-          <svg class="stat-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="9" r="6" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 14 7 22l5-3 5 3-1.5-8" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
-          <div class="num">4 hours</div><div class="label">of performing or building earns a volunteer hour certificate, with service letters on request</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="support-section" id="support">
-  <div class="section-inner reveal">
-    <div class="tag" style="color:var(--gold);">Support us</div>
-    <h2 style="color:var(--ivory);">Help keep the music going</h2>
-    <p style="margin-top:16px;color:var(--ivory-dim);font-size:16px;line-height:1.7;max-width:620px;">HarmonYouth runs on volunteer time, but things like sheet music, equipment, 3D printing filament, and outreach materials still cost money. If you'd like to chip in, our GoFundMe is below. Every bit goes back into performances and the devices and toys we build.</p>
-    <div class="gofundme-card">
-      <div class="gfm-embed" data-url="https://www.gofundme.com/f/help-harmonyouth-foundation-bring-music-to-seniors/widget/large?attribution_id=sl%3Aa185a0b2-dd07-4388-b8d9-49917c37f1c1"></div>
-      <div class="gofundme-fallback">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 21s-7-4.35-9.5-8.5C1 9 2.5 5.5 6 5c2-.3 3.7.8 6 3.3C14.3 5.8 16 4.7 18 5c3.5.5 5 4 3.5 7.5C19 16.65 12 21 12 21Z" stroke="currentColor" stroke-width="1.6"/></svg>
-        <div>
-          <div class="gofundme-title">HarmonYouth Foundation on GoFundMe</div>
-          <div class="gofundme-sub">Support student musicians and makers building assistive devices and toys across Calgary.</div>
-        </div>
-        <a href="https://www.gofundme.com/f/help-harmonyouth-foundation-bring-music-to-seniors" target="_blank" rel="noopener" class="btn btn-primary">Donate</a>
-      </div>
-      <div class="gofundme-qr">
-        <img src="gofundme-qr.png" alt="Scan to donate to HarmonYouth Foundation on GoFundMe">
-        <span>Or scan to donate from your phone</span>
-      </div>
-    </div>
-  </div>
-</section>
-<script defer src="https://www.gofundme.com/static/js/embed.js"></script>
-
-<footer>
-  <div class="footer-grid">
-    <div class="footer-brand"><img src="harmonyouth-logo.png" alt="HarmonYouth Foundation" class="footer-logo-img"><span class="footer-brand-name">HarmonYouth Foundation</span></div>
-    <div class="footer-links">
-      <a href="mission.html">Mission</a>
-      <a href="team.html">Meet the team</a>
-      <a href="performances.html">Performances</a>
-      <a href="build-meets.html">Build meets</a>
-      <a href="get-involved.html">Get involved</a>
-    </div>
-  </div>
-  <div class="footer-contact">
-    <button class="contact-toggle" type="button">Contact us</button>
-    <span class="contact-email" hidden><a href="mailto:harmonyouthfoundation@gmail.com">harmonyouthfoundation@gmail.com</a> &nbsp;|&nbsp; <a href="tel:+14039266122">(403) 926-6122</a></span>
-  </div>
-  <div class="footer-social">
-    <a href="https://instagram.com/harmonyouthfoundation" target="_blank" rel="noopener">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor"/></svg>
-      Follow us on Instagram @harmonyouthfoundation
+<body data-page="index.html">
+<a class="skip" href="#main">Skip to content</a>
+<canvas data-cursor class="hy-cursor" aria-hidden="true"></canvas>
+<svg class="hy-filter-defs" aria-hidden="true"><defs><filter id="hy-glass" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.05 0.05" numOctaves="1" seed="1" result="t"/><feGaussianBlur in="t" stdDeviation="2" result="bt"/><feDisplacementMap in="SourceGraphic" in2="bt" scale="55" xChannelSelector="R" yChannelSelector="B" result="d"/><feGaussianBlur in="d" stdDeviation="3"/></filter></defs></svg>
+<div class="hy-grain" aria-hidden="true"></div>
+<div class="hy-progress" aria-hidden="true"><i data-progress></i></div>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="brand">
+      <span class="ring"></span><span class="blur" data-glass></span>
+      <img src="harmonyouth-logo.png" alt="HarmonYouth Foundation">
+      <span class="word">HarmonYouth</span>
     </a>
+    <div class="header-actions">
+      <button type="button" data-theme-toggle class="icon-btn" aria-label="Switch colour mode">
+        <span class="ring"></span><span class="blur" data-glass></span>
+        <span class="ico" data-theme-icon></span>
+      </button>
+      <div class="menu-wrap">
+        <button type="button" data-menu-toggle class="menu-btn" aria-expanded="false" aria-haspopup="true">
+          <span class="ring"></span><span class="blur" data-glass></span>
+          <span>Menu</span>
+          <span class="menu-bars" data-menu-bars><i></i><i></i></span>
+        </button>
+        <div data-menu-panel class="menu-panel" role="menu">
+          <form data-search-form class="menu-search" role="search">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.7"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            <span class="field">
+              <input data-search-input type="text" autocomplete="off" aria-label="Search the site">
+              <span data-search-ph class="ph"></span>
+            </span>
+            <kbd>&crarr;</kbd>
+          </form>
+          <div data-search-result class="search-result"></div>
+          <div class="menu-links" role="none"><a href="index.html" data-navlink class="navlink" role="menuitem"><span class="nl-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M4 11l8-6.5 8 6.5V20a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span><span class="nl-label">Home</span><i class="navline"></i></a><a href="mission.html" data-navlink class="navlink" role="menuitem"><span class="nl-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 20.5S4.5 16 4.5 10.2A4.2 4.2 0 0 1 12 7.6a4.2 4.2 0 0 1 7.5 2.6c0 5.8-7.5 10.3-7.5 10.3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span><span class="nl-label">Mission</span><i class="navline"></i></a><a href="programs.html" data-navlink class="navlink" role="menuitem"><span class="nl-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="7.5" cy="17.5" r="2.8" stroke="currentColor" stroke-width="1.6"/><circle cx="17" cy="15.5" r="2.8" stroke="currentColor" stroke-width="1.6"/><path d="M10.3 17.5V5l9.5-2v12.5" stroke="currentColor" stroke-width="1.6"/></svg></span><span class="nl-label">Programs</span><i class="navline"></i></a><a href="performances.html" data-navlink class="navlink spread" role="menuitem"><span class="nl-left"><span class="nl-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3.5" y="5" width="17" height="15.5" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 9.5h17M8.5 3v4M15.5 3v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span class="nl-label">Performances</span></span><span class="nl-tag">2 NEXT</span><i class="navline"></i></a><a href="photos.html" data-navlink class="navlink" role="menuitem"><span class="nl-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3.5" y="5" width="17" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M6 16l4-4.5 3.5 3.5L16 12l2.5 3" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="15" cy="9" r="1.3" fill="currentColor"/></svg></span><span class="nl-label">Photos</span><i class="navline"></i></a><a href="build-meets.html" data-navlink class="navlink" role="menuitem"><span class="nl-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M14.7 6.3a3.9 3.9 0 0 0 5 5L15 16l-3.5 3.5a2 2 0 0 1-2.8-2.8L12 13 7.6 8.6a3.9 3.9 0 0 1-1.3-4.4l3 3 2-2-3-3a3.9 3.9 0 0 1 4.4 1.3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></span><span class="nl-label">Build meets</span><i class="navline"></i></a><a href="team.html" data-navlink class="navlink" role="menuitem"><span class="nl-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="8.5" r="3" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 19.5c0-3 2.4-5 5.5-5s5.5 2 5.5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M16 6.2a3 3 0 0 1 0 5.6M17.5 19.5c0-2.2-.8-3.9-2.2-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span class="nl-label">Meet the team</span><i class="navline"></i></a><a href="get-involved.html" data-navlink class="navlink" role="menuitem"><span class="nl-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="8" r="3.2" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 20c0-3.3 2.5-5.5 5.5-5.5s5.5 2.2 5.5 5.5M17 6.5v6M14 9.5h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span class="nl-label">Get involved</span><i class="navline"></i></a><a href="donate.html" data-navlink class="navlink" role="menuitem"><span class="nl-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 20.5S4 15.5 4 10.5C4 7.5 6 6 8 6c1.6 0 3 1 4 2.4C13 7 14.4 6 16 6c2 0 4 1.5 4 4.5 0 5-8 10-8 10Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span><span class="nl-label">Donate</span><i class="navline"></i></a></div>
+          <div class="menu-rule"></div>
+          <div class="menu-notes">
+            <div class="menu-note">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="9" r="5.5" stroke="currentColor" stroke-width="1.6"/><path d="M8.6 13.6 7.2 21l4.8-2.8 4.8 2.8-1.4-7.4" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+              <div><div class="t">Volunteer hours</div><div class="d">A certificate every 4 hours &mdash; performing or building both count.</div></div>
+            </div>
+            <a href="mailto:harmonyouthfoundation@gmail.com?subject=Volunteer%20Service%20Letter%20Request" class="menu-note">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="3.5" y="5" width="17" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+              <div><div class="t">Volunteer Service Letter Request</div><div class="d">Request one at any performance, or email us &mdash; we write them same week.</div></div>
+            </a>
+          </div>
+          <div class="menu-rule"></div>
+          <div class="menu-cta">
+            <a href="donate.html" class="btn btn-accent" ><span class="ring"></span><span class="btn-label">Donate</span></a>
+            <a href="https://instagram.com/harmonyouthfoundation" target="_blank" rel="noopener" class="menu-ig" aria-label="Instagram">
+              <span class="ring"></span><span class="blur" data-glass></span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="footer-fine">We play music. We build devices. We show up for people. &mdash; HarmonYouth Foundation. Calgary, AB. Started and run by students.</div>
+</header>
+<div class="dotrail" aria-hidden="true"><a href="#hero" data-dot="hero"><span class="lbl">Intro</span><i></i></a><a href="#process" data-dot="process"><span class="lbl">Process</span><i></i></a><a href="#programs" data-dot="programs"><span class="lbl">Programs</span><i></i></a><a href="#shows" data-dot="shows"><span class="lbl">Shows</span><i></i></a><a href="#gallery" data-dot="gallery"><span class="lbl">Photos</span><i></i></a><a href="#involved" data-dot="involved"><span class="lbl">Involved</span><i></i></a><a href="#support" data-dot="support"><span class="lbl">Donate</span><i></i></a></div><main id="main"><div class="hero-scene" data-hero-scene><section id="hero" class="hero" data-hero>
+  <img class="hero-bg" src="cambridgemanor-aug23-3.jpg" alt="" aria-hidden="true">
+  <div class="hero-shade" data-hero-shade></div>
+  <div class="hero-halo" aria-hidden="true"></div>
+  <div class="hero-media" data-hero-media>
+    <img src="manorvillage-aug7-2.jpg" alt="Student pianists performing at a Calgary senior home">
+    <div class="hero-veil" data-hero-veil></div>
+    <div class="hero-caption" data-hero-caption>
+      <div class="k">Manor Village at Rocky Ridge &middot; August 7</div>
+      <p>Four talented piano players performed for the residents.</p>
+    </div>
+  </div>
+  <h1 class="hero-text">
+    <span class="hero-word" data-hero-word="l">Music with</span>
+    <span class="hero-word" data-hero-word="r">somewhere to go</span>
+  </h1>
+  <div class="hero-meta" data-hero-meta>
+    <div class="btn-row"><a href="#shows" class="btn btn-accent" ><span class="ring"></span><span class="btn-label">See the performances</span></a> <a href="#programs" class="btn" ><span class="ring"></span><span class="blur"></span><span class="btn-label">What we do</span></a></div>
+    <div class="hero-scrollhint">Keep scrolling
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 4v16M6 14l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="hero-track"><i data-hero-bar></i></div>
+  </div>
+</section></div><section class="sec-tight sec-line">
+  <div class="wrap">
+    <div class="split" data-reveal>
+      <p>HarmonYouth Foundation is student-run in Calgary. We put musicians in senior homes on a set schedule, and we build assistive devices for people with disabilities.</p>
+      <a href="performances.html" class="btn" ><span class="ring"></span><span class="blur"></span><span class="btn-label">All performances</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+    <div class="stat-strip"><div class="stat" data-reveal><div class="k">Performances a month</div><div class="v">2+</div></div><div class="stat" data-reveal><div class="k">Musicians per show</div><div class="v">5&ndash;10</div></div><div class="stat" data-reveal><div class="k">Hours per certificate</div><div class="v">4</div></div><div class="stat" data-reveal><div class="k">Of donations passed on</div><div class="v">100%</div></div></div>
+  </div>
+</section><section id="process" class="sec">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <div class="eyebrow">How a show runs</div>
+      <h2 class="display">Showing up, on repeat</h2>
+      <p class="lede">Most homes only see entertainment once in a while. We wanted it on the calendar every month, so residents start expecting it.</p>
+    </div>
+    <div class="card-grid"><article class="card" data-reveal><div class="card-top"><span class="card-no">01</span><span class="card-tag">Booking</span></div><h3>A home reaches out</h3><p>An activities coordinator gets in touch, or we follow up with a home we already visit, and lock a date.</p><div class="card-photo"><img data-src="rockyridge-aug1-1.jpg" alt="Residents gathering for a performance"></div></article><article class="card" data-reveal><div class="card-top"><span class="card-no">02</span><span class="card-tag">Lineup</span></div><h3>We show up and play</h3><p>Five to ten students, 30 to 45 minutes, solo pieces and a few group ones &mdash; piano, strings, voice, clarinet.</p><div class="card-photo"><img data-src="scenicgrande-aug21-1.jpg" alt="A student performing at The Scenic Grande"></div></article><article class="card" data-reveal><div class="card-top"><span class="card-no">03</span><span class="card-tag">After</span></div><h3>We follow up</h3><p>Photos go out, certificates and service letters get signed, and the next home usually books off the back of them.</p><div class="card-photo"><img data-src="cambridgemanor-aug23-16.jpg" alt="Performers after the show"></div></article></div>
+  </div>
+</section><section id="programs" class="sec sec-alt">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <div class="eyebrow">Programs</div>
+      <h2 class="display">Two programs, one reason</h2>
+    </div>
+    <div class="accordion" data-accordion><div class="acc-item" data-acc-item>
+  <button type="button" class="acc-trigger" data-acc-trigger aria-expanded="false">
+    <span class="acc-key">Music</span>
+    <span class="acc-title">Live music at senior homes</span>
+    <span class="acc-icon" data-acc-icon><i class="ring"></i><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+  </button>
+  <div class="acc-body" data-acc-body><p>Student musicians from around Calgary perform on a set schedule, not as a one-off concert. Nobody has to commit to every date &mdash; you sign up for what works, and you get a real audience instead of a panel scoring you out of ten.</p></div>
+</div><div class="acc-item" data-acc-item>
+  <button type="button" class="acc-trigger" data-acc-trigger aria-expanded="false">
+    <span class="acc-key">Build</span>
+    <span class="acc-title">Assistive devices and adapted toys</span>
+    <span class="acc-icon" data-acc-icon><i class="ring"></i><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+  </button>
+  <div class="acc-body" data-acc-body><p>Members 3D print and assemble devices from the Makers Making Change open-source library, reviewed by occupational therapists. Finished devices go to people in our community at little to no cost. You don&rsquo;t need a printer &mdash; build meetings need hands more than hardware.</p></div>
+</div><div class="acc-item" data-acc-item>
+  <button type="button" class="acc-trigger" data-acc-trigger aria-expanded="false">
+    <span class="acc-key">Roster</span>
+    <span class="acc-title">Open to any instrument or voice</span>
+    <span class="acc-icon" data-acc-icon><i class="ring"></i><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+  </button>
+  <div class="acc-body" data-acc-body><p>Any skill level you&rsquo;re comfortable playing in front of people. We add you to the roster and check in before each show to see who can make it, so signing up never locks you into a date.</p></div>
+</div></div>
+    <div class="btn-row"><a href="programs.html" class="btn" ><span class="ring"></span><span class="blur"></span><span class="btn-label">Both programs in full</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+  </div>
+</section><section class="cta-band">
+  <div class="halo" aria-hidden="true"></div>
+  <div class="wrap" data-reveal>
+    <svg data-hovertext class="hovertext" viewBox="0 0 340 74" role="img" aria-label="Music for everyone">
+      <defs>
+        <linearGradient id="ht1-grad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="340" y2="74">
+          <stop offset="0" stop-color="#E8C87A"/><stop offset="0.5" stop-color="#C9A15A"/><stop offset="1" stop-color="#F4F6F8"/>
+        </linearGradient>
+        <radialGradient data-ht-radial id="ht1-radial" gradientUnits="userSpaceOnUse" r="0%" cx="50%" cy="50%">
+          <stop offset="0" stop-color="white"/><stop offset="1" stop-color="black"/>
+        </radialGradient>
+        <mask id="ht1-mask"><rect x="-20" y="-20" width="380" height="114" fill="url(#ht1-radial)"/></mask>
+      </defs>
+      <text class="ht-base" x="50%" y="52%" text-anchor="middle" dominant-baseline="middle" fill="transparent" stroke="var(--faint)" stroke-width="0.7" style="font-family:'Inter',sans-serif;font-size:44px;font-weight:600;letter-spacing:-1.6px">MUSIC FOR EVERYONE</text>
+      <text x="50%" y="52%" text-anchor="middle" dominant-baseline="middle" fill="transparent" stroke="url(#ht1-grad)" stroke-width="0.75" mask="url(#ht1-mask)" style="font-family:'Inter',sans-serif;font-size:44px;font-weight:600;letter-spacing:-1.6px">MUSIC FOR EVERYONE</text>
+    </svg>
+    <p>Built to keep coming back &mdash; same homes, same faces, every month.</p>
+    <div class="btn-row"><a href="get-involved.html" class="btn btn-accent" ><span class="ring"></span><span class="btn-label">Get involved</span></a> <a href="photos.html" class="btn" ><span class="ring"></span><span class="blur"></span><span class="btn-label">See the photos</span></a></div>
+  </div>
+</section><section id="shows" class="sec sec-alt">
+  <div class="wrap">
+    <div class="split" data-reveal>
+      <div class="sec-head">
+        <div class="eyebrow">Calendar</div>
+        <h2 class="display">Next two shows, last two shows</h2>
+      </div>
+      <a href="mailto:harmonyouthfoundation@gmail.com?subject=Booking%20a%20performance" class="btn" ><span class="ring"></span><span class="blur"></span><span class="btn-label">Book your home</span></a>
+    </div>
+    <div class="show-panel">
+      <div class="panel" data-reveal>
+        <div class="panel-head"><h3>Upcoming</h3><span class="pill">2 shows</span></div>
+        <div class="show-row"><div class="show-date">Sep 6</div><div class="show-venue"><span class="name">The Scenic Grande</span><span class="sub">12:00 to 12:30 PM &middot; NW Calgary</span></div><div class="show-status talks">In talks</div></div><div class="show-row"><div class="show-date">Sep 13</div><div class="show-venue"><span class="name">Manor Village at Rocky Ridge</span><span class="sub">11:00 to 11:30 AM &middot; spots open</span></div><div class="show-status ">Recruiting</div></div>
+      </div>
+      <div class="panel" data-reveal>
+        <div class="panel-head"><h3>Most recent</h3><span class="pill">Played</span></div>
+        <div class="show-row"><div class="show-date">Aug 30</div><div class="show-venue"><span class="name">Boardwalk Retirement Community</span><span class="sub">Summer Performance &middot; piano, strings, voice</span></div><a href="photos.html#boardwalk-aug-30" class="show-status">Photos</a></div><div class="show-row"><div class="show-date">Aug 23</div><div class="show-venue"><span class="name">Cambridge Manor</span><span class="sub">Summer Performance &middot; largest lineup yet</span></div><a href="photos.html#cambridge-manor" class="show-status">Photos</a></div>
+      </div>
+    </div>
+    <div class="btn-row"><a href="performances.html" class="btn" ><span class="ring"></span><span class="blur"></span><span class="btn-label">The full schedule</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+  </div>
+</section><section id="gallery" class="sec">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <div class="eyebrow">From the room</div>
+      <h2 class="display">The three most recent performances</h2>
+      <p class="lede">Drag or use the arrows. Tap any card to open it full screen.</p>
+    </div>
+    <div class="carousel-block" data-carousel-block data-reveal>
+  <div class="carousel-head">
+    <div><h3>Boardwalk Retirement Community</h3><span class="sub">Summer Performance &middot; August 30</span></div>
+    <div class="car-arrows">
+      <button type="button" class="car-arrow" data-car-prev aria-label="Scroll Boardwalk Retirement Community left"><span class="ring"></span><span class="blur"></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button type="button" class="car-arrow" data-car-next aria-label="Scroll Boardwalk Retirement Community right"><span class="ring"></span><span class="blur"></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+  </div>
+  <div class="car-track" data-car-track><button type="button" class="car-card" data-card data-cat="Boardwalk &middot; Aug 30" data-title="A full room" data-body="Chairs out in rows, and most of them taken before we started."><img data-src="boardwalk-aug30-1.jpg" alt="A full room"><span class="veil"></span><span class="cap"><span class="k">Boardwalk &middot; Aug 30</span><span class="t">A full room</span></span></button><button type="button" class="car-card" data-card data-cat="Boardwalk &middot; Aug 30" data-title="Introductions" data-body="Every performer is introduced by name before they play."><img data-src="boardwalk-aug30-6.jpg" alt="Introductions"><span class="veil"></span><span class="cap"><span class="k">Boardwalk &middot; Aug 30</span><span class="t">Introductions</span></span></button><button type="button" class="car-card" data-card data-cat="Boardwalk &middot; Aug 30" data-title="At the piano" data-body="The upright sits at the front of the dining room."><img data-src="boardwalk-aug30-11.jpg" alt="At the piano"><span class="veil"></span><span class="cap"><span class="k">Boardwalk &middot; Aug 30</span><span class="t">At the piano</span></span></button><button type="button" class="car-card" data-card data-cat="Boardwalk &middot; Aug 30" data-title="Reading the programme" data-body="Residents followed along on a printed programme."><img data-src="boardwalk-aug30-15.jpg" alt="Reading the programme"><span class="veil"></span><span class="cap"><span class="k">Boardwalk &middot; Aug 30</span><span class="t">Reading the programme</span></span></button><button type="button" class="car-card" data-card data-cat="Boardwalk &middot; Aug 30" data-title="The whole lineup" data-body="Certificates signed, and a photo before everyone headed home."><img data-src="boardwalk-aug30-18.jpg" alt="The whole lineup"><span class="veil"></span><span class="cap"><span class="k">Boardwalk &middot; Aug 30</span><span class="t">The whole lineup</span></span></button></div>
+</div><div class="carousel-block" data-carousel-block data-reveal>
+  <div class="carousel-head">
+    <div><h3>Cambridge Manor</h3><span class="sub">Summer Performance &middot; August 23</span></div>
+    <div class="car-arrows">
+      <button type="button" class="car-arrow" data-car-prev aria-label="Scroll Cambridge Manor left"><span class="ring"></span><span class="blur"></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button type="button" class="car-arrow" data-car-next aria-label="Scroll Cambridge Manor right"><span class="ring"></span><span class="blur"></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+  </div>
+  <div class="car-track" data-car-track><button type="button" class="car-card" data-card data-cat="Cambridge Manor &middot; Aug 23" data-title="A full common room" data-body="Residents filled the common room end to end — the largest audience we have played to."><img data-src="cambridgemanor-aug23-1.jpg" alt="A full common room"><span class="veil"></span><span class="cap"><span class="k">Cambridge Manor &middot; Aug 23</span><span class="t">A full common room</span></span></button><button type="button" class="car-card" data-card data-cat="Cambridge Manor &middot; Aug 23" data-title="Piano, up close" data-body="Most of our performers are pianists, and most homes have an instrument waiting."><img data-src="cambridgemanor-aug23-5.jpg" alt="Piano, up close"><span class="veil"></span><span class="cap"><span class="k">Cambridge Manor &middot; Aug 23</span><span class="t">Piano, up close</span></span></button><button type="button" class="car-card" data-card data-cat="Cambridge Manor &middot; Aug 23" data-title="Between pieces" data-body="Performers introduce themselves between pieces. It is half the point of the visit."><img data-src="cambridgemanor-aug23-9.jpg" alt="Between pieces"><span class="veil"></span><span class="cap"><span class="k">Cambridge Manor &middot; Aug 23</span><span class="t">Between pieces</span></span></button><button type="button" class="car-card" data-card data-cat="Cambridge Manor &middot; Aug 23" data-title="Group finish" data-body="The set closes with something everyone can play together."><img data-src="cambridgemanor-aug23-12.jpg" alt="Group finish"><span class="veil"></span><span class="cap"><span class="k">Cambridge Manor &middot; Aug 23</span><span class="t">Group finish</span></span></button><button type="button" class="car-card" data-card data-cat="Cambridge Manor &middot; Aug 23" data-title="Certificates signed" data-body="Hours are logged on the day, so nobody has to chase them later."><img data-src="cambridgemanor-aug23-16.jpg" alt="Certificates signed"><span class="veil"></span><span class="cap"><span class="k">Cambridge Manor &middot; Aug 23</span><span class="t">Certificates signed</span></span></button></div>
+</div><div class="carousel-block" data-carousel-block data-reveal>
+  <div class="carousel-head">
+    <div><h3>The Scenic Grande</h3><span class="sub">Summer Performance &middot; August 21</span></div>
+    <div class="car-arrows">
+      <button type="button" class="car-arrow" data-car-prev aria-label="Scroll The Scenic Grande left"><span class="ring"></span><span class="blur"></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button type="button" class="car-arrow" data-car-next aria-label="Scroll The Scenic Grande right"><span class="ring"></span><span class="blur"></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+  </div>
+  <div class="car-track" data-car-track><button type="button" class="car-card" data-card data-cat="Scenic Grande &middot; Aug 21" data-title="Opening piece" data-body="The lounge at the Grande has good acoustics for strings."><img data-src="scenicgrande-aug21-1.jpg" alt="Opening piece"><span class="veil"></span><span class="cap"><span class="k">Scenic Grande &middot; Aug 21</span><span class="t">Opening piece</span></span></button><button type="button" class="car-card" data-card data-cat="Scenic Grande &middot; Aug 21" data-title="Strings section" data-body="Piano, strings, voice — the lineup changes with whoever is free."><img data-src="scenicgrande-aug21-3.jpg" alt="Strings section"><span class="veil"></span><span class="cap"><span class="k">Scenic Grande &middot; Aug 21</span><span class="t">Strings section</span></span></button><button type="button" class="car-card" data-card data-cat="Scenic Grande &middot; Aug 21" data-title="Requests" data-body="Residents ask for songs. We play the ones we know."><img data-src="scenicgrande-aug21-5.jpg" alt="Requests"><span class="veil"></span><span class="cap"><span class="k">Scenic Grande &middot; Aug 21</span><span class="t">Requests</span></span></button><button type="button" class="car-card" data-card data-cat="Scenic Grande &middot; Aug 21" data-title="Voice" data-body="A vocal number partway through the set."><img data-src="scenicgrande-aug21-7.jpg" alt="Voice"><span class="veil"></span><span class="cap"><span class="k">Scenic Grande &middot; Aug 21</span><span class="t">Voice</span></span></button><button type="button" class="car-card" data-card data-cat="Scenic Grande &middot; Aug 21" data-title="Last bow" data-body="Thirty minutes, then a short pack-up and out of the way of dinner."><img data-src="scenicgrande-aug21-8.jpg" alt="Last bow"><span class="veil"></span><span class="cap"><span class="k">Scenic Grande &middot; Aug 21</span><span class="t">Last bow</span></span></button></div>
+</div>
+    <div class="btn-row"><a href="photos.html" class="btn" ><span class="ring"></span><span class="blur"></span><span class="btn-label">Every gallery</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+  </div>
+</section><section id="involved" class="sec sec-alt">
+  <div class="wrap">
+    <div class="split" data-reveal>
+      <div class="sec-head">
+        <div class="eyebrow">Get involved</div>
+        <h2 class="display">Play, build, or open a door</h2>
+        <p class="lede">Students, families, and care homes all start the same way &mdash; one form or one email. We answer every message ourselves.</p>
+      </div>
+      <div class="btn-row" style="margin-top:0"><a href="get-involved.html" class="btn btn-accent" ><span class="ring"></span><span class="btn-label">Sign up</span></a> <a href="mailto:harmonyouthfoundation@gmail.com?subject=Volunteer%20Service%20Letter%20Request" class="btn" ><span class="ring"></span><span class="blur"></span><span class="btn-label">Request a service letter</span></a></div>
+    </div>
+    <div class="accordion" data-accordion><div class="acc-item" data-acc-item>
+  <button type="button" class="acc-trigger" data-acc-trigger aria-expanded="false">
+    <span class="acc-key">01</span>
+    <span class="acc-title">Do I need to commit to every date?</span>
+    <span class="acc-icon" data-acc-icon><i class="ring"></i><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+  </button>
+  <div class="acc-body" data-acc-body><p>No. You&rsquo;re on the roster, and we check in before each show to see who can make it. Say yes to what works.</p></div>
+</div><div class="acc-item" data-acc-item>
+  <button type="button" class="acc-trigger" data-acc-trigger aria-expanded="false">
+    <span class="acc-key">02</span>
+    <span class="acc-title">What instruments can I play?</span>
+    <span class="acc-icon" data-acc-icon><i class="ring"></i><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+  </button>
+  <div class="acc-body" data-acc-body><p>Piano, strings, voice, clarinet, cello &mdash; whatever you bring. Any skill level you&rsquo;re comfortable playing in front of people.</p></div>
+</div><div class="acc-item" data-acc-item>
+  <button type="button" class="acc-trigger" data-acc-trigger aria-expanded="false">
+    <span class="acc-key">03</span>
+    <span class="acc-title">How do hours and service letters work?</span>
+    <span class="acc-icon" data-acc-icon><i class="ring"></i><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+  </button>
+  <div class="acc-body" data-acc-body><p>Every 4 hours of performing or building earns a certificate. You can request a Volunteer Service Letter at any performance &mdash; ask an organiser on the day, or email us and we&rsquo;ll write it that week.</p></div>
+</div><div class="acc-item" data-acc-item>
+  <button type="button" class="acc-trigger" data-acc-trigger aria-expanded="false">
+    <span class="acc-key">04</span>
+    <span class="acc-title">Do I need a 3D printer for Build?</span>
+    <span class="acc-icon" data-acc-icon><i class="ring"></i><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+  </button>
+  <div class="acc-body" data-acc-body><p>No. Build meetings need people to assemble, wire switches, and test. We print the parts ahead of time.</p></div>
+</div><div class="acc-item" data-acc-item>
+  <button type="button" class="acc-trigger" data-acc-trigger aria-expanded="false">
+    <span class="acc-key">05</span>
+    <span class="acc-title">I run a care home &mdash; can you visit?</span>
+    <span class="acc-icon" data-acc-icon><i class="ring"></i><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+  </button>
+  <div class="acc-body" data-acc-body><p>Yes &mdash; email us and we&rsquo;ll find a date. All we need is a common room and a piano, or space for one.</p></div>
+</div></div>
+  </div>
+</section><section id="support" class="sec">
+  <div class="glow" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <div class="eyebrow">Donate</div>
+      <h2 class="display">Every dollar leaves our hands</h2>
+      <p class="lede">All proceeds and donations go to the <strong style="color:var(--text);font-weight:600">hospitals</strong> and <strong style="color:var(--text);font-weight:600">senior homes</strong> we support. HarmonYouth takes none of the money &mdash; 100% of it is passed on.</p>
+      <div class="btn-row"><a href="https://www.gofundme.com/f/help-harmonyouth-foundation-bring-music-to-seniors" class="btn btn-accent" target="_blank" rel="noopener"><span class="ring"></span><span class="btn-label">Donate on GoFundMe</span></a> <a href="get-involved.html" class="btn" ><span class="ring"></span><span class="blur"></span><span class="btn-label">Volunteer instead</span></a></div>
+    </div>
+    <div class="show-panel">
+      <div data-reveal><div class="gfm" data-gfm-host>
+  <div class="gfm-head"><span class="t">GoFundMe</span><span class="pill">Live campaign</span></div>
+  <div class="gfm-body">
+    <div class="gfm-embed" data-url="https://www.gofundme.com/f/help-harmonyouth-foundation-bring-music-to-seniors/widget/large?attribution_id=sl%3Aa185a0b2-dd07-4388-b8d9-49917c37f1c1" data-widget-style="large"></div>
+    <div data-gfm-fallback>
+      <p class="gfm-fallback">Loading the live GoFundMe widget. If it doesn&rsquo;t appear, the campaign page opens in a new tab.</p>
+      <a href="https://www.gofundme.com/f/help-harmonyouth-foundation-bring-music-to-seniors" class="btn btn-accent" target="_blank" rel="noopener"><span class="ring"></span><span class="btn-label">Open the campaign</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+  </div>
+</div></div>
+      <div class="panel" data-reveal>
+        <div class="panel-head"><h3>Or from your phone</h3><span class="pill">Scan</span></div>
+        <div class="qr" style="border:none;background:transparent;padding:18px 0 0">
+          <img src="gofundme-qr.png" alt="QR code to the HarmonYouth GoFundMe campaign">
+          <div><div class="t">Scan to donate</div><div class="d">Opens the same GoFundMe campaign on your phone.</div></div>
+        </div>
+        <div class="contact-inline">
+          <a href="mailto:harmonyouthfoundation@gmail.com">harmonyouthfoundation@gmail.com</a><a href="tel:+14039266122">(403) 926-6122</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section></main><div class="modal" data-modal role="dialog" aria-modal="true" aria-label="Photo">
+  <div class="modal-backdrop" data-modal-backdrop></div>
+  <div class="modal-panel" data-modal-panel>
+    <button type="button" class="modal-close" data-modal-close aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+    </button>
+    <div class="modal-img"><img data-modal-img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></div>
+    <div class="modal-body"><div class="k" data-modal-cat></div><h3 data-modal-title></h3><p data-modal-body></p></div>
+  </div>
+</div><footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><img src="harmonyouth-logo.png" alt="HarmonYouth Foundation"><span>HarmonYouth Foundation</span></div>
+        <p class="footer-note">Calgary, AB. Started and run by students.</p>
+      </div>
+      <div class="footer-col">
+        <div class="h">Pages</div>
+        <a href="index.html">Home</a><a href="mission.html">Mission</a><a href="programs.html">Programs</a>
+        <a href="performances.html">Performances</a><a href="photos.html">Photos</a>
+        <a href="build-meets.html">Build meets</a><a href="team.html">Meet the team</a>
+      </div>
+      <div class="footer-col">
+        <div class="h">Elsewhere</div>
+        <a href="https://instagram.com/harmonyouthfoundation" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.makersmakingchange.com/" target="_blank" rel="noopener">Makers Making Change</a>
+        <a href="https://www.gofundme.com/f/help-harmonyouth-foundation-bring-music-to-seniors" target="_blank" rel="noopener">GoFundMe</a>
+        <a href="get-involved.html">Get involved</a>
+        <a href="privacy.html">Privacy policy</a>
+      </div>
+      <div class="footer-col">
+        <div class="h">Contact</div>
+        <a href="mailto:harmonyouthfoundation@gmail.com">harmonyouthfoundation@gmail.com</a>
+        <a href="tel:+14039266122">(403) 926-6122</a>
+        <a href="donate.html">Donate</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 HarmonYouth Foundation. All donations passed on in full.</span>
+      <span class="slogan">We play music. We build devices. We show up for people.</span>
+    </div>
+  </div>
 </footer>
-
-<div class="scroll-piano" id="scrollPiano"></div>
-<script src="script.js"></script>
 </body>
 </html>

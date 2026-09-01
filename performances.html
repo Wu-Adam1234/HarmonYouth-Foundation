@@ -1,322 +1,136 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-hy-theme="dark">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Performances, HarmonYouth Foundation</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Performances &mdash; HarmonYouth Foundation</title>
+<meta name="description" content="Upcoming shows and every performance HarmonYouth has played, across four senior homes in northwest Calgary.">
+<meta property="og:title" content="Performances &mdash; HarmonYouth Foundation">
+<meta property="og:description" content="Upcoming shows and every performance HarmonYouth has played, across four senior homes in northwest Calgary.">
+<meta property="og:image" content="cambridgemanor-aug23-3.jpg">
+<link rel="icon" href="harmonyouth-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=2">
+<script defer src="site.js?v=2"></script>
 </head>
-<body>
-
-<nav>
-  <a href="index.html" class="nav-brand"><img src="harmonyouth-logo.png" alt="HarmonYouth Foundation" class="logo-img"><span class="nav-brand-name">HarmonYouth Foundation</span></a>
-  <div class="nav-right">
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="mission.html">Mission</a>
-      <a href="team.html">Meet the team</a>
-      <a href="performances.html" class="active">Performances</a>
-      <a href="build-meets.html">Build meets</a>
-      <a href="get-involved.html">Get involved</a>
-    </div>
-    <button class="nav-toggle" aria-label="Open menu">&#9776;</button>
-  </div>
-</nav>
-
-<div class="page-header">
-<div class="tag">Calendar</div>
-  <h1>Upcoming performances</h1>
-  <p>Shows running at four senior homes across NW Calgary this summer. Our shows through August 23 are done, scroll down for photos.</p>
-  <div style="margin-top:24px;display:flex;gap:14px;flex-wrap:wrap;">
-    <a href="#upcoming" class="btn btn-primary">Upcoming shows</a>
-    <a href="#past" class="btn btn-ghost">Past performances &amp; photos</a>
-  </div>
-  <svg class="floating-note" style="top:24px;right:8%;width:34px;height:34px;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M9 18V5l12-2v13" stroke="#5B7B9A" stroke-width="1.6"/>
-    <circle cx="6" cy="18" r="3" stroke="#5B7B9A" stroke-width="1.6"/>
-    <circle cx="18" cy="16" r="3" stroke="#5B7B9A" stroke-width="1.6"/>
-  </svg>
-</div>
-<div class="mini-keys" data-count="32"></div>
-
-<section id="upcoming">
-  <div class="section-inner reveal">
-    <div class="tag">Upcoming</div>
-    <div class="view-toggle">
-      <button type="button" class="view-btn active" data-view="list">List</button>
-      <button type="button" class="view-btn" data-view="calendar">Calendar</button>
-    </div>
-    <div class="show-list" id="listView">
-      <div class="show-row">
-        <div class="show-date">Aug 30</div>
-        <div class="show-venue"><span><a href="https://maps.app.goo.gl/SzijnYmnxBW7Qwvx6" target="_blank" rel="noopener" class="venue-link">Boardwalk Retirement Community</a></span><span class="sub">2:00 to 2:30 PM</span></div>
-        <div class="show-status full">Full</div>
-      </div>
-      <div class="show-row">
-        <div class="show-date">Sep 6</div>
-        <div class="show-venue"><span><a href="https://www.google.com/maps/search/?api=1&query=The+Scenic+Grande+Calgary" target="_blank" rel="noopener" class="venue-link">The Scenic Grande</a></span><span class="sub">12:00 to 12:30 PM</span></div>
-        <div class="show-status" style="color:var(--rose);">In talks</div>
-      </div>
-      <div class="show-row">
-        <div class="show-date">Sep 13</div>
-        <div class="show-venue"><span><a href="https://www.google.com/maps/search/?api=1&query=The+Manor+Village+at+Rocky+Ridge+Calgary" target="_blank" rel="noopener" class="venue-link">The Manor Village at Rocky Ridge</a></span><span class="sub">11:00 to 11:30 AM</span></div>
-        <div class="show-status">Recruiting</div>
-      </div>
-      <div class="show-row">
-        <div class="show-date">Sep 25</div>
-        <div class="show-venue"><span><a href="https://www.google.com/maps/search/?api=1&query=The+Scenic+Grande+Calgary" target="_blank" rel="noopener" class="venue-link">The Scenic Grande</a></span><span class="sub">3:30 to 4:00 PM</span></div>
-        <div class="show-status" style="color:var(--rose);">In talks</div>
-      </div>
-      <div class="show-row">
-        <div class="show-date">Oct 4</div>
-        <div class="show-venue"><span><a href="https://www.google.ca/maps/place/Rocky+Ridge+Retirement+Community/@51.1450751,-114.2428446,15.14z/data=!4m6!3m5!1s0x537169a3e5516725:0x31123f4cb0477da2!8m2!3d51.1437344!4d-114.2425842!16s%2Fg%2F1pp2x8s19?entry=ttu" target="_blank" rel="noopener" class="venue-link">Rocky Ridge Retirement Community</a></span><span class="sub">3:30 to 4:00 PM</span></div>
-        <div class="show-status" style="color:var(--rose);">In talks</div>
-      </div>
-      <div class="show-row">
-        <div class="show-date">Oct 11</div>
-        <div class="show-venue"><span><a href="https://www.google.com/maps/search/?api=1&query=The+Scenic+Grande+Calgary" target="_blank" rel="noopener" class="venue-link">The Scenic Grande</a></span><span class="sub">12:00 to 12:30 PM</span></div>
-        <div class="show-status" style="color:var(--rose);">In talks</div>
-      </div>
-    </div>
-<div class="calendar-view" id="calendarView" hidden>
-      <div class="cal-nav">
-        <button type="button" class="cal-nav-btn prev" id="calPrev" aria-label="Previous month">&larr; Prev</button>
-        <div class="cal-title" id="calTitle"></div>
-        <button type="button" class="cal-nav-btn next" id="calNext" aria-label="Next month">Next &rarr;</button>
-      </div>
-      <div class="cal-month" id="calMonth"></div>
-      <div class="cal-legend" id="calLegend"></div>
-    </div>
-    <p style="margin-top:30px;color:#5C6B7A;font-size:15px;">Want to perform at one of these? Join the roster. Every 4 hours earns a volunteer hour certificate, time at our build meetings counts toward the same total, and we can write a volunteer service letter on request.</p>
-    <div style="margin-top:24px;">
-      <a href="mailto:harmonyouthfoundation@gmail.com" class="btn btn-ghost-dark">Contact us</a>
-    </div>
-  </div>
-</section>
-
-<section style="padding-top:0;" id="past">
-  <div class="section-inner reveal">
-    <div class="tag">Past</div>
-
-    <div class="past-show">
-      <div class="past-show-photo carousel">
-        <img data-src="cambridgemanor-aug23-1.jpg" class="carousel-slide active" alt="August 23 performance at Cambridge Manor">
-        <img data-src="cambridgemanor-aug23-2.jpg" class="carousel-slide" alt="August 23 performance at Cambridge Manor">
-        <img data-src="cambridgemanor-aug23-3.jpg" class="carousel-slide" alt="August 23 performance at Cambridge Manor">
-        <img data-src="cambridgemanor-aug23-4.jpg" class="carousel-slide" alt="August 23 performance at Cambridge Manor">
-        <img data-src="cambridgemanor-aug23-5.jpg" class="carousel-slide" alt="August 23 performance at Cambridge Manor">
-        <img data-src="cambridgemanor-aug23-6.jpg" class="carousel-slide" alt="August 23 performance at Cambridge Manor">
-        <img data-src="cambridgemanor-aug23-7.jpg" class="carousel-slide" alt="August 23 performance at Cambridge Manor">
-        <img data-src="cambridgemanor-aug23-8.jpg" class="carousel-slide" alt="August 23 performance at Cambridge Manor">
-        <img data-src="cambridgemanor-aug23-9.jpg" class="carousel-slide" alt="August 23 performance at Cambridge Manor">
-        <img data-src="cambridgemanor-aug23-10.jpg" class="carousel-slide" alt="August 23 performance at Cambridge Manor">
-        <img data-src="cambridgemanor-aug23-11.jpg" class="carousel-slide" alt="August 23 performance at Cambridge Manor">
-        <img data-src="cambridgemanor-aug23-12.jpg" class="carousel-slide" alt="August 23 performance at Cambridge Manor">
-        <img data-src="cambridgemanor-aug23-13.jpg" class="carousel-slide" alt="August 23 performance at Cambridge Manor">
-        <img data-src="cambridgemanor-aug23-14.jpg" class="carousel-slide" alt="August 23 performance at Cambridge Manor">
-        <img data-src="cambridgemanor-aug23-15.jpg" class="carousel-slide" alt="August 23 performance at Cambridge Manor">
-        <img data-src="cambridgemanor-aug23-16.jpg" class="carousel-slide" alt="August 23 performance at Cambridge Manor">
-        <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span></div>
-      </div>
-      <div class="past-show-info">
-        <div class="show-venue"><span>Summer Performance</span><span class="sub"><a href="https://maps.app.goo.gl/MWeXHFbV7SmxMukz9" target="_blank" rel="noopener" class="venue-link">Cambridge Manor</a>, August 23</span></div>
-      </div>
-    </div>
-
-    <div class="past-show">
-      <div class="past-show-photo carousel">
-        <img data-src="scenicgrande-aug21-1.jpg" class="carousel-slide active" alt="August 21 performance at The Scenic Grande">
-        <img data-src="scenicgrande-aug21-2.jpg" class="carousel-slide" alt="August 21 performance at The Scenic Grande">
-        <img data-src="scenicgrande-aug21-3.jpg" class="carousel-slide" alt="August 21 performance at The Scenic Grande">
-        <img data-src="scenicgrande-aug21-4.jpg" class="carousel-slide" alt="August 21 performance at The Scenic Grande">
-        <img data-src="scenicgrande-aug21-5.jpg" class="carousel-slide" alt="August 21 performance at The Scenic Grande">
-        <img data-src="scenicgrande-aug21-6.jpg" class="carousel-slide" alt="August 21 performance at The Scenic Grande">
-        <img data-src="scenicgrande-aug21-7.jpg" class="carousel-slide" alt="August 21 performance at The Scenic Grande">
-        <img data-src="scenicgrande-aug21-8.jpg" class="carousel-slide" alt="August 21 performance at The Scenic Grande">
-        <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span></div>
-      </div>
-      <div class="past-show-info">
-        <div class="show-venue"><span>Summer Performance</span><span class="sub"><a href="https://www.google.com/maps/search/?api=1&query=The+Scenic+Grande+Calgary" target="_blank" rel="noopener" class="venue-link">The Scenic Grande</a>, August 21</span></div>
-      </div>
-    </div>
-
-    <div class="past-show">
-      <div class="past-show-photo carousel">
-        <img data-src="manorvillage-aug21-1.jpg" class="carousel-slide active" alt="August 21 performance at The Manor Village at Rocky Ridge">
-        <img data-src="manorvillage-aug21-2.jpg" class="carousel-slide" alt="August 21 performance at The Manor Village at Rocky Ridge">
-        <img data-src="manorvillage-aug21-3.jpg" class="carousel-slide" alt="August 21 performance at The Manor Village at Rocky Ridge">
-        <img data-src="manorvillage-aug21-4.jpg" class="carousel-slide" alt="August 21 performance at The Manor Village at Rocky Ridge">
-        <img data-src="manorvillage-aug21-5.jpg" class="carousel-slide" alt="August 21 performance at The Manor Village at Rocky Ridge">
-        <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span></div>
-      </div>
-      <div class="past-show-info">
-        <div class="show-venue"><span>Summer Performance</span><span class="sub"><a href="https://www.google.com/maps/search/?api=1&query=The+Manor+Village+at+Rocky+Ridge+Calgary" target="_blank" rel="noopener" class="venue-link">The Manor Village at Rocky Ridge</a>, August 21</span></div>
-      </div>
-    </div>
-
-    <div class="past-show">
-      <div class="past-show-photo carousel">
-        <img data-src="scenicgrande-aug7-1.jpg" class="carousel-slide active" alt="August 7 performance at The Scenic Grande">
-        <img data-src="scenicgrande-aug7-2.jpg" class="carousel-slide" alt="August 7 performance at The Scenic Grande">
-        <img data-src="scenicgrande-aug7-3.jpg" class="carousel-slide" alt="August 7 performance at The Scenic Grande">
-        <img data-src="scenicgrande-aug7-4.jpg" class="carousel-slide" alt="August 7 performance at The Scenic Grande">
-        <img data-src="scenicgrande-aug7-5.jpg" class="carousel-slide" alt="August 7 performance at The Scenic Grande">
-        <img data-src="scenicgrande-aug7-6.jpg" class="carousel-slide" alt="August 7 performance at The Scenic Grande">
-        <img data-src="scenicgrande-aug7-7.jpg" class="carousel-slide" alt="August 7 performance at The Scenic Grande">
-        <div class="carousel-dots">
-          <span class="carousel-dot active"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span>
-        </div>
-      </div>
-      <div class="past-show-info">
-        <div class="show-venue"><span>Summer Performance</span><span class="sub"><a href="https://www.google.com/maps/search/?api=1&query=The+Scenic+Grande+Calgary" target="_blank" rel="noopener" class="venue-link">The Scenic Grande</a>, August 7</span></div>
-      </div>
-    </div>
-
-    <div class="past-show">
-      <div class="past-show-photo carousel">
-        <img data-src="manorvillage-aug7-1.jpg" class="carousel-slide active" alt="August 7 performance at The Manor Village at Rocky Ridge">
-        <img data-src="manorvillage-aug7-2.jpg" class="carousel-slide" alt="August 7 performance at The Manor Village at Rocky Ridge">
-        <img data-src="manorvillage-aug7-3.jpg" class="carousel-slide" alt="August 7 performance at The Manor Village at Rocky Ridge">
-        <img data-src="manorvillage-aug7-4.jpg" class="carousel-slide" alt="August 7 performance at The Manor Village at Rocky Ridge">
-        <img data-src="manorvillage-aug7-5.jpg" class="carousel-slide" alt="August 7 performance at The Manor Village at Rocky Ridge">
-        <img data-src="manorvillage-aug7-6.jpg" class="carousel-slide" alt="August 7 performance at The Manor Village at Rocky Ridge">
-        <div class="carousel-dots">
-          <span class="carousel-dot active"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span>
-        </div>
-      </div>
-      <div class="past-show-info">
-        <div class="show-venue"><span>Summer Performance</span><span class="sub"><a href="https://www.google.com/maps/search/?api=1&query=The+Manor+Village+at+Rocky+Ridge+Calgary" target="_blank" rel="noopener" class="venue-link">The Manor Village at Rocky Ridge</a>, August 7</span></div>
-      </div>
-    </div>
-
-    <div class="past-show">
-      <div class="past-show-photo carousel">
-        <img data-src="rockyridge-aug1-1.jpg" class="carousel-slide active" alt="August 1 performance at Rocky Ridge Retirement Community">
-        <img data-src="rockyridge-aug1-2.jpg" class="carousel-slide" alt="August 1 performance at Rocky Ridge Retirement Community">
-        <img data-src="rockyridge-aug1-3.jpg" class="carousel-slide" alt="August 1 performance at Rocky Ridge Retirement Community">
-        <img data-src="rockyridge-aug1-4.jpg" class="carousel-slide" alt="August 1 performance at Rocky Ridge Retirement Community">
-        <img data-src="rockyridge-aug1-5.jpg" class="carousel-slide" alt="August 1 performance at Rocky Ridge Retirement Community">
-        <img data-src="rockyridge-aug1-6.jpg" class="carousel-slide" alt="August 1 performance at Rocky Ridge Retirement Community">
-        <img data-src="rockyridge-aug1-7.jpg" class="carousel-slide" alt="August 1 performance at Rocky Ridge Retirement Community">
-        <img data-src="rockyridge-aug1-8.jpg" class="carousel-slide" alt="August 1 performance at Rocky Ridge Retirement Community">
-        <img data-src="rockyridge-aug1-9.jpg" class="carousel-slide" alt="August 1 performance at Rocky Ridge Retirement Community">
-        <img data-src="rockyridge-aug1-10.jpg" class="carousel-slide" alt="August 1 performance at Rocky Ridge Retirement Community">
-        <img data-src="rockyridge-aug1-11.jpg" class="carousel-slide" alt="August 1 performance at Rocky Ridge Retirement Community">
-        <img data-src="rockyridge-aug1-12.jpg" class="carousel-slide" alt="August 1 performance at Rocky Ridge Retirement Community">
-        <img data-src="rockyridge-aug1-13.jpg" class="carousel-slide" alt="August 1 performance at Rocky Ridge Retirement Community">
-        <img data-src="rockyridge-aug1-14.jpg" class="carousel-slide" alt="August 1 performance at Rocky Ridge Retirement Community">
-        <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span></div>
-      </div>
-      <div class="past-show-info">
-        <div class="show-venue"><span>Summer Performance</span><span class="sub"><a href="https://www.google.ca/maps/place/Rocky+Ridge+Retirement+Community/@51.1450751,-114.2428446,15.14z/data=!4m6!3m5!1s0x537169a3e5516725:0x31123f4cb0477da2!8m2!3d51.1437344!4d-114.2425842!16s%2Fg%2F1pp2x8s19?entry=ttu" target="_blank" rel="noopener" class="venue-link">Rocky Ridge Retirement Community</a>, August 1</span></div>
-      </div>
-    </div>
-
-
-    <div class="past-show">
-      <div class="past-show-photo carousel">
-        <img data-src="scenicgrande-jul24-1.jpg" class="carousel-slide active" alt="July 24 performance at The Scenic Grande">
-        <img data-src="scenicgrande-jul24-2.jpg" class="carousel-slide" alt="July 24 performance at The Scenic Grande">
-        <img data-src="scenicgrande-jul24-3.jpg" class="carousel-slide" alt="July 24 performance at The Scenic Grande">
-        <img data-src="scenicgrande-jul24-4.jpg" class="carousel-slide" alt="July 24 performance at The Scenic Grande">
-        <img data-src="scenicgrande-jul24-5.jpg" class="carousel-slide" alt="July 24 performance at The Scenic Grande">
-        <img data-src="scenicgrande-jul24-6.jpg" class="carousel-slide" alt="July 24 performance at The Scenic Grande">
-        <img data-src="scenicgrande-jul24-7.jpg" class="carousel-slide" alt="July 24 performance at The Scenic Grande">
-        <img data-src="scenicgrande-jul24-8.jpg" class="carousel-slide" alt="July 24 performance at The Scenic Grande">
-        <img data-src="scenicgrande-jul24-9.jpg" class="carousel-slide" alt="July 24 performance at The Scenic Grande">
-        <img data-src="scenicgrande-jul24-10.jpg" class="carousel-slide" alt="July 24 performance at The Scenic Grande">
-        <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span></div>
-      </div>
-      <div class="past-show-info">
-        <div class="show-venue"><span>Summer Performance</span><span class="sub"><a href="https://www.google.com/maps/search/?api=1&query=The+Scenic+Grande+Calgary" target="_blank" rel="noopener" class="venue-link">The Scenic Grande</a>, July 24</span></div>
-      </div>
-    </div>
-
-
-    <div class="past-show">
-      <div class="past-show-photo carousel">
-        <img data-src="scenicgrande-jul10-1.jpg" class="carousel-slide active" alt="July 10 performance at The Scenic Grande">
-        <img data-src="scenicgrande-jul10-2.jpg" class="carousel-slide" alt="July 10 performance at The Scenic Grande">
-        <img data-src="scenicgrande-jul10-3.jpg" class="carousel-slide" alt="July 10 performance at The Scenic Grande">
-        <img data-src="scenicgrande-jul10-4.jpg" class="carousel-slide" alt="July 10 performance at The Scenic Grande">
-        <img data-src="scenicgrande-jul10-5.jpg" class="carousel-slide" alt="July 10 performance at The Scenic Grande">
-        <img data-src="scenicgrande-jul10-6.jpg" class="carousel-slide" alt="July 10 performance at The Scenic Grande">
-        <img data-src="scenicgrande-jul10-7.jpg" class="carousel-slide" alt="July 10 performance at The Scenic Grande">
-        <img data-src="scenicgrande-jul10-8.jpg" class="carousel-slide" alt="July 10 performance at The Scenic Grande">
-        <img data-src="scenicgrande-jul10-9.jpg" class="carousel-slide" alt="July 10 performance at The Scenic Grande">
-        <img data-src="scenicgrande-jul10-10.jpg" class="carousel-slide" alt="July 10 performance at The Scenic Grande">
-        <img data-src="scenicgrande-jul10-11.jpg" class="carousel-slide" alt="July 10 performance at The Scenic Grande">
-        <img data-src="scenicgrande-jul10-12.jpg" class="carousel-slide" alt="July 10 performance at The Scenic Grande">
-        <img data-src="scenicgrande-jul10-13.jpg" class="carousel-slide" alt="July 10 performance at The Scenic Grande">
-        <div class="carousel-dots">
-          <span class="carousel-dot active"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span>
-        </div>
-      </div>
-      <div class="past-show-info">
-        <div class="show-venue"><span>Summer Performance</span><span class="sub"><a href="https://www.google.com/maps/search/?api=1&query=The+Scenic+Grande+Calgary" target="_blank" rel="noopener" class="venue-link">The Scenic Grande</a>, July 10</span></div>
-      </div>
-    </div>
-
-    <div class="past-show">
-      <div class="past-show-photo carousel">
-        <img data-src="rockyridge-jul10-1.jpg" class="carousel-slide active" alt="July 10 performance at The Manor Village at Rocky Ridge">
-        <img data-src="rockyridge-jul10-2.jpg" class="carousel-slide" alt="July 10 performance at The Manor Village at Rocky Ridge">
-        <img data-src="rockyridge-jul10-3.jpg" class="carousel-slide" alt="July 10 performance at The Manor Village at Rocky Ridge">
-        <img data-src="rockyridge-jul10-4.jpg" class="carousel-slide" alt="July 10 performance at The Manor Village at Rocky Ridge">
-        <div class="carousel-dots">
-          <span class="carousel-dot active"></span><span class="carousel-dot"></span><span class="carousel-dot"></span><span class="carousel-dot"></span>
-        </div>
-      </div>
-      <div class="past-show-info">
-        <div class="show-venue"><span>Summer Performance</span><span class="sub"><a href="https://www.google.com/maps/search/?api=1&query=The+Manor+Village+at+Rocky+Ridge+Calgary" target="_blank" rel="noopener" class="venue-link">The Manor Village at Rocky Ridge</a>, July 10</span></div>
-      </div>
-    </div>
-
-    <div class="past-show">
-      <div class="past-show-photo carousel">
-        <img data-src="scenic-grande-recital.jpg" class="carousel-slide active" alt="A performance at The Scenic Grande, December 2025">
-        <img data-src="recital-photo-2.jpg" class="carousel-slide" alt="Adam performing piano at the 2025 Christmas recital">
-        <img data-src="recital-photo-3.jpg" class="carousel-slide" alt="Hanry performing clarinet at the 2025 Christmas recital">
-        <div class="carousel-dots">
-          <span class="carousel-dot active"></span>
-          <span class="carousel-dot"></span>
-          <span class="carousel-dot"></span>
-        </div>
-      </div>
-      <div class="past-show-info">
-        <div class="show-venue"><span>2025 Christmas Recital</span><span class="sub"><a href="https://www.google.com/maps/search/?api=1&query=The+Scenic+Grande+Calgary" target="_blank" rel="noopener" class="venue-link">The Scenic Grande</a>, December 27</span></div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<footer>
-  <div class="footer-grid">
-    <div class="footer-brand"><img src="harmonyouth-logo.png" alt="HarmonYouth Foundation" class="footer-logo-img"><span class="footer-brand-name">HarmonYouth Foundation</span></div>
-    <div class="footer-links">
-      <a href="mission.html">Mission</a>
-      <a href="team.html">Meet the team</a>
-      <a href="build-meets.html">Build meets</a>
-      <a href="get-involved.html">Get involved</a>
-    </div>
-  </div>
-  <div class="footer-contact">
-    <button class="contact-toggle" type="button">Contact us</button>
-    <span class="contact-email" hidden><a href="mailto:harmonyouthfoundation@gmail.com">harmonyouthfoundation@gmail.com</a> &nbsp;|&nbsp; <a href="tel:+14039266122">(403) 926-6122</a></span>
-  </div>
-  <div class="footer-social">
-    <a href="https://instagram.com/harmonyouthfoundation" target="_blank" rel="noopener">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor"/></svg>
-      Follow us on Instagram @harmonyouthfoundation
+<body data-page="performances.html">
+<a class="skip" href="#main">Skip to content</a>
+<canvas data-cursor class="hy-cursor" aria-hidden="true"></canvas>
+<svg class="hy-filter-defs" aria-hidden="true"><defs><filter id="hy-glass" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.05 0.05" numOctaves="1" seed="1" result="t"/><feGaussianBlur in="t" stdDeviation="2" result="bt"/><feDisplacementMap in="SourceGraphic" in2="bt" scale="55" xChannelSelector="R" yChannelSelector="B" result="d"/><feGaussianBlur in="d" stdDeviation="3"/></filter></defs></svg>
+<div class="hy-grain" aria-hidden="true"></div>
+<div class="hy-progress" aria-hidden="true"><i data-progress></i></div>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="brand">
+      <span class="ring"></span><span class="blur" data-glass></span>
+      <img src="harmonyouth-logo.png" alt="HarmonYouth Foundation">
+      <span class="word">HarmonYouth</span>
     </a>
+    <div class="header-actions">
+      <button type="button" data-theme-toggle class="icon-btn" aria-label="Switch colour mode">
+        <span class="ring"></span><span class="blur" data-glass></span>
+        <span class="ico" data-theme-icon></span>
+      </button>
+      <div class="menu-wrap">
+        <button type="button" data-menu-toggle class="menu-btn" aria-expanded="false" aria-haspopup="true">
+          <span class="ring"></span><span class="blur" data-glass></span>
+          <span>Menu</span>
+          <span class="menu-bars" data-menu-bars><i></i><i></i></span>
+        </button>
+        <div data-menu-panel class="menu-panel" role="menu">
+          <form data-search-form class="menu-search" role="search">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.7"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            <span class="field">
+              <input data-search-input type="text" autocomplete="off" aria-label="Search the site">
+              <span data-search-ph class="ph"></span>
+            </span>
+            <kbd>&crarr;</kbd>
+          </form>
+          <div data-search-result class="search-result"></div>
+          <div class="menu-links" role="none"><a href="index.html" data-navlink class="navlink" role="menuitem"><span class="nl-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M4 11l8-6.5 8 6.5V20a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span><span class="nl-label">Home</span><i class="navline"></i></a><a href="mission.html" data-navlink class="navlink" role="menuitem"><span class="nl-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 20.5S4.5 16 4.5 10.2A4.2 4.2 0 0 1 12 7.6a4.2 4.2 0 0 1 7.5 2.6c0 5.8-7.5 10.3-7.5 10.3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span><span class="nl-label">Mission</span><i class="navline"></i></a><a href="programs.html" data-navlink class="navlink" role="menuitem"><span class="nl-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="7.5" cy="17.5" r="2.8" stroke="currentColor" stroke-width="1.6"/><circle cx="17" cy="15.5" r="2.8" stroke="currentColor" stroke-width="1.6"/><path d="M10.3 17.5V5l9.5-2v12.5" stroke="currentColor" stroke-width="1.6"/></svg></span><span class="nl-label">Programs</span><i class="navline"></i></a><a href="performances.html" data-navlink class="navlink spread" role="menuitem"><span class="nl-left"><span class="nl-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3.5" y="5" width="17" height="15.5" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 9.5h17M8.5 3v4M15.5 3v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span class="nl-label">Performances</span></span><span class="nl-tag">2 NEXT</span><i class="navline"></i></a><a href="photos.html" data-navlink class="navlink" role="menuitem"><span class="nl-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3.5" y="5" width="17" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M6 16l4-4.5 3.5 3.5L16 12l2.5 3" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="15" cy="9" r="1.3" fill="currentColor"/></svg></span><span class="nl-label">Photos</span><i class="navline"></i></a><a href="build-meets.html" data-navlink class="navlink" role="menuitem"><span class="nl-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M14.7 6.3a3.9 3.9 0 0 0 5 5L15 16l-3.5 3.5a2 2 0 0 1-2.8-2.8L12 13 7.6 8.6a3.9 3.9 0 0 1-1.3-4.4l3 3 2-2-3-3a3.9 3.9 0 0 1 4.4 1.3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></span><span class="nl-label">Build meets</span><i class="navline"></i></a><a href="team.html" data-navlink class="navlink" role="menuitem"><span class="nl-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="8.5" r="3" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 19.5c0-3 2.4-5 5.5-5s5.5 2 5.5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M16 6.2a3 3 0 0 1 0 5.6M17.5 19.5c0-2.2-.8-3.9-2.2-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span class="nl-label">Meet the team</span><i class="navline"></i></a><a href="get-involved.html" data-navlink class="navlink" role="menuitem"><span class="nl-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="8" r="3.2" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 20c0-3.3 2.5-5.5 5.5-5.5s5.5 2.2 5.5 5.5M17 6.5v6M14 9.5h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span class="nl-label">Get involved</span><i class="navline"></i></a><a href="donate.html" data-navlink class="navlink" role="menuitem"><span class="nl-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 20.5S4 15.5 4 10.5C4 7.5 6 6 8 6c1.6 0 3 1 4 2.4C13 7 14.4 6 16 6c2 0 4 1.5 4 4.5 0 5-8 10-8 10Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span><span class="nl-label">Donate</span><i class="navline"></i></a></div>
+          <div class="menu-rule"></div>
+          <div class="menu-notes">
+            <div class="menu-note">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="9" r="5.5" stroke="currentColor" stroke-width="1.6"/><path d="M8.6 13.6 7.2 21l4.8-2.8 4.8 2.8-1.4-7.4" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+              <div><div class="t">Volunteer hours</div><div class="d">A certificate every 4 hours &mdash; performing or building both count.</div></div>
+            </div>
+            <a href="mailto:harmonyouthfoundation@gmail.com?subject=Volunteer%20Service%20Letter%20Request" class="menu-note">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="3.5" y="5" width="17" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+              <div><div class="t">Volunteer Service Letter Request</div><div class="d">Request one at any performance, or email us &mdash; we write them same week.</div></div>
+            </a>
+          </div>
+          <div class="menu-rule"></div>
+          <div class="menu-cta">
+            <a href="donate.html" class="btn btn-accent" ><span class="ring"></span><span class="btn-label">Donate</span></a>
+            <a href="https://instagram.com/harmonyouthfoundation" target="_blank" rel="noopener" class="menu-ig" aria-label="Instagram">
+              <span class="ring"></span><span class="blur" data-glass></span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="footer-fine">We play music. We build devices. We show up for people. &mdash; HarmonYouth Foundation. Calgary, AB. Started and run by students.</div>
+</header>
+<main id="main"><section class="page-head">
+  <div class="glow" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="eyebrow">Performances</div>
+    <h1 class="display display-lg">Next two shows, and everything we&rsquo;ve played</h1>
+    <p class="lede">We aim for at least two performances a month across four homes in northwest Calgary. Dates are confirmed with the home first, then opened to the roster.</p>
+  </div>
+</section>
+<section class="sec-tight"><div class="wrap"><div class="detail-grid"><article class="detail" data-reveal><div class="detail-top"><span class="card-tag">Up next</span><span class="show-status talks">In talks</span></div><h3><a href="https://www.google.com/maps/search/?api=1&amp;query=The+Scenic+Grande+Calgary" target="_blank" rel="noopener" class="venue-link">The Scenic Grande</a></h3><dl><dt>Date</dt><dd>Saturday, September 6</dd><dt>Time</dt><dd>12:00 &ndash; 12:30 PM</dd><dt>Where</dt><dd>NW Calgary</dd><dt>Lineup</dt><dd>Being confirmed</dd></dl><div class="note">Our third visit to the Grande. Piano is in the main lounge; strings and voice work well in that room.</div></article><article class="detail" data-reveal><div class="detail-top"><span class="card-tag">Then</span><span class="show-status ">Recruiting</span></div><h3><a href="https://www.google.com/maps/search/?api=1&amp;query=The+Manor+Village+at+Rocky+Ridge+Calgary" target="_blank" rel="noopener" class="venue-link">Manor Village at Rocky Ridge</a></h3><dl><dt>Date</dt><dd>Saturday, September 13</dd><dt>Time</dt><dd>11:00 &ndash; 11:30 AM</dd><dt>Where</dt><dd>Rocky Ridge, NW</dd><dt>Spots</dt><dd>Open</dd></dl><div class="note">Third booking here since August. Upright piano on site, so pianists don&rsquo;t need to bring anything.</div></article></div><div class="btn-row"><a href="get-involved.html#perform" class="btn btn-accent" ><span class="ring"></span><span class="btn-label">Ask for a spot</span></a></div></div></section><section class="sec sec-alt"><div class="wrap"><div class="sec-head" data-reveal><div class="eyebrow">Schedule</div><h2 class="display">Everything on the calendar</h2><p class="lede">Switch to the calendar view to see the whole month at a glance. Hover a chip for the venue and time.</p></div><div style="margin-top:40px"><div data-schedule>
+  <div class="view-toggle" data-view-toggle>
+    <span class="ring"></span>
+    <button type="button" class="on" data-show="list">List</button>
+    <button type="button" data-show="calendar">Calendar</button>
+  </div>
+  <div class="panel" data-view="list" style="margin-top:22px"><div class="show-row"><div class="show-date">Sep 6</div><div class="show-venue"><span class="name"><a href="https://www.google.com/maps/search/?api=1&amp;query=The+Scenic+Grande+Calgary" target="_blank" rel="noopener" class="venue-link">The Scenic Grande</a></span><span class="sub">12:00 to 12:30 PM &middot; NW Calgary</span></div><div class="show-status talks">In talks</div></div><div class="show-row"><div class="show-date">Sep 13</div><div class="show-venue"><span class="name"><a href="https://www.google.com/maps/search/?api=1&amp;query=The+Manor+Village+at+Rocky+Ridge+Calgary" target="_blank" rel="noopener" class="venue-link">The Manor Village at Rocky Ridge</a></span><span class="sub">11:00 to 11:30 AM</span></div><div class="show-status ">Recruiting</div></div><div class="show-row"><div class="show-date">Sep 25</div><div class="show-venue"><span class="name"><a href="https://www.google.com/maps/search/?api=1&amp;query=The+Scenic+Grande+Calgary" target="_blank" rel="noopener" class="venue-link">The Scenic Grande</a></span><span class="sub">3:30 to 4:00 PM</span></div><div class="show-status talks">In talks</div></div><div class="show-row"><div class="show-date">Oct 4</div><div class="show-venue"><span class="name"><a href="https://www.google.ca/maps/place/Rocky+Ridge+Retirement+Community/@51.1450751,-114.2428446,15.14z/data=!4m6!3m5!1s0x537169a3e5516725:0x31123f4cb0477da2!8m2!3d51.1437344!4d-114.2425842!16s%2Fg%2F1pp2x8s19?entry=ttu" target="_blank" rel="noopener" class="venue-link">Rocky Ridge Retirement Community</a></span><span class="sub">3:30 to 4:00 PM</span></div><div class="show-status talks">In talks</div></div><div class="show-row"><div class="show-date">Oct 11</div><div class="show-venue"><span class="name"><a href="https://www.google.com/maps/search/?api=1&amp;query=The+Scenic+Grande+Calgary" target="_blank" rel="noopener" class="venue-link">The Scenic Grande</a></span><span class="sub">12:00 to 12:30 PM</span></div><div class="show-status talks">In talks</div></div></div>
+  <div class="calendar" data-view="calendar" hidden>
+    <div class="cal-nav">
+      <button type="button" class="cal-nav-btn prev" aria-label="Previous month"><span class="ring"></span>&larr; Prev</button>
+      <div class="cal-title"></div>
+      <button type="button" class="cal-nav-btn next" aria-label="Next month"><span class="ring"></span>Next &rarr;</button>
+    </div>
+    <div class="cal-month" id="perfCalMonth"></div>
+    <div class="cal-legend"></div>
+  </div>
+</div></div><p class="lede" style="margin-top:30px">Want to perform at one of these? Join the roster. Every 4 hours earns a volunteer hour certificate, time at our build meetings counts toward the same total, and we can write a volunteer service letter on request.</p><div class="btn-row"><a href="get-involved.html#perform" class="btn btn-accent" ><span class="ring"></span><span class="btn-label">Join the roster</span></a> <a href="mailto:harmonyouthfoundation@gmail.com" class="btn" ><span class="ring"></span><span class="blur"></span><span class="btn-label">Contact us</span></a></div></div></section><section class="sec"><div class="wrap"><div class="split" data-reveal><div class="sec-head"><div class="eyebrow">Played</div><h2 class="display">Every show so far</h2></div><div class="btn-row" style="margin-top:0"><a href="photos.html" class="btn" ><span class="ring"></span><span class="blur"></span><span class="btn-label">See the photos</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div></div><div class="panel" data-reveal style="margin-top:40px"><div class="show-row"><div class="show-date">Aug 30</div><div class="show-venue"><span class="name"><a href="https://maps.app.goo.gl/SzijnYmnxBW7Qwvx6" target="_blank" rel="noopener" class="venue-link">Boardwalk Retirement Community</a></span><span class="sub">Summer Performance &middot; piano, strings, voice</span></div><div class="show-status "><a href="photos.html#boardwalk-aug-30" class="venue-link">Photos</a></div></div><div class="show-row"><div class="show-date">Aug 23</div><div class="show-venue"><span class="name"><a href="https://maps.app.goo.gl/MWeXHFbV7SmxMukz9" target="_blank" rel="noopener" class="venue-link">Cambridge Manor</a></span><span class="sub">Summer Performance &middot; largest lineup yet</span></div><div class="show-status "><a href="photos.html#cambridge-manor" class="venue-link">Photos</a></div></div><div class="show-row"><div class="show-date">Aug 21</div><div class="show-venue"><span class="name"><a href="https://www.google.com/maps/search/?api=1&amp;query=The+Scenic+Grande+Calgary" target="_blank" rel="noopener" class="venue-link">The Scenic Grande</a></span><span class="sub">Summer Performance &middot; piano, strings, voice</span></div><div class="show-status "><a href="photos.html#the-scenic-grande-aug-21" class="venue-link">Photos</a></div></div><div class="show-row"><div class="show-date">Aug 21</div><div class="show-venue"><span class="name"><a href="https://www.google.com/maps/search/?api=1&amp;query=The+Manor+Village+at+Rocky+Ridge+Calgary" target="_blank" rel="noopener" class="venue-link">The Manor Village at Rocky Ridge</a></span><span class="sub">Four pianists played for the residents</span></div><div class="show-status "><a href="photos.html#manor-village-aug-21" class="venue-link">Photos</a></div></div><div class="show-row"><div class="show-date">Aug 7</div><div class="show-venue"><span class="name"><a href="https://www.google.com/maps/search/?api=1&amp;query=The+Scenic+Grande+Calgary" target="_blank" rel="noopener" class="venue-link">The Scenic Grande</a></span><span class="sub">Afternoon set in the lounge</span></div><div class="show-status "><a href="photos.html#the-scenic-grande-aug-7" class="venue-link">Photos</a></div></div><div class="show-row"><div class="show-date">Aug 7</div><div class="show-venue"><span class="name"><a href="https://www.google.com/maps/search/?api=1&amp;query=The+Manor+Village+at+Rocky+Ridge+Calgary" target="_blank" rel="noopener" class="venue-link">The Manor Village at Rocky Ridge</a></span><span class="sub">Afternoon set in the common room</span></div><div class="show-status "><a href="photos.html#manor-village-aug-7" class="venue-link">Photos</a></div></div><div class="show-row"><div class="show-date">Aug 1</div><div class="show-venue"><span class="name"><a href="https://www.google.ca/maps/place/Rocky+Ridge+Retirement+Community/@51.1450751,-114.2428446,15.14z/data=!4m6!3m5!1s0x537169a3e5516725:0x31123f4cb0477da2!8m2!3d51.1437344!4d-114.2425842!16s%2Fg%2F1pp2x8s19?entry=ttu" target="_blank" rel="noopener" class="venue-link">Rocky Ridge Retirement Community</a></span><span class="sub">First visit &middot; booked a return the same day</span></div><div class="show-status "><a href="photos.html#rocky-ridge-aug-1" class="venue-link">Photos</a></div></div><div class="show-row"><div class="show-date">Jul 24</div><div class="show-venue"><span class="name"><a href="https://www.google.com/maps/search/?api=1&amp;query=The+Scenic+Grande+Calgary" target="_blank" rel="noopener" class="venue-link">The Scenic Grande</a></span><span class="sub">Summer Performance</span></div><div class="show-status "><a href="photos.html#the-scenic-grande-jul-24" class="venue-link">Photos</a></div></div><div class="show-row"><div class="show-date">Jul 10</div><div class="show-venue"><span class="name"><a href="https://www.google.com/maps/search/?api=1&amp;query=The+Scenic+Grande+Calgary" target="_blank" rel="noopener" class="venue-link">The Scenic Grande</a></span><span class="sub">Summer Performance</span></div><div class="show-status "><a href="photos.html#the-scenic-grande-jul-10" class="venue-link">Photos</a></div></div><div class="show-row"><div class="show-date">Jul 10</div><div class="show-venue"><span class="name"><a href="https://www.google.ca/maps/place/Rocky+Ridge+Retirement+Community/@51.1450751,-114.2428446,15.14z/data=!4m6!3m5!1s0x537169a3e5516725:0x31123f4cb0477da2!8m2!3d51.1437344!4d-114.2425842!16s%2Fg%2F1pp2x8s19?entry=ttu" target="_blank" rel="noopener" class="venue-link">Rocky Ridge Retirement Community</a></span><span class="sub">Summer Performance</span></div><div class="show-status "><a href="photos.html#rocky-ridge-jul-10" class="venue-link">Photos</a></div></div><div class="show-row"><div class="show-date">Dec 27</div><div class="show-venue"><span class="name"><a href="https://www.google.com/maps/search/?api=1&amp;query=The+Scenic+Grande+Calgary" target="_blank" rel="noopener" class="venue-link">The Scenic Grande</a></span><span class="sub">2025 Christmas Recital</span></div><div class="show-status "><a href="photos.html#christmas-recital" class="venue-link">Photos</a></div></div></div></div></section><section class="sec sec-alt"><div class="wrap"><div class="sec-head" data-reveal><div class="eyebrow">Venues</div><h2 class="display">Four homes on the roster</h2></div><div class="venue-grid"><div class="venue" data-reveal><h3><a href="https://maps.app.goo.gl/MWeXHFbV7SmxMukz9" target="_blank" rel="noopener" class="venue-link">Cambridge Manor</a></h3><p>University District. Large common room, grand piano available.</p></div><div class="venue" data-reveal><h3><a href="https://www.google.com/maps/search/?api=1&amp;query=The+Scenic+Grande+Calgary" target="_blank" rel="noopener" class="venue-link">The Scenic Grande</a></h3><p>NW Calgary. Lounge performances, good acoustics for strings.</p></div><div class="venue" data-reveal><h3><a href="https://www.google.com/maps/search/?api=1&amp;query=The+Manor+Village+at+Rocky+Ridge+Calgary" target="_blank" rel="noopener" class="venue-link">Manor Village, Rocky Ridge</a></h3><p>Upright piano on site. Our most frequent booking.</p></div><div class="venue" data-reveal><h3><a href="https://www.google.ca/maps/place/Rocky+Ridge+Retirement+Community/@51.1450751,-114.2428446,15.14z/data=!4m6!3m5!1s0x537169a3e5516725:0x31123f4cb0477da2!8m2!3d51.1437344!4d-114.2425842!16s%2Fg%2F1pp2x8s19?entry=ttu" target="_blank" rel="noopener" class="venue-link">Rocky Ridge Retirement</a></h3><p>Where we played our first show. Returning this autumn.</p></div></div><div class="callout" data-reveal><h2 class="display" style="margin-top:0">Run a care home? We&rsquo;ll come to you.</h2><p>All we need is a common room and a piano, or space for one. We handle the lineup, the programme, and the setup. No cost to the home.</p><div class="btn-row" style="justify-content:center"><a href="mailto:harmonyouthfoundation@gmail.com?subject=Booking%20a%20performance" class="btn btn-accent" ><span class="ring"></span><span class="btn-label">Book a performance</span></a></div></div></div></section></main><footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><img src="harmonyouth-logo.png" alt="HarmonYouth Foundation"><span>HarmonYouth Foundation</span></div>
+        <p class="footer-note">Calgary, AB. Started and run by students.</p>
+      </div>
+      <div class="footer-col">
+        <div class="h">Pages</div>
+        <a href="index.html">Home</a><a href="mission.html">Mission</a><a href="programs.html">Programs</a>
+        <a href="performances.html">Performances</a><a href="photos.html">Photos</a>
+        <a href="build-meets.html">Build meets</a><a href="team.html">Meet the team</a>
+      </div>
+      <div class="footer-col">
+        <div class="h">Elsewhere</div>
+        <a href="https://instagram.com/harmonyouthfoundation" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.makersmakingchange.com/" target="_blank" rel="noopener">Makers Making Change</a>
+        <a href="https://www.gofundme.com/f/help-harmonyouth-foundation-bring-music-to-seniors" target="_blank" rel="noopener">GoFundMe</a>
+        <a href="get-involved.html">Get involved</a>
+        <a href="privacy.html">Privacy policy</a>
+      </div>
+      <div class="footer-col">
+        <div class="h">Contact</div>
+        <a href="mailto:harmonyouthfoundation@gmail.com">harmonyouthfoundation@gmail.com</a>
+        <a href="tel:+14039266122">(403) 926-6122</a>
+        <a href="donate.html">Donate</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 HarmonYouth Foundation. All donations passed on in full.</span>
+      <span class="slogan">We play music. We build devices. We show up for people.</span>
+    </div>
+  </div>
 </footer>
-
-<div class="scroll-piano" id="scrollPiano"></div>
-<script src="script.js"></script>
 </body>
 </html>
