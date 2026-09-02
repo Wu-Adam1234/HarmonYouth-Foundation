@@ -49,8 +49,8 @@
       '2026-08-21': [['SG', 'past', '2:00 to 2:30 PM'], ['MV', 'past', '1:00 to 1:30 PM']],
       '2026-08-23': [['CM', 'past', '2:00 to 2:45 PM']],
       '2026-08-30': [['BW', 'past', '2:00 to 2:30 PM']],
-      '2026-09-06': [['SG', 'talks', '12:00 to 12:30 PM']],
-      '2026-09-13': [['MV', 'recruiting', '11:00 to 11:30 AM']],
+      '2026-09-06': [['SG', 'full', '12:00 to 12:30 PM']],
+      '2026-09-13': [['MV', 'recruiting', '11:30 AM to 12:00 PM']],
       '2026-09-25': [['SG', 'talks', '3:30 to 4:00 PM']],
       '2026-10-04': [['RR', 'talks', '3:30 to 4:00 PM']],
       '2026-10-11': [['SG', 'talks', '12:00 to 12:30 PM']]
@@ -366,7 +366,7 @@
       var color = el.querySelector('[data-piano-color]');
       if (!color) return;
       function setSpot(x, y) {
-        var m = 'radial-gradient(circle 170px at ' + x + 'px ' + y + 'px, #000 0%, #000 55%, transparent 100%)';
+        var m = 'radial-gradient(circle 260px at ' + x + 'px ' + y + 'px, #000 0%, #000 55%, transparent 100%)';
         color.style.webkitMaskImage = m;
         color.style.maskImage = m;
       }
@@ -484,19 +484,12 @@
   function initGoFundMe() {
     var host = $('[data-gfm-host]');
     if (!host) return;
-    if (!document.querySelector('script[data-gfm-embed]')) {
-      var s = document.createElement('script');
-      s.defer = true;
-      s.setAttribute('data-gfm-embed', '1');
-      s.src = 'https://www.gofundme.com/static/js/embed.js';
-      document.body.appendChild(s);
-    }
     var fallback = host.querySelector('[data-gfm-fallback]');
     var tries = 0;
     var timer = setInterval(function () {
       tries += 1;
       if (host.querySelector('iframe')) { if (fallback) fallback.style.display = 'none'; clearInterval(timer); }
-      else if (tries > 20) clearInterval(timer);
+      else if (tries > 30) clearInterval(timer);
     }, 500);
   }
 
