@@ -8,7 +8,7 @@ The redesign, built for real. Everything about how the site works and how to upd
 
 **Where the files are on this Mac**
 - Working folder: `~/Documents/harmonyouth-website/` — edit here
-- Zipped copy: `~/Documents/harmonyouth-website.zip` — 33MB, 125 files, for backup or sharing
+- Zipped copy: `~/Documents/harmonyouth-website.zip` — 34MB, 126 files, for backup or sharing
 
 The zip is a snapshot, not the working copy. If you edit the folder, re-zip it (right-click the
 folder → Compress) or the zip goes stale. **You cannot upload the zip to GitHub and have it
@@ -37,7 +37,7 @@ This is **path 2 from section 13 of the old guide: the full rebuild.** The Claud
 
 | Page | File | What's on it |
 |------|------|--------------|
-| Home | `index.html` | Scroll-driven hero, stat strip, "How a show runs" 01/02/03, Programs accordion, MUSIC FOR EVERYONE headline, next/last shows, three photo carousels, FAQ accordion, donate block |
+| Home | `index.html` | Scroll-driven hero, stat strip, "How a show runs" 01/02/03, Programs accordion, piano spotlight illustration, next/last shows, three photo carousels, FAQ accordion, donate block |
 | Mission | `mission.html` | Why the org exists, three principles, the three founders in brief, "what we measure" stats |
 | Programs | `programs.html` | Program 01 (music) and Program 02 (Build) in full, the 00:00→00:35 set timeline, practical-questions accordion |
 | Performances | `performances.html` | The next two shows as detail cards, full schedule with List/Calendar toggle, every show played, the four venues, booking panel |
@@ -129,12 +129,12 @@ Each card looks like this:
         data-cat="Venue · Sep 6" data-title="Short caption"
         data-body="The longer caption shown in the lightbox.">
   <img data-src="scenicgrande-sep6-1.jpg" alt="Description of the photo">
-  <span class="veil"></span>
-  <span class="cap"><span class="k">Venue · Sep 6</span><span class="t">Short caption</span></span>
 </button>
 ```
 
 **Use `data-src`, not `src`.** That's what makes photos load lazily — `site.js` only downloads them when the carousel scrolls near the viewport, which is what keeps the page fast with ten galleries on it. `data-title` and `data-body` are what the lightbox shows when someone taps the card.
+
+**Cards themselves carry no visible caption or dark veil anymore** — as of the September 2026 pass, every card is just the clean photo (see "Build decisions worth knowing," section 8). Still fill in `data-cat`, `data-title` and `data-body` on every card — they're what the full-screen lightbox shows when someone taps it, they just don't render on the card face itself.
 
 Give the carousel block an `id` (e.g. `id="the-scenic-grande-sep-6"`) so `performances.html` can link straight to it.
 
@@ -236,7 +236,7 @@ The look is **liquid glass**: every button, arrow and toggle is a transparent pi
 - **Fluid cursor** — a soft warm trail; off automatically on touch devices and with reduce-motion
 - **Carousels** — snapping horizontal rows; photos blur up as they load; arrows disable at each end
 - **Lightbox** — click any card for the photo, category, headline and caption
-- **Text hover** — the outlined headlines draw themselves in, then reveal a gold gradient inside a circle following your cursor
+- **Piano spotlight** — the "Built to keep coming back" CTA band on the homepage. A black-and-white outline of a grand piano (`piano-outline.jpg`) sits under a full-colour version (`piano-color.jpg`); the colour layer is CSS-masked to a circle that follows the cursor, so hovering "lights up" the piano in colour wherever you point. Wired in `initPianoSpotlight()` in `site.js`. Replaces the old "MUSIC FOR EVERYONE" outlined-text headline.
 - **Accordions** — one row open at a time
 - **Scroll progress bar** — two-pixel gold bar at the very top
 - **Dot rail** — right edge of the homepage, highlights the section you're in
@@ -297,6 +297,23 @@ default focus ring — tabbing through the forms showed nothing at all. There is
 the gallery nears the viewport. On the Photos page that means 5 images load on arrival instead of
 104. Keep using `data-src` when you add galleries.
 
+**September 2026 pass — piano spotlight, caption removal, thinner cursor trail.** Three changes
+made after the initial rebuild:
+- The homepage CTA band's "MUSIC FOR EVERYONE" outlined-text headline was replaced with the piano
+  spotlight illustration described in section 5. The old SVG text/mask markup, its `.hovertext`/
+  `.ht-base` CSS and the `hyDash` keyframe are gone; `initHoverText()` in `site.js` was replaced by
+  `initPianoSpotlight()`.
+- Every gallery card's on-card caption (`.cap`) and the dark bottom veil (`.veil`) that existed to
+  keep that caption legible were removed, on both `index.html`'s and `photos.html`'s carousels —
+  cards now show only the clean photo. The full-screen lightbox is untouched and still reads
+  `data-cat` / `data-title` / `data-body` from the card, so keep filling those in when you add a
+  gallery (section 3).
+- The fluid cursor trail (`initCursor()` in `site.js`) was retuned smaller and softer — it had
+  drifted thick and blobby. If a future edit makes it feel heavy again, the knobs are the particle
+  radius (`r: 16 + Math.min(20, d * 0.55)`), the per-frame opacity (`0.13`), and the fade-out rate
+  of the trail (`rgba(0,0,0,0.13)` in the clear step) — smaller radius and lower opacity read as
+  thinner and lighter.
+
 **Source archives.** This site was built from three archives — the old live site, the Claude Design
 mockup handoff, and a Google Drive export of the August 30 photos. Everything from all three that
 the site uses is already in this folder, so they were cleared out afterwards. Two things existed
@@ -307,7 +324,60 @@ are in the Trash or can be re-exported from Google Drive.
 
 ---
 
-## 9. Quick reference
+## 9. Design audit notes (September 2026) — not yet applied
+
+A design review was run against the site's anti-generic-design principles. Nothing below has been
+changed in the code — these are recommendations for whoever picks this up next.
+
+**What's working:** the hero (a real performance photo expanding on scroll, not a generic
+gradient-blur headline), the piano spotlight (section 5 — genuinely grounded in the subject), and
+the liquid-glass buttons (a bespoke, consistently-executed micro-interaction).
+
+**What reads as templated:**
+- [ ] **The "Get involved" FAQ accordion** (five questions, numbered `01`–`05`) is a stock SaaS-FAQ
+  pattern — numbered dividers, plus/× toggle, thin question text — and the numbering doesn't mean
+  anything: the five questions aren't a sequence. Compare to the "How a show runs" `01/02/03` cards
+  earlier on the same page, where the numbering *is* real (Booking → Lineup → After). Likely fix:
+  drop the numbers from the FAQ, keep them on the process cards.
+- [ ] **Typography has no distinct personality.** Inter (headlines + UI) + Open Sans (body) is one
+  of the most common pairings in web design generally — safe, but not specific to HarmonYouth.
+- [ ] **Dark mode's structure** — near-black background (`#07080A`) plus exactly one accent colour
+  (`--accent:#C9A15A`) — matches a well-known generic-AI-design formula (near-black + single bright
+  accent), independent of the specific gold hue chosen. See the palette proposal below for a
+  low-risk fix.
+- [ ] **Motion is scattered rather than one signature moment.** Counted running at once: hero
+  scroll-lock, sitewide fluid cursor trail, piano spotlight, carousel blur-up, accordion expand,
+  scroll progress bar, dot rail. Worth considering whether the ambient chrome (progress bar, dot
+  rail, cursor trail) should recede so the hero's scroll expansion reads as *the* signature moment
+  rather than one effect among several.
+
+**Proposed palette fix — "Concert Red" as a second accent.** Rather than repainting the palette,
+pull a second colour from imagery already on the site: the red velvet seats and chandelier in the
+piano illustration (section 5). Adding it as a genuine second accent breaks the
+single-accent-on-near-black formula without touching the gold, the logo, or any already-validated
+contrast pairing.
+
+```
+#8C2F38  (base)
+├─ 300 #CB7881 → text on dark bg:            6.24:1  (AA)
+├─ 500 #8C2F38 → filled badge, light text:   7.52:1 dark theme / 8.14:1 light theme  (AA/AAA)
+└─ 600 #6E232B → text on light bg:           9.76:1  (AAA)
+```
+
+Suggested use — small and deliberate, not a repaint: give the `talks` show-status pill (currently
+reuses the gold `--accent-soft`) its own red, so "In talks" reads differently from "Recruiting" at
+a glance. Keep it out of primary buttons/CTAs — gold stays the dominant brand colour, red is the
+accent-to-the-accent, per the 60-30-10 rule.
+
+**Current palette accessibility (validated independently, September 2026):** every text/background
+and text/button pairing in both themes clears WCAG AA (4.5:1). Only the two primary text colours
+against their backgrounds clear AAA (7:1) — the muted/faint text tokens and the gold accent land in
+the 4.5–6.9:1 range in both themes, same conclusion as section 5's contrast note, now re-verified
+with `check_contrast.py`.
+
+---
+
+## 10. Quick reference
 
 | Thing | Where it lives |
 |-------|----------------|
@@ -316,6 +386,8 @@ are in the Trash or can be re-exported from Google Drive.
 | Build meet calendar data | `site.js` → `BUILD_MEET_CALENDAR` |
 | Calendar rendering | `site.js` → `initCalendar()` |
 | Photo galleries | `photos.html` → `.carousel-block` |
+| Piano spotlight (homepage CTA band) | `index.html` → `.piano-hover`; `site.js` → `initPianoSpotlight()`; images `piano-outline.jpg` / `piano-color.jpg` |
+| Fluid cursor trail | `site.js` → `initCursor()` |
 | Homepage hero behaviour | `site.js` → `initHeroLock()`; `styles.css` → `.hero-scene` / `.hero` |
 | Forms | `get-involved.html`; wiring in `site.js` → `initForms()` |
 | Formspree form ID | `site.js` → `FORM_ID` |

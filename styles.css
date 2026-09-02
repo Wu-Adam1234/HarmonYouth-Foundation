@@ -60,7 +60,6 @@ p{margin:0}
 
 @keyframes hyGrain{0%,100%{transform:translate(0,0)}25%{transform:translate(-14px,9px)}50%{transform:translate(11px,-12px)}75%{transform:translate(-8px,-6px)}}
 @keyframes hyBob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
-@keyframes hyDash{to{stroke-dashoffset:0}}
 
 /* ---------- fixed page furniture ---------- */
 .hy-cursor{position:fixed;inset:0;width:100%;height:100%;z-index:45;pointer-events:none;mix-blend-mode:screen;opacity:.7}
@@ -199,9 +198,12 @@ section{position:relative}
   .acc-key{grid-column:1/-1}
 }
 
-/* ---------- hover text (outlined headline) ---------- */
-.hovertext{display:block;width:100%;height:auto;overflow:visible;cursor:default}
-.ht-base{stroke-dasharray:1400;stroke-dashoffset:1400;animation:hyDash 3.4s ease forwards}
+/* ---------- piano spotlight (outline that reveals colour under the cursor) ---------- */
+.piano-hover{position:relative;max-width:560px;margin:0 auto;border-radius:20px;overflow:hidden;border:1px solid var(--line);background:var(--bg2);box-shadow:var(--pop)}
+.piano-hover img{display:block;width:100%;height:auto}
+.piano-hover-color{position:absolute;inset:0;opacity:0;transition:opacity .4s ease;pointer-events:none;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+.piano-hover.is-lit .piano-hover-color{opacity:1}
+@media(prefers-reduced-motion:reduce){.piano-hover-color{transition:none}}
 .cta-band{padding:clamp(70px,10vw,130px) clamp(16px,5vw,56px);overflow:hidden;text-align:center}
 .cta-band .halo{position:absolute;left:50%;top:50%;width:1000px;height:700px;transform:translate(-50%,-50%);pointer-events:none;background:radial-gradient(ellipse at center,rgba(201,161,90,.18) 0%,transparent 68%);filter:blur(40px)}
 .cta-band p{margin:26px auto 0;max-width:600px;font-size:17px;line-height:1.7;color:var(--muted)}
@@ -338,10 +340,6 @@ section{position:relative}
   border:none;padding:0;background:var(--panel);cursor:pointer;display:block;transition:transform .4s var(--ease)}
 .car-card:hover{transform:translateY(-6px)}
 .car-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:blur(14px);transform:scale(1.06);transition:filter .7s ease,transform .7s ease}
-.car-card .veil{position:absolute;inset:0;background:linear-gradient(to top,rgba(7,8,10,.88) 0%,rgba(7,8,10,.25) 55%,transparent 100%)}
-.car-card .cap{position:absolute;left:0;right:0;bottom:0;padding:20px 18px;text-align:left;display:flex;flex-direction:column;gap:6px}
-.car-card .cap .k{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:#E8C87A}
-.car-card .cap .t{font-family:'Inter',sans-serif;font-size:16px;font-weight:400;letter-spacing:-.02em;color:#fff;line-height:1.25}
 
 /* ---------- lightbox ---------- */
 .modal{display:none;position:fixed;inset:0;z-index:100;align-items:center;justify-content:center;padding:clamp(12px,4vw,48px)}

@@ -359,19 +359,27 @@
   }
 
   /* ------------------------------------------------------------------ *
-   * Outlined headline that reveals a gold gradient under the cursor
+   * Piano outline that reveals colour in a spotlight under the cursor
    * ------------------------------------------------------------------ */
-  function initHoverText() {
-    $$('[data-hovertext]').forEach(function (svg) {
-      var radial = svg.querySelector('[data-ht-radial]');
-      if (!radial) return;
-      svg.addEventListener('pointerenter', function () { radial.setAttribute('r', '22%'); });
-      svg.addEventListener('pointermove', function (e) {
-        var r = svg.getBoundingClientRect(), vb = svg.viewBox.baseVal;
-        radial.setAttribute('cx', String(((e.clientX - r.left) / r.width) * vb.width));
-        radial.setAttribute('cy', String(((e.clientY - r.top) / r.height) * vb.height));
+  function initPianoSpotlight() {
+    $$('[data-piano-hover]').forEach(function (el) {
+      var color = el.querySelector('[data-piano-color]');
+      if (!color) return;
+      function setSpot(x, y) {
+        var m = 'radial-gradient(circle 170px at ' + x + 'px ' + y + 'px, #000 0%, #000 55%, transparent 100%)';
+        color.style.webkitMaskImage = m;
+        color.style.maskImage = m;
+      }
+      el.addEventListener('pointerenter', function (e) {
+        var r = el.getBoundingClientRect();
+        setSpot(e.clientX - r.left, e.clientY - r.top);
+        el.classList.add('is-lit');
       });
-      svg.addEventListener('pointerleave', function () { radial.setAttribute('r', '0%'); });
+      el.addEventListener('pointermove', function (e) {
+        var r = el.getBoundingClientRect();
+        setSpot(e.clientX - r.left, e.clientY - r.top);
+      });
+      el.addEventListener('pointerleave', function () { el.classList.remove('is-lit'); });
     });
   }
 
@@ -401,11 +409,11 @@
             parts.push({
               x: last.x + dx * t, y: last.y + dy * t,
               vx: dx * 0.06, vy: dy * 0.06,
-              r: 34 + Math.min(46, d * 1.1), life: 1,
+              r: 16 + Math.min(20, d * 0.55), life: 1,
               hue: ((theme === 'light' ? 32 : 38) + Math.random() * 26) % 360
             });
           }
-          if (parts.length > 90) parts.splice(0, parts.length - 90);
+          if (parts.length > 70) parts.splice(0, parts.length - 70);
         }
       }
       last = { x: x, y: y };
@@ -415,15 +423,15 @@
       requestAnimationFrame(loop);
       var w = canvas.width, h = canvas.height;
       ctx.globalCompositeOperation = 'destination-out';
-      ctx.fillStyle = 'rgba(0,0,0,0.09)';
+      ctx.fillStyle = 'rgba(0,0,0,0.13)';
       ctx.fillRect(0, 0, w, h);
       ctx.globalCompositeOperation = theme === 'light' ? 'source-over' : 'lighter';
       for (var i = parts.length - 1; i >= 0; i--) {
         var p = parts[i];
-        p.x += p.vx; p.y += p.vy; p.vx *= 0.92; p.vy *= 0.92; p.life -= 0.022;
+        p.x += p.vx; p.y += p.vy; p.vx *= 0.92; p.vy *= 0.92; p.life -= 0.028;
         if (p.life <= 0) { parts.splice(i, 1); continue; }
-        var r = p.r * (0.6 + 0.6 * (1 - p.life)) * dpr;
-        var a = 0.20 * p.life;
+        var r = p.r * (0.55 + 0.45 * p.life) * dpr;
+        var a = 0.13 * p.life;
         var sat = theme === 'light' ? 60 : 78, lig = theme === 'light' ? 52 : 62;
         var g = ctx.createRadialGradient(p.x * dpr, p.y * dpr, 0, p.x * dpr, p.y * dpr, r);
         g.addColorStop(0, 'hsla(' + p.hue + ',' + sat + '%,' + lig + '%,' + a + ')');
@@ -743,7 +751,7 @@
     initReveals();
     initCarousels();
     initModal();
-    initHoverText();
+    initPianoSpotlight();
     initCursor();
     initScrollBar();
     initGoFundMe();
