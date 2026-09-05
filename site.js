@@ -53,9 +53,11 @@
       '2026-09-13': [['MV', 'recruiting', '11:30 AM to 12:00 PM']],
       '2026-09-25': [['SG', 'talks', '3:30 to 4:00 PM']],
       '2026-10-04': [['RR', 'talks', '3:30 to 4:00 PM']],
-      '2026-10-11': [['SG', 'talks', '12:00 to 12:30 PM']]
+      '2026-10-11': [['SG', 'talks', '12:00 to 12:30 PM']],
+      '2026-10-18': [['CM', 'recruiting', '11:00 to 11:30 AM']],
+      '2026-11-08': [['BW', 'talks', '11:30 AM to 12:00 PM, or 12:00 to 12:30 PM']]
     },
-    min: { y: 2026, m: 7 }, max: { y: 2026, m: 9 }, start: { y: 2026, m: 8 },
+    min: { y: 2026, m: 7 }, max: { y: 2026, m: 10 }, start: { y: 2026, m: 8 },
     labels: { past: 'Past performance' },
     note: 'Gold = booked or recruiting, gray = played. Hover a chip for venue and time.'
   };
@@ -658,7 +660,22 @@
       return ok;
     }
 
+    // Under-18 answer decides whether the guardian email pair is required.
+    // Fields carry data-guardian-required instead of a hard-coded required attribute.
+    function initMinorGate(form) {
+      var radios = $$('input[name="under_18"]', form);
+      var guardian = $$('[data-guardian-required]', form);
+      if (!radios.length || !guardian.length) return;
+      function sync() {
+        var minor = radios.some(function (r) { return r.checked && r.value === 'Yes'; });
+        guardian.forEach(function (el) { el.required = minor; });
+      }
+      radios.forEach(function (r) { r.addEventListener('change', sync); });
+      sync();
+    }
+
     forms.forEach(function (form) {
+      initMinorGate(form);
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         if (!checkConfirm(form)) return;
@@ -671,6 +688,13 @@
         if (btn) btn.disabled = true;
 
         var data = new FormData(form);
+
+        // CASL: record consent explicitly either way, with the date it was given.
+        $$('input[type="checkbox"][data-consent]', form).forEach(function (cb) {
+          data.set(cb.name, cb.checked
+            ? 'YES — consented ' + new Date().toISOString()
+            : 'No — did not opt in');
+        });
         fetch('https://formspree.io/f/' + FORM_ID, {
           method: 'POST', body: data, headers: { Accept: 'application/json' }
         }).then(function (r) {
