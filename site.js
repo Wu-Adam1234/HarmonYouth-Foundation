@@ -49,8 +49,8 @@
       '2026-08-21': [['SG', 'past', '2:00 to 2:30 PM'], ['MV', 'past', '1:00 to 1:30 PM']],
       '2026-08-23': [['CM', 'past', '2:00 to 2:45 PM']],
       '2026-08-30': [['BW', 'past', '2:00 to 2:30 PM']],
-      '2026-09-06': [['SG', 'full', '12:00 to 12:30 PM']],
-      '2026-09-13': [['MV', 'recruiting', '11:30 AM to 12:00 PM']],
+      '2026-09-06': [['SG', 'past', '12:00 to 12:30 PM']],
+      '2026-09-13': [['MV', 'full', '11:30 AM to 12:00 PM']],
       '2026-09-25': [['SG', 'talks', '3:30 to 4:00 PM']],
       '2026-10-04': [['RR', 'talks', '3:30 to 4:00 PM']],
       '2026-10-11': [['SG', 'talks', '12:00 to 12:30 PM']],
@@ -298,6 +298,9 @@
       if (img.dataset.loaded) return;
       img.dataset.loaded = '1';
       img.src = img.getAttribute('data-src');
+      // A cached image can finish decoding before 'load' fires, which would
+      // otherwise leave the card stuck at its blur-up placeholder.
+      if (img.complete && img.naturalWidth) unblur(img);
     }
     function unblur(img) { img.style.filter = 'none'; img.style.transform = 'scale(1)'; }
     pending.forEach(function (img) {
@@ -758,6 +761,35 @@
   }
 
   /* ------------------------------------------------------------------ *
+   * Deep links (photos.html#some-gallery)
+   * The galleries lazy-load, so on first paint the page is far shorter than
+   * it ends up being. The browser does its hash jump against that short page
+   * and lands at the top. Re-run the jump a few times while the layout
+   * settles, and stop the moment the visitor scrolls for themselves.
+   * ------------------------------------------------------------------ */
+  function initHashTarget() {
+    if (!location.hash || location.hash.length < 2) return;
+    var el;
+    try { el = document.getElementById(decodeURIComponent(location.hash.slice(1))); }
+    catch (e) { return; }
+    if (!el) return;
+
+    var stop = false;
+    function release() { stop = true; }
+    ['wheel', 'touchstart', 'keydown'].forEach(function (ev) {
+      window.addEventListener(ev, release, { passive: true, once: true });
+    });
+
+    var tries = 0;
+    (function settle() {
+      if (stop) return;
+      // behavior:'auto' so this doesn't fight html{scroll-behavior:smooth}
+      el.scrollIntoView({ behavior: 'auto', block: 'start' });
+      if (++tries < 5) setTimeout(settle, 260);
+    })();
+  }
+
+  /* ------------------------------------------------------------------ *
    * Boot
    * ------------------------------------------------------------------ */
   function boot() {
@@ -778,6 +810,7 @@
     initPiano();
     initCalendar(document.getElementById('perfCalMonth'), PERFORMANCE_CALENDAR);
     initCalendar(document.getElementById('buildCalMonth'), BUILD_MEET_CALENDAR);
+    initHashTarget();
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
