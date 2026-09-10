@@ -32,7 +32,7 @@
     { page: 'programs.html',     label: 'Programs',              keys: 'program programs music build assistive device 3d print printing makers making change adapted toys roster instrument piano strings voice clarinet cello' },
     { page: 'build-meets.html',  label: 'Build meets',           keys: 'build meet meets meeting assembly solder switch printer parts september 30' },
     { page: 'get-involved.html', label: 'Get involved',          keys: 'join volunteer involved sign up signup form hours certificate service letter request student musician care home coordinator faq questions email contact wechat fundraising director lead open role recruiting sponsor sponsors donors campaign' },
-    { page: 'donate.html',       label: 'Donate',                keys: 'donate donation stripe money sheet music gear travel equipment build materials senior homes give support fundraise salaries payroll qr wechat' },
+    { page: 'donate.html',       label: 'Donate',                keys: 'donate donation stripe money printing certificates gifts running costs senior homes give support fundraise qr wechat' },
     { page: 'mission.html',      label: 'Our mission',           keys: 'mission why about story values purpose who we are consistency access transparency' },
     { page: 'team.html',         label: 'Meet the team',         keys: 'team founders adam hanry arthur vienna lu bios who runs it marketing outreach lead fundraising director open role recruiting' },
     { page: 'privacy.html',      label: 'Privacy policy',        keys: 'privacy policy data consent photos personal information cookies under 18 guardian' }
