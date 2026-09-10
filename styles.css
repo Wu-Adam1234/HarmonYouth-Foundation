@@ -378,6 +378,11 @@ section{position:relative}
 .founder-photo.empty span{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
 .bio-pending{color:var(--faint)!important;font-style:italic}
 .founder-body h3{margin:14px 0 0;font-size:clamp(22px,2.8vw,32px);font-weight:400;letter-spacing:-.03em;line-height:1.15}
+/* The role IS the heading now. The old pattern was a small grey .card-tag above a
+   one-line personal headline ("Co-founded by someone who'd rather play for a room
+   than for a grade"); Adam cut those headlines on Sep 10, 2026 so the job title
+   carries the card. It is the first child, so it loses the 14px top margin. */
+.founder-body h3.founder-role{margin-top:0}
 .founder-body p{margin:18px 0 0;font-size:16px;line-height:1.75;color:var(--muted)}
 .founder-sig{margin-top:24px;padding-top:18px;border-top:1px solid var(--line);font-family:'Inter',sans-serif;font-size:13px;color:var(--text)}
 .founder-sig span{display:block;margin-top:4px;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);font-weight:600}
@@ -445,7 +450,7 @@ section{position:relative}
 .qr .d{margin-top:8px;font-size:14px;line-height:1.6;color:var(--muted)}
 
 /* ---------- donate CTA ----------
-   Replaces the old two-column GoFundMe iframe + QR grid. That grid mismatched
+   Replaces the old two-column donation-iframe + QR grid. That grid mismatched
    its column heights (short embed, tall panel) and left a dead gap on the right.
    One centred card, one big button, and the scan/contact routes demoted to a
    slim footer row underneath, so there is nothing left to fall out of balance. */

@@ -7,6 +7,21 @@
 (function () {
   'use strict';
 
+  /* ==================================================================== *
+   * STRIPE DONATION LINK — THE ONLY PLACE THIS URL IS WRITTEN DOWN.
+   *
+   * Paste the Payment Link from the Stripe Dashboard between the quotes
+   * (Dashboard -> Payment links -> your donation link -> Copy link). It
+   * looks like 'https://donate.stripe.com/xxxxxxxxxxxxxxxx'.
+   *
+   * Leave it as '' and every donate button on the site stays pointed at
+   * the general-inquiry form instead, and says so — no dead links.
+   * Change it here and it changes on every page at once. Do NOT paste
+   * the URL into the HTML: that is the mistake this constant exists to
+   * prevent.
+   * ==================================================================== */
+  var STRIPE_DONATE_URL = '';
+
   /* ------------------------------------------------------------------ *
    * SEARCH ROUTES — what the menu search matches against.
    * Add a page here and the search can find it.
@@ -16,10 +31,10 @@
     { page: 'photos.html',       label: 'Photos',                keys: 'photo photos gallery pictures images carousel cambridge scenic manor boardwalk august' },
     { page: 'programs.html',     label: 'Programs',              keys: 'program programs music build assistive device 3d print printing makers making change adapted toys roster instrument piano strings voice clarinet cello' },
     { page: 'build-meets.html',  label: 'Build meets',           keys: 'build meet meets meeting assembly solder switch printer parts september 30' },
-    { page: 'get-involved.html', label: 'Get involved',          keys: 'join volunteer involved sign up signup form hours certificate service letter request student musician care home coordinator faq questions email contact wechat' },
-    { page: 'donate.html',       label: 'Donate',                keys: 'donate donation gofundme money hospital hospitals senior homes proceeds give support fundraise qr wechat' },
+    { page: 'get-involved.html', label: 'Get involved',          keys: 'join volunteer involved sign up signup form hours certificate service letter request student musician care home coordinator faq questions email contact wechat fundraising director lead open role recruiting sponsor sponsors donors campaign' },
+    { page: 'donate.html',       label: 'Donate',                keys: 'donate donation stripe money sheet music gear travel equipment build materials senior homes give support fundraise salaries payroll qr wechat' },
     { page: 'mission.html',      label: 'Our mission',           keys: 'mission why about story values purpose who we are consistency access transparency' },
-    { page: 'team.html',         label: 'Meet the team',         keys: 'team founders adam hanry arthur vienna lu bios who runs it marketing outreach lead' },
+    { page: 'team.html',         label: 'Meet the team',         keys: 'team founders adam hanry arthur vienna lu bios who runs it marketing outreach lead fundraising director open role recruiting' },
     { page: 'privacy.html',      label: 'Privacy policy',        keys: 'privacy policy data consent photos personal information cookies under 18 guardian' }
   ];
 
@@ -791,6 +806,35 @@
   }
 
   /* ------------------------------------------------------------------ *
+   * Stripe donate buttons
+   *
+   * Every donate CTA ships in its safe "not configured yet" state: the
+   * href points at the general-inquiry form and the label and note say
+   * so. Once STRIPE_DONATE_URL is filled in above, this swaps in the
+   * real link, the real label (data-stripe-label) and the real note
+   * (data-stripe-note) on every page. Nothing to edit in the HTML.
+   * ------------------------------------------------------------------ */
+  function initStripeDonate() {
+    var url = (STRIPE_DONATE_URL || '').trim();
+    if (!url) return;
+
+    var links = document.querySelectorAll('[data-stripe-donate]');
+    for (var i = 0; i < links.length; i++) {
+      var a = links[i];
+      a.setAttribute('href', url);
+      a.setAttribute('target', '_blank');
+      a.setAttribute('rel', 'noopener');
+      var label = a.querySelector('[data-stripe-label]');
+      if (label) label.textContent = label.getAttribute('data-stripe-label');
+    }
+
+    var notes = document.querySelectorAll('[data-stripe-note]');
+    for (var j = 0; j < notes.length; j++) {
+      notes[j].innerHTML = notes[j].getAttribute('data-stripe-note');
+    }
+  }
+
+  /* ------------------------------------------------------------------ *
    * Boot
    * ------------------------------------------------------------------ */
   function boot() {
@@ -810,6 +854,7 @@
     initPiano();
     initCalendar(document.getElementById('perfCalMonth'), PERFORMANCE_CALENDAR);
     initCalendar(document.getElementById('buildCalMonth'), BUILD_MEET_CALENDAR);
+    initStripeDonate();
     initHashTarget();
   }
 
