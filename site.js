@@ -484,21 +484,6 @@
   }
 
   /* ------------------------------------------------------------------ *
-   * GoFundMe widget, with a styled fallback if it doesn't load
-   * ------------------------------------------------------------------ */
-  function initGoFundMe() {
-    var host = $('[data-gfm-host]');
-    if (!host) return;
-    var fallback = host.querySelector('[data-gfm-fallback]');
-    var tries = 0;
-    var timer = setInterval(function () {
-      tries += 1;
-      if (host.querySelector('iframe')) { if (fallback) fallback.style.display = 'none'; clearInterval(timer); }
-      else if (tries > 30) clearInterval(timer);
-    }, 500);
-  }
-
-  /* ------------------------------------------------------------------ *
    * Homepage hero scroll-lock — the first scrolls expand the photo
    * ------------------------------------------------------------------ */
   function initHeroLock() {
@@ -698,6 +683,22 @@
             ? 'YES — consented ' + new Date().toISOString()
             : 'No — did not opt in');
         });
+
+        // Formspree picks its Reply-To off a field named "email" or off "_replyto".
+        // #volunteerForm calls its field "performer_email", so without this, hitting
+        // Reply in Gmail addressed nobody. Take the first non-empty, non-guardian
+        // email on the form and set _replyto to it.
+        if (!data.get('_replyto')) {
+          var replyTo = '';
+          $$('input[type="email"]', form).some(function (el) {
+            if (!el.name || el.hasAttribute('data-guardian-required')) return false;
+            var v = el.value.trim();
+            if (!v) return false;
+            replyTo = v;
+            return true;
+          });
+          if (replyTo) data.set('_replyto', replyTo);
+        }
         fetch('https://formspree.io/f/' + FORM_ID, {
           method: 'POST', body: data, headers: { Accept: 'application/json' }
         }).then(function (r) {
@@ -803,7 +804,6 @@
     initPianoSpotlight();
     initCursor();
     initScrollBar();
-    initGoFundMe();
     initHeroLock();
     initViewToggles();
     initForms();
