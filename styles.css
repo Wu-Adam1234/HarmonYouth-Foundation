@@ -73,6 +73,15 @@ p{margin:0}
 /* ---------- glass primitives ---------- */
 .ring{position:absolute;inset:0;border-radius:inherit;box-shadow:var(--glass);pointer-events:none}
 .blur{position:absolute;inset:0;border-radius:inherit;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+/* Header glass needs a TINT, not just blur. Blur alone samples whatever is
+   behind it, so near-white header text over near-white content disappears.
+   That became reachable on Sep 10, 2026, when the homepage gained a full-bleed
+   near-white piano illustration that scrolls under the fixed header (17.x /
+   section 18). Dark theme only: in light theme the header text is already dark,
+   and .over-hero forces white text over the dark hero photo, so a light tint
+   there would break the case it currently handles correctly. */
+.site-header .blur{background:rgba(7,8,10,.5)}
+[data-hy-theme="light"] .site-header .blur{background:transparent}
 
 /* ---------- header ---------- */
 .site-header{position:fixed;top:2px;left:0;right:0;z-index:59}
@@ -217,7 +226,16 @@ section{position:relative}
 .piano-hover-color{position:absolute;inset:0;opacity:0;transition:opacity .4s ease;pointer-events:none;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
 .piano-hover.is-lit .piano-hover-color{opacity:1}
 @media(prefers-reduced-motion:reduce){.piano-hover-color{transition:none}}
-.cta-band{padding:clamp(70px,10vw,130px) clamp(16px,5vw,56px);overflow:hidden;text-align:center}
+.cta-band{position:relative;padding:clamp(70px,10vw,130px) clamp(16px,5vw,56px);overflow:hidden;text-align:center}
+/* Full-bleed outro variant (homepage, after the donate block). The piano leaves
+   .wrap entirely so it spans edge to edge: no card, no radius, no border, and
+   never cropped — height:auto keeps the whole 3:2 illustration visible. The
+   copy underneath stays inside .wrap. Sep 10, 2026, at Adam's request. */
+.cta-band-full{padding-left:0;padding-right:0;padding-top:0}
+.cta-band-full .piano-hover{max-width:none;width:100%;margin:0 0 clamp(34px,5vw,64px);
+  border:0;border-left:0;border-right:0;border-radius:0;box-shadow:none;background:transparent}
+.cta-band-full .piano-hover img{width:100%;height:auto}
+.cta-band-full .wrap{padding-left:clamp(16px,5vw,56px);padding-right:clamp(16px,5vw,56px)}
 .cta-band .halo{position:absolute;left:50%;top:50%;width:1000px;height:700px;transform:translate(-50%,-50%);pointer-events:none;background:radial-gradient(ellipse at center,rgba(201,161,90,.18) 0%,transparent 68%);filter:blur(40px)}
 .cta-band p{margin:26px auto 0;max-width:600px;font-size:17px;line-height:1.7;color:var(--muted)}
 .cta-band .btn-row{justify-content:center}
@@ -465,6 +483,23 @@ section{position:relative}
   font-size:clamp(26px,3.6vw,40px);letter-spacing:-.04em}
 .dc-goal{margin-top:14px;font-size:15.5px;line-height:1.6;color:var(--muted)}
 .dc-goal strong{color:var(--accent);font-weight:600}
+/* Donation progress bar. Deliberately built from parts already on the page so it
+   reads as one system: the same 1px --line border and --bg2 fill as .stat-strip /
+   .numbered, and the exact accent gradient the .hy-progress scroll bar uses.
+   Amount comes from DONATION_RAISED in site.js — one place, like the Stripe URL. */
+.raised{margin-top:30px;width:100%;max-width:520px;margin-left:auto;margin-right:auto;text-align:left}
+.raised-row{display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+  font-family:'Inter',sans-serif;font-size:14px;color:var(--muted)}
+.raised-row strong{font-weight:600;letter-spacing:-.01em}
+.raised-now strong{font-size:clamp(24px,3vw,30px);font-weight:300;color:var(--accent);letter-spacing:-.03em}
+.raised-goal strong{color:var(--text)}
+.raised-track{margin-top:10px;height:10px;border-radius:999px;overflow:hidden;
+  background:var(--bg2);border:1px solid var(--line)}
+.raised-track i{display:block;height:100%;width:0;border-radius:999px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-soft));
+  transition:width 1s cubic-bezier(.22,.61,.36,1)}
+.raised-note{margin-top:10px;font-size:13px;line-height:1.6;color:var(--faint)}
+@media(prefers-reduced-motion:reduce){.raised-track i{transition:none}}
 .dc-actions{margin-top:30px;display:flex;flex-direction:column;align-items:center;gap:10px}
 .btn-xl{padding:22px 54px;font-size:13px;letter-spacing:.13em;box-shadow:0 20px 44px -20px rgba(201,161,90,.85)}
 [data-hy-theme="light"] .btn-xl{box-shadow:0 16px 34px -22px rgba(20,22,26,.5)}

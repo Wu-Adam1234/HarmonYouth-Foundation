@@ -12,8 +12,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=8">
-<script defer src="site.js?v=8"></script>
+<link rel="stylesheet" href="styles.css?v=10">
+<script defer src="site.js?v=10"></script>
 </head>
 <body data-page="donate.html">
 <a class="skip" href="#main">Skip to content</a>
@@ -91,6 +91,11 @@
       <span class="pill">Secure checkout &middot; Stripe</span>
       <div class="dc-title">Help us bring music to seniors</div>
       <div class="dc-goal"><strong>$1,000</strong> goal &middot; every dollar goes into running HarmonYouth</div>
+      <div class="raised" data-raised data-goal="1000">
+        <div class="raised-row"><span class="raised-now"><strong data-raised-amount>$0</strong> raised</span><span class="raised-goal">of <strong>$1,000</strong></span></div>
+        <div class="raised-track" role="progressbar" aria-valuemin="0" aria-valuemax="1000" aria-valuenow="0" aria-label="Fundraising progress"><i data-raised-fill></i></div>
+        <div class="raised-note" data-raised-note>Just getting started &mdash; be the first to give.</div>
+      </div>
       <div class="dc-actions">
         <a href="get-involved.html#other" class="btn btn-accent btn-xl" data-stripe-donate>
           <span class="ring"></span>

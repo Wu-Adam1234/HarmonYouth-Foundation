@@ -22,6 +22,19 @@
    * ==================================================================== */
   var STRIPE_DONATE_URL = '';
 
+  /* ==================================================================== *
+   * HOW MUCH HAS BEEN RAISED — the only place this number is written.
+   *
+   * Set it to the running total in dollars and the progress bar on the
+   * homepage and the donate page both update. The goal lives in the
+   * markup as data-goal on .raised (currently 1000); change it in both
+   * index.html and donate.html if the target moves.
+   *
+   * Stripe does NOT feed this automatically — a static site has no server
+   * to ask. Update it by hand after checking the Stripe Dashboard.
+   * ==================================================================== */
+  var DONATION_RAISED = 0;
+
   /* ------------------------------------------------------------------ *
    * SEARCH ROUTES — what the menu search matches against.
    * Add a page here and the search can find it.
@@ -806,6 +819,58 @@
   }
 
   /* ------------------------------------------------------------------ *
+   * Donation progress bar
+   *
+   * Fills to DONATION_RAISED / data-goal. The bar animates from 0 when it
+   * scrolls into view, so it reads as progress rather than a static line.
+   * Falls back to a plain filled bar if IntersectionObserver is missing.
+   * ------------------------------------------------------------------ */
+  function initRaised() {
+    var money = function (n) {
+      return '$' + Math.round(n).toLocaleString('en-CA');
+    };
+
+    $$('[data-raised]').forEach(function (el) {
+      var goal = parseFloat(el.getAttribute('data-goal')) || 0;
+      var raised = Math.max(0, DONATION_RAISED || 0);
+      if (!goal) return;
+
+      var pct = Math.max(0, Math.min(100, (raised / goal) * 100));
+      var amountEl = el.querySelector('[data-raised-amount]');
+      var fill = el.querySelector('[data-raised-fill]');
+      var note = el.querySelector('[data-raised-note]');
+      var track = el.querySelector('.raised-track');
+
+      if (amountEl) amountEl.textContent = money(raised);
+      if (track) track.setAttribute('aria-valuenow', String(Math.round(raised)));
+
+      if (note) {
+        if (raised <= 0) {
+          note.innerHTML = 'Just getting started &mdash; be the first to give.';
+        } else if (pct >= 100) {
+          note.innerHTML = 'Goal reached &mdash; thank you. Anything further goes straight into the next round of shows.';
+        } else {
+          note.textContent = Math.round(pct) + '% of the way there \u00b7 ' +
+            money(goal - raised) + ' to go';
+        }
+      }
+
+      if (!fill) return;
+      var paint = function () { fill.style.width = pct + '%'; };
+
+      if (!('IntersectionObserver' in window)) { paint(); return; }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          paint();
+          io.disconnect();
+        });
+      }, { threshold: 0.35 });
+      io.observe(el);
+    });
+  }
+
+  /* ------------------------------------------------------------------ *
    * Stripe donate buttons
    *
    * Every donate CTA ships in its safe "not configured yet" state: the
@@ -855,6 +920,7 @@
     initCalendar(document.getElementById('perfCalMonth'), PERFORMANCE_CALENDAR);
     initCalendar(document.getElementById('buildCalMonth'), BUILD_MEET_CALENDAR);
     initStripeDonate();
+    initRaised();
     initHashTarget();
   }
 
