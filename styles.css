@@ -124,7 +124,7 @@ main section[id],main [id][data-reveal]{scroll-margin-top:96px}
 .menu-search{position:relative;display:flex;align-items:center;gap:9px;padding:11px 12px;margin:2px 2px 8px;border-radius:14px;background:var(--panel);border:1px solid var(--line)}
 .menu-search svg{flex:0 0 auto;color:var(--faint)}
 .menu-search .field{position:relative;flex:1 1 auto;min-width:0}
-.menu-search input{width:100%;padding:0;border:none;background:transparent;color:var(--text);font-size:14px;outline:none}
+.menu-search input{width:100%;min-height:24px;padding:0;border:none;background:transparent;color:var(--text);font-size:14px;outline:none}
 .menu-search .ph{position:absolute;left:0;top:50%;transform:translateY(-50%);pointer-events:none;font-size:14px;color:var(--faint);white-space:nowrap;transition:opacity .35s ease,transform .35s ease}
 .menu-search kbd{flex:0 0 auto;padding:3px 6px;border-radius:6px;border:1px solid var(--line);font-family:'Inter',sans-serif;font-size:10px;color:var(--faint)}
 .search-result{display:none;margin:0 6px 8px;font-size:12.5px;color:var(--muted)}
@@ -508,7 +508,11 @@ section{position:relative}
 .dc-rule{margin:32px auto 0;max-width:640px;height:1px;background:var(--line)}
 .dc-foot{margin-top:26px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:20px 40px}
 .dc-scan{display:flex;align-items:center;gap:14px;text-align:left}
-.dc-scan img{width:76px;height:76px;flex:0 0 auto;object-fit:contain;border-radius:10px;background:#fff;padding:5px}
+/* .qr and .dc-scan set display:flex, and an author rule always beats the
+   UA [hidden]{display:none}. Say it explicitly, or the Stripe QR tiles
+   would still show on a site with no STRIPE_DONATE_URL configured. */
+.dc-scan[hidden],.qr[hidden]{display:none}
+.dc-scan img{width:104px;height:104px;flex:0 0 auto;object-fit:contain;border-radius:12px;background:#fff;padding:7px}
 .dc-scan .t{font-family:'Inter',sans-serif;font-size:14.5px;font-weight:500;letter-spacing:-.015em}
 .dc-scan .d{margin-top:5px;font-size:13px;line-height:1.55;color:var(--muted)}
 .dc-contact{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 24px;font-size:14.5px;color:var(--muted)}
@@ -591,6 +595,22 @@ section{position:relative}
   font-size:12.5px;color:var(--faint)}
 .footer-bottom .slogan{color:var(--muted)}
 
+/* WCAG 2.2 AA (2.5.8 Target Size, Minimum) asks for 24x24 CSS px of pointer
+   target. These inline links measured 20px and 13px tall — the type is the
+   right size, the hit area was not, so this pads the box and leaves the
+   type scale alone. */
+.dc-contact a,.contact-inline a{
+  display:inline-block;padding-block:4px;min-height:24px}
+/* .venue-link stays display:inline on purpose. Vertical padding on an inline
+   box grows the hit area without adding to the line box, so the target reaches
+   24px while the text keeps flowing and wrapping exactly as before — an
+   inline-block here would refuse to break across lines and reflow the row. */
+.venue-link{padding-block:5px}
+.show-status .venue-link{padding-block:6px}
+/* Links inside running prose are NOT padded: 2.5.8 exempts targets that sit in
+   a sentence, and padding them would break the line rhythm of the paragraph. */
+.prose .venue-link{padding-block:0}
+
 /* Keyboard focus. The glass pills are translucent, so the browser default ring
    disappears against them — this gives every control an explicit visible focus. */
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
@@ -601,9 +621,88 @@ section{position:relative}
 /* ---------- misc ---------- */
 .contact-inline{margin-top:28px;display:flex;flex-wrap:wrap;gap:10px 24px;font-size:14.5px;color:var(--muted)}
 .contact-inline a{color:var(--accent)}
+/* Visually hidden, still announced. Several sections are built entirely from
+   cards and carousels whose own headings are h3, which left an h1 -> h3 jump
+   in the outline. These name the section for screen readers and for the
+   document outline without putting anything new on the page. clip-path over
+   display:none, because display:none would drop it from the a11y tree too. */
+.vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;
+  clip-path:inset(50%);white-space:nowrap;border:0}
 .skip{position:absolute;left:-9999px}
 .skip:focus{left:12px;top:12px;z-index:200;padding:10px 16px;border-radius:10px;background:var(--accent);color:var(--ink)}
 @media(prefers-reduced-motion:reduce){
   *{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
   .hy-grain{display:none}
+}
+
+/* ==========================================================================
+   PRINT
+   The site is dark-on-dark and browsers do not print background colours by
+   default, so without this block every page came out as near-white text on
+   white paper — blank sheets. Care-home coordinators do print the schedule
+   and the donation details, so this has to work. Strategy: redefine the
+   tokens for paper rather than restyle each component, drop the decorative
+   layers, and force the scroll-reveal elements visible (JS leaves them at
+   inline opacity:0 until they scroll into view, which never happens on paper).
+   ========================================================================== */
+@media print{
+  :root,[data-hy-theme="light"],[data-hy-theme="dark"]{
+    --bg:#fff; --bg2:#fff;
+    --panel:#fff; --panel2:#f4f4f4;
+    --line:#bbb;
+    --text:#000; --muted:#333; --faint:#555;
+    --accent:#6b4e16; --accent-soft:#6b4e16; --ink:#fff;
+    --glass:none; --pop:none; --shade:#fff;
+  }
+  html,body{background:#fff!important;color:#000!important}
+
+  /* decorative layers carry no information on paper */
+  .hy-grain,.hy-cursor,.hy-progress,.dotrail,.glow,.dc-glow,.halo,
+  .hero-halo,.hero-shade,.hero-veil,.ring,.blur,.hy-filter-defs,
+  .menu-panel,.menu-wrap,.header-actions,.modal,.skip,
+  .car-arrows,.acc-icon,.view-toggle,.hero-scrollhint,.hero-release,
+  .hero-track,.piano,.piano-note,.nf-search{display:none!important}
+
+  /* the reveal observer never fires without a viewport to scroll */
+  [data-reveal]{opacity:1!important;transform:none!important;transition:none!important}
+
+  .site-header{position:static!important}
+  .hero-scene{height:auto!important}
+  .hero{position:static!important;height:auto!important;padding:0 0 18pt}
+  .hero-bg,.hero-media{display:none!important}
+  .hero-text{position:static!important;padding:0;text-align:left;align-items:flex-start}
+  .hero-word{color:#000!important;text-shadow:none!important;font-size:26pt!important}
+  .hero-meta{position:static!important;padding:0}
+
+  /* let horizontally-scrolled strips show everything they hold */
+  .car-track{overflow:visible!important;flex-wrap:wrap!important}
+  .car-card{width:31%!important;break-inside:avoid}
+  .car-card img{filter:none!important;transform:none!important}
+  .prose .tbl{overflow:visible!important}
+  .prose table{min-width:0!important}
+
+  /* accordions are shut by default; on paper the answers must be readable */
+  .acc-body{height:auto!important;overflow:visible!important}
+
+  .sec,.sec-tight{padding:14pt 0!important}
+  .sec-alt{border:none!important}
+  .card,.tile,.panel,.detail,.donate-cta,.qr,.founder,.program,.numbered .row,
+  .stat,.recruit,.callout{break-inside:avoid}
+  h1,h2,h3{break-after:avoid}
+  .cta-band-full .piano-hover,.piano-hover{break-inside:avoid}
+
+  /* Gallery photos load through the JS lazy loader, which sets src only once
+     they scroll into view — something that never happens on paper. Without
+     this they print as empty boxes with alt text sitting in them. */
+  img:not([src]){display:none!important}
+
+  /* A printed page loses every href. The email and phone links already print
+     their own value as link text, so only annotate the ones that do not. */
+  .dc-contact a[href^="http"]::after,.contact-inline a[href^="http"]::after{
+    content:" (" attr(href) ")";font-size:9pt;color:#555;word-break:break-all}
+
+  .site-footer{border-top:1pt solid #bbb;padding:12pt 0 0}
+  a{color:#000!important;text-decoration:underline}
+  img{max-width:100%!important}
+  @page{margin:14mm}
 }

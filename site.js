@@ -11,16 +11,25 @@
    * STRIPE DONATION LINK — THE ONLY PLACE THIS URL IS WRITTEN DOWN.
    *
    * Paste the Payment Link from the Stripe Dashboard between the quotes
-   * (Dashboard -> Payment links -> your donation link -> Copy link). It
-   * looks like 'https://donate.stripe.com/xxxxxxxxxxxxxxxx'.
+   * (Dashboard -> Payment links -> your donation link -> Copy link).
+   *
+   * A LIVE link looks like   https://buy.stripe.com/xxxxxxxxxxxx
+   * A TEST link looks like   https://buy.stripe.com/test_xxxxxxxxxxxx
+   *
+   * A link containing 'test_' only accepts Stripe's fake test card
+   * numbers — a real donor's real card is DECLINED on it. Going live
+   * means changing TWO things together: this line, and stripe-qr.png,
+   * which encodes this same URL. Change one without the other and the
+   * button and the QR code lead to different places.
    *
    * Leave it as '' and every donate button on the site stays pointed at
-   * the general-inquiry form instead, and says so — no dead links.
+   * the general-inquiry form instead, and says so — no dead links — and
+   * the Stripe QR tiles stay hidden.
    * Change it here and it changes on every page at once. Do NOT paste
    * the URL into the HTML: that is the mistake this constant exists to
    * prevent.
    * ==================================================================== */
-  var STRIPE_DONATE_URL = '';
+  var STRIPE_DONATE_URL = 'https://buy.stripe.com/test_6oUbJ19yK93kb977LGbwk00';
 
   /* ==================================================================== *
    * HOW MUCH HAS BEEN RAISED — the only place this number is written.
@@ -79,11 +88,11 @@
       '2026-08-30': [['BW', 'past', '2:00 to 2:30 PM']],
       '2026-09-06': [['SG', 'past', '12:00 to 12:30 PM']],
       '2026-09-13': [['MV', 'full', '11:30 AM to 12:00 PM']],
-      '2026-09-25': [['SG', 'talks', '3:30 to 4:00 PM']],
-      '2026-10-04': [['RR', 'talks', '3:30 to 4:00 PM']],
-      '2026-10-11': [['SG', 'talks', '12:00 to 12:30 PM']],
+      '2026-09-25': [['SG', 'recruiting', '3:30 to 4:00 PM']],
+      '2026-10-04': [['RR', 'recruiting', '3:30 to 4:00 PM']],
+      '2026-10-11': [['SG', 'recruiting', '12:00 to 12:30 PM']],
       '2026-10-18': [['CM', 'recruiting', '11:00 to 11:30 AM']],
-      '2026-11-08': [['BW', 'talks', '11:30 AM to 12:00 PM, or 12:00 to 12:30 PM']]
+      '2026-11-22': [['BW', 'talks', '10:30 to 11:00 AM']]
     },
     min: { y: 2026, m: 7 }, max: { y: 2026, m: 10 }, start: { y: 2026, m: 8 },
     labels: { past: 'Past performance' },
@@ -107,6 +116,19 @@
   var $  = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Scroll fires far more often than the screen repaints, and both scroll
+     handlers below read layout (offsetTop, scrollHeight) and then write it
+     (style.width, style.height). Run at most one of those per frame so the
+     read/write pair cannot be repeated several times between paints. */
+  function onFrame(fn) {
+    var queued = false;
+    return function () {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(function () { queued = false; fn(); });
+    };
+  }
 
   function matchRoute(q) {
     var words = String(q || '').toLowerCase().split(/\s+/).filter(function (w) { return w.length > 1; });
@@ -452,12 +474,35 @@
       last = { x: x, y: y };
     }, { passive: true });
 
+    /* The trail fades by painting transparent black over itself each frame.
+       That is asymptotic — it approaches zero alpha without ever reaching it,
+       so a faint smear of the last few pixels stays on the canvas forever.
+       Invisible in dark mode (mix-blend-mode:screen over near-black), but in
+       light mode the canvas blends with 'multiply', and multiplying even
+       alpha-3 gold against #F4F3EF leaves a visible streak wherever the
+       pointer has been. So: once the last particle dies, fade harder for a
+       few frames and then hard-clear, which also parks the loop instead of
+       compositing a full-screen rect forever on an idle tab. */
+    var idleFrames = 0;
+
     (function loop() {
       requestAnimationFrame(loop);
       var w = canvas.width, h = canvas.height;
-      ctx.globalCompositeOperation = 'destination-out';
-      ctx.fillStyle = 'rgba(0,0,0,0.13)';
-      ctx.fillRect(0, 0, w, h);
+
+      if (parts.length) {
+        idleFrames = 0;
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.fillStyle = 'rgba(0,0,0,0.13)';
+        ctx.fillRect(0, 0, w, h);
+      } else if (idleFrames < 24) {
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.fillStyle = 'rgba(0,0,0,0.28)';
+        ctx.fillRect(0, 0, w, h);
+        if (++idleFrames === 24) { ctx.clearRect(0, 0, w, h); }
+      } else {
+        return;                    // nothing on screen and nothing to clear
+      }
+
       ctx.globalCompositeOperation = theme === 'light' ? 'source-over' : 'lighter';
       for (var i = parts.length - 1; i >= 0; i--) {
         var p = parts[i];
@@ -506,7 +551,7 @@
         dots.forEach(function (d) { d.classList.toggle('on', d === active); });
       }
     }
-    window.addEventListener('scroll', paint, { passive: true });
+    window.addEventListener('scroll', onFrame(paint), { passive: true });
     window.addEventListener('resize', paint);
     paint();
   }
@@ -550,7 +595,7 @@
       var travel = Math.max(1, scene.offsetHeight - window.innerHeight);
       paint(Math.min(1, Math.max(0, (window.scrollY - scene.offsetTop) / travel)));
     }
-    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('scroll', onFrame(onScroll), { passive: true });
     window.addEventListener('resize', onScroll);
     onScroll();
   }
@@ -842,7 +887,15 @@
       var track = el.querySelector('.raised-track');
 
       if (amountEl) amountEl.textContent = money(raised);
-      if (track) track.setAttribute('aria-valuenow', String(Math.round(raised)));
+      /* aria-valuemax is also written in the markup, but the goal really
+         lives in data-goal — re-stamp it here so the two cannot drift, and
+         give the bar a spoken value, since "0" alone tells a screen-reader
+         user nothing about the target. */
+      if (track) {
+        track.setAttribute('aria-valuemax', String(Math.round(goal)));
+        track.setAttribute('aria-valuenow', String(Math.round(raised)));
+        track.setAttribute('aria-valuetext', money(raised) + ' raised of ' + money(goal) + ' goal');
+      }
 
       if (note) {
         if (raised <= 0) {
@@ -897,6 +950,19 @@
     for (var j = 0; j < notes.length; j++) {
       notes[j].innerHTML = notes[j].getAttribute('data-stripe-note');
     }
+
+    /* The QR tiles ship hidden so an unconfigured site never shows a code
+       that scans to nowhere. They encode the same URL as the button. */
+    var scans = document.querySelectorAll('[data-stripe-scan]');
+    for (var k = 0; k < scans.length; k++) scans[k].hidden = false;
+
+    /* Loud in the console, invisible to visitors: a test link takes no
+       real money. See the note on STRIPE_DONATE_URL at the top. */
+    if (url.indexOf('/test_') !== -1 && window.console && console.warn) {
+      console.warn('HarmonYouth: STRIPE_DONATE_URL is a Stripe TEST link — ' +
+        'real donor cards will be declined. Swap it, and stripe-qr.png, ' +
+        'for the live Payment Link before launch.');
+    }
   }
 
   /* ------------------------------------------------------------------ *
@@ -907,6 +973,7 @@
     initNav();
     initSearch();
     initAccordions();
+    initStripeDonate();
     initReveals();
     initCarousels();
     initModal();
@@ -919,7 +986,6 @@
     initPiano();
     initCalendar(document.getElementById('perfCalMonth'), PERFORMANCE_CALENDAR);
     initCalendar(document.getElementById('buildCalMonth'), BUILD_MEET_CALENDAR);
-    initStripeDonate();
     initRaised();
     initHashTarget();
   }
